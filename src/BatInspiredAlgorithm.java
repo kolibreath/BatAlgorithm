@@ -176,7 +176,7 @@ public class BatInspiredAlgorithm {
 				for(int i = 0; i< population; i++) {
                     //todo fitness 暂时没有改动
                     //这里将best[]
-                    best = windows.get(randomIndex()).getLocation();
+                    best = windows.get(randomTarget()).getLocation();
                     Q[i] = Qmin + (Qmin - Qmax) * Math.random();
                     for (int j = 0; j < d; j++) {
                         v[i][j] = v[i][j] + ((batPopulationLocation[i][j] - best[j]) * Q[i]);
