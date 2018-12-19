@@ -157,10 +157,10 @@ abstract class BatAlgorithm {
                     }
 
                 val objectValue = objective(batPopulationLocation[i])
+                println("the object value of $objectValue")
                 if (objectValue < bestValue
                         && random.nextDouble()  < loudness) {
 
-                    println("the best value of $objectValue")
                     loudness *= decay
                     pulseRate /= pulseRate
                     bestValue = objectValue
@@ -175,6 +175,7 @@ abstract class BatAlgorithm {
 
             }
         }
+        bestValue = windows[0].objectives
     }
 
     private fun useWindows(location :DoubleArray){
