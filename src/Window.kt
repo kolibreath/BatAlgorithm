@@ -1,5 +1,5 @@
 class Window(
-        var location:DoubleArray ,
+        var location:DoubleArray,
         var objectives:Double
 ):Comparable<Window>{
     override fun compareTo(other: Window): Int {

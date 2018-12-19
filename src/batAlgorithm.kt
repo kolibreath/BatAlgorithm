@@ -80,7 +80,7 @@ abstract class BatAlgorithm {
         bestLocation = batPopulationLocation[0]
         //初始windowSize个蝙蝠
         var counter = 0
-        var lastEnd = (1.0/windowSize)
+        var lastEnd: Double
         while(counter +1 < windowSize){
             val location = batPopulationLocation[randomIndex()]
             val window = Window(
@@ -128,7 +128,7 @@ abstract class BatAlgorithm {
                 val r  = randomTarget()
                 //修改目标bestValue
                 bestValue = windows[r].objectives
-                bestLocation = windows[r].location
+                bestLocatiion = windows[r].location
                 //the ith bat
                 val i = bat.index
                 val frequency = random.nextDouble() * 2
@@ -138,6 +138,7 @@ abstract class BatAlgorithm {
 
                     val j = temp.index
                     val x = temp.value
+                    //修正bestLocation
                     batPopulationVelocity[i][j] =
                             (x - bestLocation[j]) * frequency + batPopulationVelocity[i][j]
                 }
@@ -179,7 +180,7 @@ abstract class BatAlgorithm {
                 println("the object value of $objectValue")
 
 //                    loudness *= decay
-//                    pulseRate /= pulseRate
+                    pulseRate /= pulseRate
 
                     loudness *= 0.95
                     pulseRate *= Math.exp(-1 * 0.95 * (generation - copy).toDouble())
@@ -248,17 +249,17 @@ abstract class BatAlgorithm {
 
     //使用一个随机数表示选择第几只蝙蝠开始跟随
     private fun randomTarget():Int{
-//        val double = random.nextDouble()
-//        var index = 0
-//        while(index< windows.size-1){
-//            if(double <= possibility[index ]){
-//                return index
-//            }
-//            index++
-//        }
-//        return index
+        val double = random.nextDouble()
+        var index = 0
+        while(index< windows.size-1){
+            if(double <= possibility[index ]){
+                return index
+            }
+            index++
+        }
+        return index
 
-        return 0
+//        return 0
     }
 
 
