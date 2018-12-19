@@ -128,7 +128,7 @@ abstract class BatAlgorithm {
                 val r  = randomTarget()
                 //修改目标bestValue
                 bestValue = windows[r].objectives
-                bestLocatiion = windows[r].location
+                bestLocation = windows[r].location
                 //the ith bat
                 val i = bat.index
                 val frequency = random.nextDouble() * 2
