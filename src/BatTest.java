@@ -10,7 +10,7 @@ public static void main(String args[]) {
              			   
 		                 
 		int n=500;//population size;
-	    int Ngen=10000;// Number of generation
+	    int Ngen=1000;// Number of generation
 	    double A=0.45;// Loudness;
 	    double r=0.5;// Pulse rate
 	    double Qmin=0.0;//Frequency minimum

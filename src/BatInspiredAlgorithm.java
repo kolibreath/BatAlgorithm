@@ -1,3 +1,4 @@
+import javax.swing.plaf.synth.SynthTextAreaUI;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Random;
@@ -35,15 +36,15 @@ public class BatInspiredAlgorithm {
 
 
     private int randomTarget(){
-        double d = Math.random();
-        int index = 0;
-        while(index < windowSize -1){
-            if(d <= possibility.get(index)){
-                return index;
-            }
-            index ++;
-        }
-        return index;
+//        double d = Math.random();
+//        int index = 0;
+//        while(index < windowSize -1){
+//            if(d <= possibility.get(index)){
+//                return index;
+//            }
+//            index ++;
+//        }
+        return 0;
     }
 
     //一个求值函数
@@ -71,7 +72,7 @@ public class BatInspiredAlgorithm {
             counter ++;
         }
 
-
+        possibility = temp;
 
     }
     IFunctions ff;
@@ -172,7 +173,14 @@ public class BatInspiredAlgorithm {
 			  while(t< generation) {
 
 			    changePossibility();
-
+			    System.out.println("locations ");
+			    System.out.println(possibility);
+                  for (int i = 0; i < windowSize ; i++) {
+                      for (int j = 0; j < ub.length; j++) {
+                          System.out.print(windows.get(i).getLocation()[j] +" ");
+                      }
+                      System.out.println();
+                  }
 				for(int i = 0; i< population; i++) {
                     //todo fitness 暂时没有改动
                     //这里将best[]
@@ -196,6 +204,7 @@ public class BatInspiredAlgorithm {
                             batPopulationLocation[i][j] = S[i][j];
                         }
                         fitness[i] = fnew;
+                        useWindows(batPopulationLocation[i]);
                         r0 = r0 * (1.0 - Math.exp(-gamma * t));
                         A0 = A0 * alfa;
                     }
@@ -226,13 +235,21 @@ public class BatInspiredAlgorithm {
 		}
 		return dep;
 	}
-	
-		void toStringnew() {
-			double[][] out=solution();
-			System.out.println("Optimized value = "+out[0][0]);
-			for(int i=0;i<d;i++) {
-				System.out.println("x["+i+"] = "+out[1][i]);
-			}
-		}
+	//增加并且排序
+	private void useWindows(double[]location){
+        Window maxValue = windows.stream().max(Window::compareTo).get();
+        if(ff.func(location) < maxValue.getObjectives()){
+            windows.remove(maxValue);
+            windows.add(new Window(location,ff.func(location)));
+        }
+        windows.sort(Window::compareTo);
+    }
+	public 	void toStringnew() {
+        double[][] out = solution();
+        System.out.println("Optimized value = " + out[0][0]);
+        for (int i = 0; i < d; i++) {
+            System.out.println("x[" + i + "] = " + out[1][i]);
+        }
+    }
 
 }
