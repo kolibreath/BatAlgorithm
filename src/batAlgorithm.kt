@@ -12,7 +12,7 @@ const val dimension = 3
 //the population of bats
 const val population = 500
 //the iteration times of bats
-const val generation = 1000
+const val generation = 10
 const val lowerBound = -5.0
 const val upperBound = +5.0
 
@@ -118,9 +118,9 @@ abstract class BatAlgorithm {
                 //修改目标bestValue
                 bestValue = windows[r].objectives
                 bestLocation = windows[r].location
-//
-//                println("the posibility")
-//                println(possibility.toString())
+
+                println("the posibility")
+                println(possibility.toString())
 
                 //the ith bat
                 val i = bat.index

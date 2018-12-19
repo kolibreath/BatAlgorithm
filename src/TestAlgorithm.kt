@@ -34,7 +34,7 @@ fun main(args:Array<String>) {
 //    }
 
 
-    algrithm = TestAlgorithm(12)
+    algrithm = TestAlgorithm(0)
     algrithm.initBats()
     val co = LinkedList<Double>()
     repeat(1){
