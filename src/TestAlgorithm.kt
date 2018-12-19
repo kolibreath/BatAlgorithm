@@ -11,7 +11,6 @@ class TestAlgorithm(private val i:Int) :BatAlgorithm() {
 
 fun main(args:Array<String>) {
 
-
     lateinit var algrithm :TestAlgorithm
     val list = listOf("sphere", "schwefel 2.22", "schwefel 1.2",
             "schwefel 2.21", "rosenBrock", "step", "quarticWithNoise", "rastrign", "ackley"

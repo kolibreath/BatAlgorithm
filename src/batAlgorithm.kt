@@ -1,6 +1,6 @@
 import java.util.*
-import kotlin.collections.ArrayList
 import kotlin.math.absoluteValue
+import kotlin.math.log
 
 /***
  * the implementation of Bat Algorithm in Kotlin
@@ -12,7 +12,7 @@ const val dimension = 3
 //the population of bats
 const val population = 500
 //the iteration times of bats
-const val generation = 10
+const val generation = 1000
 const val lowerBound = -5.0
 const val upperBound = +5.0
 
@@ -56,10 +56,10 @@ abstract class BatAlgorithm {
 
     //假设先保存四只蝙蝠的位置
     private val windowSize = 4
-    private val windows = LinkedList<Window>()
+    private var windows = LinkedList<Window>()
 
     //算法中的系数
-    private val weightVariable = 0.9
+    private val weightVariable = 0.95
     private var possibility = LinkedList<Double>()
 
     fun initBats() {
@@ -98,9 +98,7 @@ abstract class BatAlgorithm {
                 objectives = objective(location)
         )
         windows.add(window)
-        windows.sortedBy {
-            it.objectives
-        }
+        Collections.sort(windows)
     }
 
     abstract fun objective(xi:DoubleArray):Double
@@ -110,6 +108,19 @@ abstract class BatAlgorithm {
         copy = generation
         while (copy-- >= 0) {
 
+            changePossibility()
+                println("the posibility")
+                println(possibility.toString())
+
+            println("locations ")
+            for(win in windows){
+                for(l in win.location){
+                    print("$l  ")
+                }
+                println()
+            }
+            println("random ${randomTarget()}")
+
             //iterate every bat!
             for (bat in batPopulationLocation.withIndex()) {
 
@@ -118,13 +129,9 @@ abstract class BatAlgorithm {
                 //修改目标bestValue
                 bestValue = windows[r].objectives
                 bestLocation = windows[r].location
-
-                println("the posibility")
-                println(possibility.toString())
-
                 //the ith bat
                 val i = bat.index
-                val frequency = random.nextDouble() * ((2 ))
+                val frequency = random.nextDouble() * 2
 //            println(batPopulationFrequency[i])
                 //update velocity the bat will fly to a random location
                 for (temp in bat.value.withIndex()) {
@@ -191,24 +198,26 @@ abstract class BatAlgorithm {
             bestValue = windows.minBy { it.objectives }!!.objectives
     }
 
-    private fun useWindows(location :DoubleArray){
+    private fun useWindows(location :DoubleArray) {
 
-        if(windows.size < windowSize){
-        //这种一般不会出现
+        if (windows.size < windowSize) {
+            //这种一般不会出现
             //先初始化window的开始终结值都为0
             val window = Window(location = location, objectives = objective(location))
             windows.add(window)
-        }else{
+        } else {
             val worst = windows.maxBy { it.objectives }!!
             val testingObjective = objective(location)
-            if(testingObjective < worst.objectives){
+            if (testingObjective < worst.objectives) {
                 windows.remove(worst)
                 windows.add(Window(location = location
-                        ,objectives = testingObjective))
+                        , objectives = testingObjective))
             }
         }
-        windows.sortedBy { it.objectives }
+        Collections.sort(windows)
+    }
 
+    private fun changePossibility(){
 
         val weights = LinkedList<Double>()
         repeat(windows.size){
@@ -224,7 +233,7 @@ abstract class BatAlgorithm {
         var end = possibility[counter]
         while(counter+1 < windowSize){
 
-            end += (1 - end) * f() *weights[counter]
+            end += (1 - end) * f() *weights[counter] * 1/40
             temp.add(end)
 
             if(counter == windowSize -2 )
@@ -239,15 +248,17 @@ abstract class BatAlgorithm {
 
     //使用一个随机数表示选择第几只蝙蝠开始跟随
     private fun randomTarget():Int{
-        val double = random.nextDouble()
-        var index = 0
-        while(index< windows.size-1){
-            if(double <= possibility[index ]){
-                return index
-            }
-            index++
-        }
-        return index
+//        val double = random.nextDouble()
+//        var index = 0
+//        while(index< windows.size-1){
+//            if(double <= possibility[index ]){
+//                return index
+//            }
+//            index++
+//        }
+//        return index
+
+        return 0
     }
 
 
