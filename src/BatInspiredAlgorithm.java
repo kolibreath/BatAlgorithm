@@ -122,8 +122,8 @@ public class BatInspiredAlgorithm {
         int counter = 0;
         double lastEnd = 0;
         while (counter + 1 < windowSize) {
-            double[] random = batPopulationLocation[randomIndex()];
-            Window window = new Window(random,ff.func(random));
+            //todo 应该改成best 而不是随机值
+            Window window = new Window(best,ff.func(best));
 
             lastEnd =  (1.0/windowSize)*(counter + 1);
             possibility.add(lastEnd);
@@ -185,7 +185,7 @@ public class BatInspiredAlgorithm {
 				for(int i = 0; i< population; i++) {
                     //todo fitness 暂时没有改动
                     //这里将best[]
-//                   best = windows.get(randomTarget()).getLocation();
+                   best = windows.get(randomTarget()).getLocation();
                     Q[i] = Qmin + (Qmin - Qmax) * Math.random();
                     for (int j = 0; j < d; j++) {
                         v[i][j] = v[i][j] + ((batPopulationLocation[i][j] - best[j]) * Q[i]);
@@ -206,7 +206,6 @@ public class BatInspiredAlgorithm {
                             batPopulationLocation[i][j] = S[i][j];
                         }
                         fitness[i] = fnew;
-                        useWindows(batPopulationLocation[i]);
                         r0 = r0 * (1.0 - Math.exp(-gamma * t));
                         A0 = A0 * alfa;
                     }
@@ -216,6 +215,7 @@ public class BatInspiredAlgorithm {
                             best[j] = S[i][j];
                         }
                         fmin = fnew;
+                        useWindows(best);
                     }
                 }
 
