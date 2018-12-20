@@ -30,7 +30,7 @@ public class ImprovedBatAlgorithm extends AbsBatAlgorithm{
 
     private double loundnesses[];
     private LinkedList<Double> possibility=new LinkedList<>();
-    private int windowSize = 15;
+    private int windowSize = 4;
     private LinkedList<Window> windows = new LinkedList<>();
 
 
@@ -112,6 +112,7 @@ public class ImprovedBatAlgorithm extends AbsBatAlgorithm{
        Random random = new Random();
        return Math.abs(random.nextInt()) %   population;
     }
+
     private	void initialize() {
         for (int i = 0; i < population; i++) {
             for (int j = 0; j < d; j++) {
@@ -124,24 +125,21 @@ public class ImprovedBatAlgorithm extends AbsBatAlgorithm{
         int index = (int) d1[1];
         best = batPopulationLocation[index];
 
+        double firstSection = 0.7;
+        double section = (1.0 - firstSection)/(windowSize-1);
+
+
         int counter = 0;
-        double lastEnd = 0;
+        double lastEnd = firstSection;
         int indices[] = getSortedFitnessIndices(fitness);
         while (counter + 1 < windowSize) {
             //todo 应该改成best 而不是随机值
-//            double ranger[] = new double[d];
-//            for (int i = 0; i <d ; i++) {
-////                ranger[i] = best[i] + (0.001 * new Random().nextGaussian());;
-//                ranger[i] = best[i] + (lb[i] + (ub[i] - lb[i]) * Math.random())/(100);
-//            }
-            //去前windowSize个
-
             double ranger[] = batPopulationLocation[indices[counter]];
             Window window = new Window(ranger
                     ,ff.func(ranger));
 
-            lastEnd =  (1.0/windowSize)*(counter + 1);
             possibility.add(lastEnd);
+            lastEnd = firstSection +  (section)*(counter + 1);
             windows.add(window);
             counter ++;
         }
@@ -222,23 +220,17 @@ public class ImprovedBatAlgorithm extends AbsBatAlgorithm{
 			  double r0=0.4205;
 			  Random rndm=new Random();
 			  double fnew=0.0;
+
 			  while(t< generation) {
 
 			    changePossibility();
-//			    System.out.println("locations ");
-//			    System.out.println(possibility);
-//                  for (int i = 0; i < windowSize ; i++) {
-//                      for (int j = 0; j < ub.length; j++) {
-//                          System.out.print(windows.get(i).getLocation()[j] +" ");
-//                      }
-//                      System.out.println();
-//                  }
+//                System.out.println(possibility);
 
 				for(int i = 0; i< population; i++) {
 
                       A0 = loundnesses[i];
                     //todo fitness 暂时没有改动
-                    //这里将best[]
+//                    这里将best[]
                    best = windows.get(randomTarget()).getLocation();
                     Q[i] = Qmin + (Qmin - Qmax) * Math.random();
                     for (int j = 0; j < d; j++) {
