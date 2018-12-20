@@ -257,7 +257,9 @@ public class ImprovedBatAlgorithm extends AbsBatAlgorithm{
                     //todo 已经确定上界和下界 要进行改良 和 观察in
                     fnew = ff.func(simplebounds(S[i]));
 
-                    if ((fnew <= fitness[i]) && (Math.random() < A0)) {
+                    //修改
+                    if ((fnew <= fitness[i])
+                            ) {
                         for (int j = 0; j < d; j++) {
                             batPopulationLocation[i][j] = S[i][j];
                         }

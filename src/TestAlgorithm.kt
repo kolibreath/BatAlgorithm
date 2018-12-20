@@ -27,7 +27,7 @@ fun main(args:Array<String>) {
     lateinit var batAlgorithm: AbsBatAlgorithm
 
     val functions = ImplementedFunctions()
-    functions.index = 0
+    functions.index = 1
 
     val container = LinkedList<Double>()
     repeat(30){
