@@ -1,5 +1,6 @@
 import java.util.*
-import kotlin.collections.ArrayList
+import kotlin.math.absoluteValue
+import kotlin.math.log
 
 /***
  * the implementation of Bat Algorithm in Kotlin
@@ -20,20 +21,22 @@ const val lLowerBound = -500.0
 
 @Suppress("UNUSED_EXPRESSION")
 abstract class BatAlgorithm {
+    private val random = Random()
+
     var variable = 1.0
-    var pulseRate = 3
-    var loudness = 0.7
+    var pulseRate = random.nextDouble()
+    var loudness = random.nextDouble()+1
     var decay = 0.95
 
-    private val random = Random()
-    /**
-     * dont set the initial value to big!
-     * better initialize with the upper bound and lower bound
-     *
-     * narrow down initial locations
-     */
+
+
     val randomLocation = {
-        lowerBound + (upperBound - lowerBound) * random.nextDouble()
+        uUpperBound + (uUpperBound - lLowerBound) * random.nextDouble()
+    }
+
+    //初始化在范围中的一个下标
+    val randomIndex ={
+       random.nextInt().absoluteValue % population
     }
 
 
@@ -52,12 +55,12 @@ abstract class BatAlgorithm {
 
 
     //假设先保存四只蝙蝠的位置
-    private val objectives = LinkedList<Double>()
-    private val window = ArrayList<DoubleArray>().apply {
-        this.add(bestLocation)
-    }
-    val windowSize = 4
-    private val posibility = LinkedList<Pair<Double,Double>>()
+    private val windowSize = 4
+    private var windows = LinkedList<Window>()
+
+    //算法中的系数
+    private val weightVariable = 0.95
+    private var possibility = LinkedList<Double>()
 
     fun initBats() {
 
@@ -66,23 +69,57 @@ abstract class BatAlgorithm {
         var j = 0
         while (i < population) {
             while (j < dimension) {
-                batPopulationLocation[i][j++] = randomLocation()
+                val l = randomLocation();
+                batPopulationLocation[i][j++] = l
             }
+            j = 0
             i++
         }
 
         //初始化bestLocation
         bestLocation = batPopulationLocation[0]
-        objectives.add(objective(bestLocation))
-        posibility.add(Pair(0.0,1.0 ))
-        window.add(bestLocation)
+        //初始windowSize个蝙蝠
+        var counter = 0
+        var lastEnd: Double
+        while(counter +1 < windowSize){
+            val location = batPopulationLocation[randomIndex()]
+            val window = Window(
+                    location =  location,
+                    objectives = objective(location)
+            )
+            lastEnd = (1.0/windowSize)*(counter + 1)
+            possibility.add(lastEnd)
+            windows.add(window)
+            counter++
+        }
+        val location = batPopulationLocation[randomIndex()]
+        val window = Window(
+                location =  location,
+                objectives = objective(location)
+        )
+        windows.add(window)
+        Collections.sort(windows)
     }
-    
+
     abstract fun objective(xi:DoubleArray):Double
 
+    var copy = 0
     fun startBats(generation: Int) {
-        var copy = generation
+        copy = generation
         while (copy-- >= 0) {
+
+            changePossibility()
+                println("the posibility")
+                println(possibility.toString())
+
+            println("locations ")
+            for(win in windows){
+                for(l in win.location){
+                    print("$l  ")
+                }
+                println()
+            }
+            println("random ${randomTarget()}")
 
             //iterate every bat!
             for (bat in batPopulationLocation.withIndex()) {
@@ -90,19 +127,18 @@ abstract class BatAlgorithm {
                 //选择windowSize各种第r只蝙蝠开始跟随
                 val r  = randomTarget()
                 //修改目标bestValue
-                bestValue = objectives[r]
-                bestLocation = window[r]
-
+                bestValue = windows[r].objectives
+                bestLocation = windows[r].location
                 //the ith bat
                 val i = bat.index
-                val frequency = random.nextDouble() * ((2 + 2)) - 2
+                val frequency = random.nextDouble() * 2
 //            println(batPopulationFrequency[i])
                 //update velocity the bat will fly to a random location
                 for (temp in bat.value.withIndex()) {
 
-                    if (bat.value.size > 3) break
                     val j = temp.index
                     val x = temp.value
+                    //修正bestLocation
                     batPopulationVelocity[i][j] =
                             (x - bestLocation[j]) * frequency + batPopulationVelocity[i][j]
                 }
@@ -122,7 +158,7 @@ abstract class BatAlgorithm {
 
 
                 //using rate to convergence
-                if (random.nextDouble() * 10 > pulseRate)
+                if (random.nextDouble() > pulseRate)
                     for (location in batPopulationLocation[i].withIndex()) {
                         //对最好的值周围进行一个扰动
                         val doubleArray = DoubleArray(dimension)
@@ -130,133 +166,112 @@ abstract class BatAlgorithm {
                         while(counter < doubleArray.size){
 //                            doubleArray[counter] = bestLocation[counter] + variable * loudness
                             //修改为跟随着某一个蝙蝠
-                            doubleArray[counter] = window[r][counter] + variable * loudness
+//                            doubleArray[counter] = windows[r].location[counter] + variable * loudness
+                            doubleArray[counter] = windows[r].location[counter] + (random.nextDouble()*2 - 1) * loudness
                             counter ++
                         }
                         batPopulationLocation[location.index] = doubleArray
-                        variable *= decay
+//                        variable *= decay
                     }
 
                 val objectValue = objective(batPopulationLocation[i])
                 if (objectValue < bestValue
                         && random.nextDouble()  < loudness) {
+                println("the object value of $objectValue")
 
-                    println("the best value of $objectValue")
-                    loudness *= decay
+//                    loudness *= decay
                     pulseRate /= pulseRate
-                    bestValue = objectValue
+
+                    loudness *= 0.95
+                    pulseRate *= Math.exp(-1 * 0.95 * (generation - copy).toDouble())
+                    //bestValue = objectValue
 //                    bestLocation = batPopulationLocation[i]
 
                     //修改为改变这个跟随的蝙蝠的最好值
-                     window[r] = batPopulationLocation[i]
+                     windows[r].location = batPopulationLocation[i]
                     bestLocation = batPopulationLocation[i]
                     //使用window观察结果
-                    useWindow(batPopulationLocation[i])
+                    useWindows(batPopulationLocation[i])
                 }
 
             }
         }
+            bestValue = windows.minBy { it.objectives }!!.objectives
+    }
+
+    private fun useWindows(location :DoubleArray) {
+
+        if (windows.size < windowSize) {
+            //这种一般不会出现
+            //先初始化window的开始终结值都为0
+            val window = Window(location = location, objectives = objective(location))
+            windows.add(window)
+        } else {
+            val worst = windows.maxBy { it.objectives }!!
+            val testingObjective = objective(location)
+            if (testingObjective < worst.objectives) {
+                windows.remove(worst)
+                windows.add(Window(location = location
+                        , objectives = testingObjective))
+            }
+        }
+        Collections.sort(windows)
+    }
+
+    private fun changePossibility(){
+
+        val weights = LinkedList<Double>()
+        repeat(windows.size){
+            weights.add(Math.pow(weightVariable,(it + 1).toDouble()))
+        }
+
+        val f = {
+            (1/Math.E)*Math.pow(Math.E,((generation - copy)/generation).toDouble())
+        }
+        var counter= 0
+        val temp = LinkedList<Double>()
+
+        var end = possibility[counter]
+        while(counter+1 < windowSize){
+
+            end += (1 - end) * f() *weights[counter] * 1/40
+            temp.add(end)
+
+            if(counter == windowSize -2 )
+                break
+            end = possibility[counter+1]
+            counter ++
+        }
+
+        possibility = temp
+
     }
 
     //使用一个随机数表示选择第几只蝙蝠开始跟随
     private fun randomTarget():Int{
         val double = random.nextDouble()
         var index = 0
-        while(index < window.size){
-            if(double < posibility[index].second && double >= posibility[index].first ){
+        while(index< windows.size-1){
+            if(double <= possibility[index ]){
                 return index
             }
             index++
         }
-        return index -1
+        return index
+
+//        return 0
     }
 
 
-    //使用观察window 并且根据适应度找到 <= windowSize个蝙蝠的选择出来的比例
-    private fun useWindow(location: DoubleArray){
-        if(window.size < windowSize) {
-            window.add(location)
-        }else {
-            //找出当前这个window中最差的值
-            val worse = window.minBy {
-                objective(it)
-            }
-            if (objective(location) < objective(worse!!)) {
-                window.remove(worse)
-                window.add(location)
-            }
-        }
 
 
-        objectives.clear()
-        window.forEach {it-> objectives.add(objective(it)) }
-
-        val sum = objectives.sum()
-        val weights = ArrayList<Double>()
-        for(l in window.withIndex()){
-            val thisIndex = l.index
-            weights.add(objectives[thisIndex]/sum)
-        }
-        var counter = 0
-
-
-        val flags = Array(window.size){true}
-        val sortedWeight = LinkedList<Double>()
-        weights.sortedDescending().forEach { sortedWeight.add(it) }
-        //flag 计数 如果weights中所有都被改变 则也将会跳出循环
-        var counterFlag = 0
-
-        while(!sortedWeight.isEmpty() && counterFlag < window.size){
-            var min = Double.MAX_VALUE
-            val topValue = sortedWeight.poll()!!
-            //第一次迭代找出最小值 的下标集合
-            for(value in objectives.withIndex()){
-                //flag 操作
-                if(min >= value.value && flags[value.index]){
-                    min =value.value
-                    flags[value.index] = false
-                }
-            }
-            //找出这些下标集合
-            val minIndices = LinkedList<Int>()
-            for(value in objectives.withIndex()){
-                if(min == value.value)
-                    minIndices.add(value.index)
-            }
-
-            for(index in minIndices){
-                weights[index] = topValue
-                counterFlag ++
-            }
-        }
-
-        val sumWeight = weights.sum()
-        for (weight in weights.withIndex()){
-            weights[weight.index] = weight.value/sumWeight
-        }
-
-        //每次都需要刷新一次
-        posibility.clear()
-
-        var lastStart = 0.0
-        var lastEnd   = weights[counter]
-        while(counter + 1 < window.size){
-            posibility.add(Pair(lastStart,lastEnd))
-            lastStart = lastEnd
-            lastEnd   += weights[counter + 1]
-            counter ++
-        }
-
-        posibility.add(Pair(lastStart,1.0))
-
-
-    }
 
     private fun simpleBounds(location:DoubleArray){
         for(i in location.withIndex()){
-            if(i.value !in lLowerBound..uUpperBound){
-                location[i.index] = (- lLowerBound + uUpperBound)*random.nextDouble() + lLowerBound
-            }
+            if(i.value > upperBound)
+                location[i.index] = upperBound
+            if(i.value < lowerBound)
+                location[i.index] = lowerBound
         }
     }
 }
