@@ -36,15 +36,16 @@ public class BatInspiredAlgorithm {
 
 
     private int randomTarget(){
-//        double d = Math.random();
-//        int index = 0;
-//        while(index < windowSize -1){
-//            if(d <= possibility.get(index)){
-//                return index;
-//            }
-//            index ++;
-//        }
-        return 0;
+        double d = Math.random();
+        int index = 0;
+        while(index < windowSize -1){
+            if(d <= possibility.get(index)){
+                return index;
+            }
+            index ++;
+        }
+        return index;
+//        return 0;
     }
 
     //一个求值函数
@@ -184,7 +185,7 @@ public class BatInspiredAlgorithm {
 				for(int i = 0; i< population; i++) {
                     //todo fitness 暂时没有改动
                     //这里将best[]
-                    best = windows.get(randomTarget()).getLocation();
+//                   best = windows.get(randomTarget()).getLocation();
                     Q[i] = Qmin + (Qmin - Qmax) * Math.random();
                     for (int j = 0; j < d; j++) {
                         v[i][j] = v[i][j] + ((batPopulationLocation[i][j] - best[j]) * Q[i]);
@@ -197,6 +198,7 @@ public class BatInspiredAlgorithm {
                             S[i][j] = best[j] + (0.001 * rndm.nextGaussian());
                         }
                     }
+                    //todo 对于S 的位置要进行收敛
                     fnew = ff.func(S[i]);
 
                     if ((fnew <= fitness[i]) && (Math.random() < A0)) {

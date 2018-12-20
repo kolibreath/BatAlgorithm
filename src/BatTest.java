@@ -2,8 +2,8 @@
 public class BatTest {
 public static void main(String args[]) {
 
-	double[] Lower={-10.0,-10.0,-10.0};//  f11 griewank
-	double[] Upper={10.0,10.0,10.0};
+	double[] Lower={-500.0,-500.0,-500.0};//  f11 griewank
+	double[] Upper={500.0,500.0,500.0};
 
 
 
@@ -18,6 +18,7 @@ public static void main(String args[]) {
 
 	    ImplementedFunctions functions = new ImplementedFunctions();
 	    functions.setIndex(0);
+
 	    BatInspiredAlgorithm bat=new BatInspiredAlgorithm(functions,n,Ngen,A,r,Qmin,Qmax,Lower,Upper);
 	    bat.toStringnew();
 
