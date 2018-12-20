@@ -5,30 +5,27 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class OriginalBatAlgorithm extends AbsBatAlgorithm{
-    int population;
-    int Ngen;
-    double A;
-    double r;
-    double Qmin;
-    double Qmax;
-    int Niter;
-    int d;
-    double Lb;
-    double Ub;
-    double Lbvec[];
-    double Ubvec[];
-    double Q[];
-    double v[][];
-    double[][] Sol;
-    double[][] S;
-    double[] fitness;
-    double[] best;
-    double BEST[];
-    double BESTvar1[];
-    double BESTvar2[];
-    double BESTvar3[];
-    double fmin;
-    IFunctions ff;
+    private int population;
+    private int Ngen;
+    private double A;
+    private double r;
+    private double Qmin;
+    private double Qmax;
+    private int Niter;
+    private int d;
+    private double Lb;
+    private double Ub;
+    private double Lbvec[];
+    private double Ubvec[];
+    private double Q[];
+    private double v[][];
+    private double[][] Sol;
+    private double[][] S;
+    private double[] fitness;
+    private double[] best;
+    private double BEST[];
+    private double fmin;
+    private IFunctions ff;
 
     double[] loundnesses ;
     public OriginalBatAlgorithm(IFunctions iff, int in, int iNgen, double iA, double ir, double iQmin, double iQmax, double[] iLbvec, double[] iUbvec) {
@@ -39,9 +36,6 @@ public class OriginalBatAlgorithm extends AbsBatAlgorithm{
         Qmin=iQmin;
         Qmax=iQmax;
         BEST=new double[Ngen];
-        BESTvar1=new double[Ngen];
-        BESTvar2=new double[Ngen];
-        BESTvar3=new double[Ngen];
         Lbvec=iLbvec;
         Ubvec=iUbvec;
         d=Lbvec.length;
@@ -67,13 +61,13 @@ public class OriginalBatAlgorithm extends AbsBatAlgorithm{
                 Sol[i][j]=Lbvec[j]+(Ubvec[j]-Lbvec[j])*Math.random();
             }
             fitness[i]=ff.func(Sol[i]);}
-        double d1[]=getminval_index(fitness);
+        double d1[]= getMinValue(fitness);
         fmin=d1[0];
         int index=(int)d1[1];
         best=Sol[index];
     }
 
-    double[] getminval_index(double[] a) {
+    double[] getMinValue(double[] a) {
         double m=0.0;
         double b[]=new double[a.length];
         for(int i=0;i<a.length;i++)
@@ -104,7 +98,7 @@ public class OriginalBatAlgorithm extends AbsBatAlgorithm{
         Random random = new Random();
         return Math.abs(random.nextInt()) %   population;
     }
-    double[][] solution() {
+    private double[][] solution() {
         int t=1;
         initialize();
         double alfa=0.5264;
