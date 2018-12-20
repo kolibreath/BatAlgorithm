@@ -1,3 +1,5 @@
+package functions;
+
 abstract class IFunctions {
     private int index = 0;
 

@@ -1,13 +1,6 @@
+import functions.Functions
+import functions.ImplementedFunctions
 import java.util.*
-
-class TestAlgorithm(private val i:Int) :BatAlgorithm() {
-
-
-    override fun objective(xi: DoubleArray): Double {
-        val function = Functions()
-        return function.runAll(xi,dimension,i)
-    }
-}
 
 fun main(args:Array<String>) {
 

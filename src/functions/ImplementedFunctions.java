@@ -1,3 +1,5 @@
+package functions;
+
 public class ImplementedFunctions extends IFunctions {
     @Override
     double func(double[] x) {
