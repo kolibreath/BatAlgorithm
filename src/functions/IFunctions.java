@@ -1,6 +1,6 @@
 package functions;
 
-abstract class IFunctions {
+public abstract class IFunctions {
     private int index = 0;
 
     public void setIndex(int index) {
@@ -12,6 +12,6 @@ abstract class IFunctions {
     }
 
 
-    abstract double func(double x[]);
+    public abstract double func(double x[]);
 
 }

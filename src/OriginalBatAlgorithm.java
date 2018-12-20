@@ -1,3 +1,4 @@
+
 import functions.IFunctions;
 
 import java.util.Arrays;
