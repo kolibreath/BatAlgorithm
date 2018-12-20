@@ -1,10 +1,7 @@
-import javax.swing.plaf.synth.SynthTextAreaUI;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.Random;
+import java.util.*;
 
 
-public class BatInspiredAlgorithm {
+public class ImprovedBatAlgorithm extends AbsBatAlgorithm{
     //t表示当前迭代次数
     int population,t = 1;
     private int generation;
@@ -30,8 +27,10 @@ public class BatInspiredAlgorithm {
     private double BESTvar3[];
     private double fmin;
 
+
+    private double loundnesses[];
     private LinkedList<Double> possibility=new LinkedList<>();
-    private int windowSize = 4;
+    private int windowSize = 15;
     private LinkedList<Window> windows = new LinkedList<>();
 
 
@@ -52,20 +51,21 @@ public class BatInspiredAlgorithm {
 
     private double f(){
         //todo 运算精度
-      return  (1/Math.E)*Math.pow(Math.E,((generation - t)/generation));
+      return  (1/Math.E)*Math.pow(Math.E,((t)/generation));
     }
     private void changePossibility(){
         LinkedList<Double> weights = new LinkedList<>();
         for (int i = 0; i < windowSize; i++) {
-            double weightVariable = 0.95;
-            weights.add(Math.pow(weightVariable,i+1));
+            double weightVariable = 0.80;
+            weights.add(Math.pow(weightVariable,i));
         }
 
         int counter = 0;
         double end = possibility.get(counter);
         LinkedList<Double> temp = new LinkedList<>();
         while(counter + 1 < windowSize){
-            end += (1 - end) * f() * weights.get(counter) * 1/40;
+            end += (1 - end) * f() * weights.get(counter) * 1/100;
+//            end += (1 - end)  * weights.get(counter) * 1/100;
             temp.add(end);
 
             if(counter == windowSize -2)break;
@@ -78,7 +78,7 @@ public class BatInspiredAlgorithm {
     }
     IFunctions ff;
 
-    public BatInspiredAlgorithm(IFunctions iff, int in, int iNgen, double iA, double ir, double iQmin, double iQmax, double[] iLbvec, double[] iUbvec) {
+    public ImprovedBatAlgorithm(IFunctions iff, int in, int iNgen, double iA, double ir, double iQmin, double iQmax, double[] iLbvec, double[] iUbvec) {
         population = in;
         generation = iNgen;
         A = iA;
@@ -101,6 +101,11 @@ public class BatInspiredAlgorithm {
 
         Q = new double[population];
         v = new double[population][d];
+
+        loundnesses = new double[population];
+        for (int i = 0; i <loundnesses.length ; i++) {
+            loundnesses[i] = Math.random() + 1;
+        }
     }
 
     private int randomIndex(){
@@ -114,16 +119,26 @@ public class BatInspiredAlgorithm {
             }
             fitness[i] = ff.func(batPopulationLocation[i]);
         }
-        double d1[] = getminval_index(fitness);
+        double d1[] = getMinValue(fitness);
         fmin = d1[0];
         int index = (int) d1[1];
         best = batPopulationLocation[index];
 
         int counter = 0;
         double lastEnd = 0;
+        int indices[] = getSortedFitnessIndices(fitness);
         while (counter + 1 < windowSize) {
             //todo 应该改成best 而不是随机值
-            Window window = new Window(best,ff.func(best));
+//            double ranger[] = new double[d];
+//            for (int i = 0; i <d ; i++) {
+////                ranger[i] = best[i] + (0.001 * new Random().nextGaussian());;
+//                ranger[i] = best[i] + (lb[i] + (ub[i] - lb[i]) * Math.random())/(100);
+//            }
+            //去前windowSize个
+
+            double ranger[] = batPopulationLocation[indices[counter]];
+            Window window = new Window(ranger
+                    ,ff.func(ranger));
 
             lastEnd =  (1.0/windowSize)*(counter + 1);
             possibility.add(lastEnd);
@@ -131,27 +146,63 @@ public class BatInspiredAlgorithm {
             counter ++;
         }
 
-        double[] location = batPopulationLocation[randomIndex()];
+        double[] location = batPopulationLocation[indices[counter]];
         Window window = new Window(location,ff.func(location));
         windows.add(window);
         Collections.sort(windows);
     }
-	 
-		 double[] getminval_index(double[] a) {
-			 double m=0.0;
-			 double b[]=new double[a.length];
-			 for(int i=0;i<a.length;i++)
-			 {b[i]=a[i];}
-			 double minval=a[0];
-			 for(int i=0;i<a.length;i++)
-			 {if(a[i]<minval){minval=a[i];}}
-			 for(int i=0;i<a.length;i++)
-			 {if(b[i]==minval){m=i;break;}};
-			 double[] dep=new double[2];
-			 dep[0]=minval;
-			 dep[1]=m;
-			 return dep;
-		 }
+
+    private  int[] getSortedFitnessIndices(double fitness[]){
+        int indices[]= new int[fitness.length];
+        HashMap<Double,Integer> map = new HashMap<>();
+        for(int i = 0;i<fitness.length;i++){
+            map.put(fitness[i],i);
+        }
+
+        Map<Double,Integer> sortedMap = new TreeMap<>(
+                (aDouble, t1) -> {
+                    if (aDouble - t1 >0)
+                        return 1;
+                    else if(aDouble == t1)
+                        return 0;
+                    else
+                        return -1;
+                }
+        );
+
+        sortedMap.putAll(map);
+         int counter = 0;
+         for(Map.Entry<Double,Integer> entry: sortedMap.entrySet()){
+             indices[counter++] = entry.getValue();
+         }
+         return indices;
+    }
+
+    private double[] getMinValue(double[] a) {
+
+        double m = 0.0;
+        double b[] = new double[a.length];
+        for (int i = 0; i < a.length; i++) {
+            b[i] = a[i];
+        }
+        double minval = a[0];
+        for (int i = 0; i < a.length; i++) {
+            if (a[i] < minval) {
+                minval = a[i];
+            }
+        }
+        for (int i = 0; i < a.length; i++) {
+            if (b[i] == minval) {
+                m = i;
+                break;
+            }
+        }
+        ;
+        double[] dep = new double[2];
+        dep[0] = minval;
+        dep[1] = m;
+        return dep;
+    }
 
 		 double[] simplebounds(double s[]) {
 			   for(int i=0;i<d;i++)
@@ -165,8 +216,8 @@ public class BatInspiredAlgorithm {
 	 
 		 double[][] solution() {
 			  initialize();
-			  double alfa=0.5264;
-			  double gamma=4.411;
+             double alfa=0.5264;
+             double gamma=4.411;
 			  double A0=0.5026;
 			  double r0=0.4205;
 			  Random rndm=new Random();
@@ -174,15 +225,18 @@ public class BatInspiredAlgorithm {
 			  while(t< generation) {
 
 			    changePossibility();
-			    System.out.println("locations ");
-			    System.out.println(possibility);
-                  for (int i = 0; i < windowSize ; i++) {
-                      for (int j = 0; j < ub.length; j++) {
-                          System.out.print(windows.get(i).getLocation()[j] +" ");
-                      }
-                      System.out.println();
-                  }
+//			    System.out.println("locations ");
+//			    System.out.println(possibility);
+//                  for (int i = 0; i < windowSize ; i++) {
+//                      for (int j = 0; j < ub.length; j++) {
+//                          System.out.print(windows.get(i).getLocation()[j] +" ");
+//                      }
+//                      System.out.println();
+//                  }
+
 				for(int i = 0; i< population; i++) {
+
+                      A0 = loundnesses[i];
                     //todo fitness 暂时没有改动
                     //这里将best[]
                    best = windows.get(randomTarget()).getLocation();
@@ -192,14 +246,16 @@ public class BatInspiredAlgorithm {
                         S[i][j] = batPopulationLocation[i][j] + v[i][j];
                     }
                     batPopulationLocation[i] = simplebounds(batPopulationLocation[i]);
-                    //System.out.println(Matrix.toString(batPopulationLocation[i]));
                     if (Math.random() > r0) {
                         for (int j = 0; j < d; j++) {
-                            S[i][j] = best[j] + (0.001 * rndm.nextGaussian());
+                            double eth = Math.random()*2 - 1;
+//                        S[i][j] = best[j] + (0.001 * rndm.nextGaussian());
+                            S[i][j] = best[j] + eth*aveLoundness();
                         }
                     }
                     //todo 对于S 的位置要进行收敛
-                    fnew = ff.func(S[i]);
+                    //todo 已经确定上界和下界 要进行改良 和 观察in
+                    fnew = ff.func(simplebounds(S[i]));
 
                     if ((fnew <= fitness[i]) && (Math.random() < A0)) {
                         for (int j = 0; j < d; j++) {
@@ -207,7 +263,7 @@ public class BatInspiredAlgorithm {
                         }
                         fitness[i] = fnew;
                         r0 = r0 * (1.0 - Math.exp(-gamma * t));
-                        A0 = A0 * alfa;
+                        loundnesses[i]= A0 * alfa;
                     }
 
                     if (fnew <= fmin) {
@@ -224,6 +280,8 @@ public class BatInspiredAlgorithm {
 				t++;
 		}
 
+
+
 		double[] plott=new double[generation];
 		for(int i = 0; i< generation; i++) {
 				plott[i]=i;
@@ -237,6 +295,12 @@ public class BatInspiredAlgorithm {
 		}
 		return dep;
 	}
+
+    private double aveLoundness(){
+        return Arrays.stream(loundnesses).sum();
+    }
+
+
 	//增加并且排序
 	private void useWindows(double[]location){
         Window maxValue = windows.stream().max(Window::compareTo).get();
@@ -254,4 +318,8 @@ public class BatInspiredAlgorithm {
         }
     }
 
+    @Override
+    double bestValue() {
+        return solution()[0][0];
+    }
 }

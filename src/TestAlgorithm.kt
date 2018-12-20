@@ -11,39 +11,39 @@ class TestAlgorithm(private val i:Int) :BatAlgorithm() {
 
 fun main(args:Array<String>) {
 
-    lateinit var algrithm :TestAlgorithm
-    val list = listOf("sphere", "schwefel 2.22", "schwefel 1.2",
-            "schwefel 2.21", "rosenBrock", "step", "quarticWithNoise", "rastrign", "ackley"
-            , "griewank", "penalized", "penalized2")
-
-//    list.forEachIndexed { index, s ->
 //
-//        //收藏进行30次这个运算的最好值！
-//        val container = LinkedList<Double>()
-//        repeat(1) {
-//            algrithm = TestAlgorithm(index)
-//            algrithm.initBats()
-//            algrithm.startBats(generation)
-//            println("the $it th value of$s is ${algrithm.bestValue} ")
-//            container.add(algrithm.bestValue)
-//        }
-//        println("the best value of $s is "+container.min())
-//        println("the worst value of $s is ${container.max()}")
-//        println("the average value of $s is ${container.average()}")
-//    }
+//    val Lower = doubleArrayOf(-500.0, -500.0, -500.0)
+//    val Upper = doubleArrayOf(500.0, 500.0, 500.0)
 
+    val Lower = doubleArrayOf(-10.0, -10.0, -10.0)//  f11 griewank
+    val Upper = doubleArrayOf(10.0, 10.0, 10.0)
 
-    algrithm = TestAlgorithm(0)
-    algrithm.initBats()
-    val co = LinkedList<Double>()
-    repeat(1){
-        algrithm.startBats(generation)
-//        println("the $it th value of schewel 2.6 is ${algrithm.bestValue} ")
-        co.add(algrithm.bestValue)
+    val n = 20//population size;
+    val Ngen = 1000// Number of generation
+    val A = 0.45// Loudness;
+    val r = 0.5// Pulse rate
+    val Qmin = 0.0//Frequency minimum
+    val Qmax = 2.0//Frequency maximum
+    lateinit var batAlgorithm: AbsBatAlgorithm
+
+    val functions = ImplementedFunctions()
+    functions.index = 0
+
+    val container = LinkedList<Double>()
+    repeat(30){
+        batAlgorithm = OriginalBatAlgorithm(functions,n,Ngen,A,r,Qmin,Qmax,Lower,Upper)
+        container.add(batAlgorithm.bestValue())
     }
-    println("the best value of schwefel 2.6 is ${co.min()}")
-    println("the worst value of schwefel 2.6 is ${co.max()}")
-    println("the average value of schwefel 2.6 is ${co.average()}")
 
+    println("the best average value of original bat is ${container.min()}")
+
+    container.clear()
+
+    repeat(30){
+        batAlgorithm = ImprovedBatAlgorithm(functions, n, Ngen, A, r, Qmin, Qmax, Lower, Upper)
+        container.add(batAlgorithm.bestValue())
+    }
+
+    println("the best average value of improved bat is ${container.min()}")
 
 }
