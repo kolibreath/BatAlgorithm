@@ -289,7 +289,7 @@ public class ImprovedBatAlgorithm extends AbsBatAlgorithm{
 				    for(double loc : window.getLocation()){
 				        builder += loc +" ";
                     }
-                    builder += "\n";
+                    builder += "                value "+window.getObjectives()+ "\n";
                  }
                  FileUtils.Companion.write(file,builder);
 
