@@ -1,5 +1,6 @@
 import functions.IFunctions;
 
+import java.io.File;
 import java.util.*;
 
 
@@ -28,6 +29,8 @@ public class ImprovedBatAlgorithm extends AbsBatAlgorithm{
     private double BESTvar2[];
     private double BESTvar3[];
     private double fmin;
+
+    private File file;
 
 
     private double loundnesses[];
@@ -220,13 +223,19 @@ public class ImprovedBatAlgorithm extends AbsBatAlgorithm{
 		 }
 	 
 		 double[][] solution() {
+
 			  initialize();
+
+			  //file initial file
+             file = new File(getFilename());
+
              double alfa=0.5264;
              double gamma=4.411;
 			  double A0=0.5026;
 			  double r0=0.4205;
 			  Random rndm=new Random();
 			  double fnew=0.0;
+
 
 			  while(t< generation) {
 

@@ -1,178 +1,179 @@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ORIGIN~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
 --------------------------0---------------------------------
-origin best value 3.5701275881094147E-4
-origin best value 2.174604382300204E-5
-origin best value 4.58529955235986E-4
-origin best value 0.003554623210579779
-origin best value 0.06542819282906208
-origin best value 4.0601107945125494E-5
-origin best value 0.026861778758429603
-origin best value 0.01783282285511335
-origin best value 1.1864612684666971E-5
-origin best value 3.2786624530488796E-4
-origin best value 0.0017027315376482032
-origin best value 4.8434043255932545E-5
-origin best value 1.1527435776921821E-5
-origin best value 1.2881858171307067E-5
-origin best value 0.002415566371516917
-origin best value 6.4775771035079336E-6
-origin best value 7.581144686022686E-5
-origin best value 5.195477469737202E-5
-origin best value 2.4823433583047544E-5
-origin best value 5.836351860613085E-5
-origin best value 0.0048887265167318365
-origin best value 2.9814831397141335E-4
-origin best value 0.0017334706268620423
-origin best value 1.2908363843449897E-5
-origin best value 1.3654874214366085E-4
-origin best value 5.3386786548249824E-5
-origin best value 2.5781939288109842E-5
-origin best value 1.2796972331715432E-4
-origin best value 2.9081571047123655E-6
-origin best value 2.1710835435563126E-6
+origin best value 2.788791523575481E-5
+origin best value 1.3517509180569382E-4
+origin best value 2.626021949918396E-4
+origin best value 6.278370103560249E-5
+origin best value 0.009915577986925186
+origin best value 4.914577689645037E-5
+origin best value 7.019249170596017E-4
+origin best value 2.27900855417669E-4
+origin best value 2.579583008380403E-5
+origin best value 1.7309662183035382E-6
+origin best value 2.0285164439364607E-4
+origin best value 3.5456850401179794E-5
+origin best value 3.8556718570863094E-4
+origin best value 5.855772827290414E-5
+origin best value 2.621058339328534E-6
+origin best value 0.037101728185714854
+origin best value 7.125001908981661E-5
+origin best value 1.1732881117199843E-4
+origin best value 1.8663037396801246E-5
+origin best value 9.349458839541712E-5
+origin best value 0.01782728989912957
+origin best value 0.010486937949251584
+origin best value 7.53159507893807E-5
+origin best value 6.634578985215908E-5
+origin best value 0.008346140571935131
+origin best value 3.91295130605065E-5
+origin best value 8.334318235848605E-5
+origin best value 0.004334579527065627
+origin best value 8.25926878945932E-5
+origin best value 3.811312415585544E-5
 
-the worst   value is 2.1710835435563126E-6
-the best    value is 2.1710835435563126E-6
-the average value is 2.1710835435563126E-6
+the worst   value is 0.037101728185714854
+the best    value is 1.7309662183035382E-6
+the average value is 0.003029261084668246
 --------------------------1---------------------------------
-origin best value 0.022104538377607293
-origin best value 0.0130816757363722
-origin best value 0.021443522204270583
-origin best value 0.014314820182330646
-origin best value 0.01587336809072187
-origin best value 0.027584199718379703
-origin best value 0.012783571662199471
-origin best value 0.032274373230472525
-origin best value 0.01709854110624584
-origin best value 0.09430802391967312
-origin best value 0.1793759733608992
-origin best value 0.13209281590311156
-origin best value 0.008119668452544365
-origin best value 0.015829246070056664
-origin best value 0.015207409430116187
-origin best value 0.01923123237765829
-origin best value 0.006670773809365473
-origin best value 0.03470618750367305
-origin best value 0.002980651821045578
-origin best value 0.012547780078084467
-origin best value 0.028963027441368815
-origin best value 0.1488590031433069
-origin best value 0.01584208669879578
-origin best value 0.014321385347095305
-origin best value 0.016380448975075446
-origin best value 0.029331949027979923
-origin best value 0.007695441887254801
-origin best value 0.02309941937190452
-origin best value 0.008553431970124498
-origin best value 0.009305446594921314
+origin best value 0.010440848500829273
+origin best value 0.377799825829476
+origin best value 0.007798514638539507
+origin best value 0.022082794767761503
+origin best value 0.01180265109933907
+origin best value 0.0062292405077180235
+origin best value 0.011333911156837845
+origin best value 0.007097068192649397
+origin best value 0.010254294252604898
+origin best value 0.020032521333510855
+origin best value 0.014577038464536033
+origin best value 0.03715853185548761
+origin best value 0.018710347724123992
+origin best value 0.01685457890088698
+origin best value 0.009627153729629823
+origin best value 0.012995650774228578
+origin best value 0.013832637715837846
+origin best value 0.008140229088884666
+origin best value 0.013358080237291311
+origin best value 0.007167506585251759
+origin best value 0.011090926500827221
+origin best value 0.010244104530937093
+origin best value 0.008284425027604939
+origin best value 0.01979803231050503
+origin best value 0.0010790000869890656
+origin best value 0.01336676449694088
+origin best value 0.018146420305135632
+origin best value 0.014183250671571437
+origin best value 0.013948163222288845
+origin best value 0.015408344894470698
 
-the worst   value is 0.002980651821045578
-the best    value is 0.002980651821045578
-the average value is 0.002980651821045578
+the worst   value is 0.377799825829476
+the best    value is 0.0010790000869890656
+the average value is 0.025428095246756526
 --------------------------2---------------------------------
-origin best value 1.1439623506228361E-4
-origin best value 3.664040850819459E-5
-origin best value 2.716034995678093E-6
-origin best value 3.896484989159471E-4
-origin best value 4.6906111306289916E-4
-origin best value 5.567669722108937E-5
-origin best value 5.1137210646114506E-5
-origin best value 1.3505512504109E-4
-origin best value 3.588116629058322E-5
-origin best value 5.108375840394562E-5
-origin best value 5.464716992338445E-4
-origin best value 1.4024379550752977E-4
-origin best value 1.416922743409891E-4
-origin best value 6.994154601729931E-5
-origin best value 1.6715077668409729E-6
-origin best value 2.465923442643464E-4
-origin best value 7.0968845315205344E-6
-origin best value 1.1158641914084862E-5
-origin best value 5.015798052161867E-5
-origin best value 2.855282236000532E-4
-origin best value 7.868038569452188E-7
-origin best value 2.304452690765942E-5
-origin best value 2.1357078356671217E-4
-origin best value 8.067884128579522E-5
-origin best value 4.808288689071729E-6
-origin best value 2.590962296320797E-5
-origin best value 1.0283558443155083E-5
-origin best value 4.499012180601178E-5
-origin best value 2.525374669211133E-4
-origin best value 1.294839171857662E-4
+origin best value 5.0873572536964945E-6
+origin best value 1.470323064555307E-5
+origin best value 7.012844776559823E-5
+origin best value 2.0402444558469048E-4
+origin best value 6.334620759861942E-5
+origin best value 3.578529202312386E-7
+origin best value 6.312555822453088E-5
+origin best value 4.3701922537116185E-6
+origin best value 3.113511505108955E-4
+origin best value 7.917629067770901E-5
+origin best value 7.400787008850134E-5
+origin best value 7.576052522969176E-5
+origin best value 8.380715010385734E-5
+origin best value 1.711184163801096E-5
+origin best value 4.3103056189225335E-5
+origin best value 4.286614042029004E-5
+origin best value 1.3483763433116294E-4
+origin best value 3.559221314600037E-4
+origin best value 5.0330097215904856E-5
+origin best value 1.4301463870159978E-6
+origin best value 4.610657559367709E-6
+origin best value 3.2703857098172786E-4
+origin best value 6.34269770420085E-5
+origin best value 1.6393090894915556E-4
+origin best value 1.1214817714880256E-5
+origin best value 9.894777301289443E-5
+origin best value 1.1025742411321147E-4
+origin best value 1.115090620789007E-4
+origin best value 1.359712955387434E-4
+origin best value 1.8419656487306726E-4
 
-the worst   value is 7.868038569452188E-7
-the best    value is 7.868038569452188E-7
-the average value is 7.868038569452188E-7
+the worst   value is 3.559221314600037E-4
+the best    value is 3.578529202312386E-7
+the average value is 9.686504594542862E-5
 --------------------------3---------------------------------
-origin best value 0.003879133911591247
-origin best value 0.008628591535872383
-origin best value 0.02192169419541881
-origin best value 0.005110295778742979
-origin best value 0.012536459888530846
-origin best value 0.006687720090032422
-origin best value 0.0053637699497496635
-origin best value 0.0030297442417404094
-origin best value 0.006189767571530701
-origin best value 0.008662113586010729
-origin best value 0.010541092516198227
-origin best value 0.034842364989143663
-origin best value 0.0039147266252990386
-origin best value 0.015749094172484396
-origin best value 0.006220648845096593
-origin best value 0.002041121331914985
-origin best value 0.007887805152584342
-origin best value 0.04279537004048971
-origin best value 0.014133447397191561
-origin best value 0.004935827507638427
-origin best value 0.006613291011774838
-origin best value 0.03415568058001413
-origin best value 0.005371580324178685
-origin best value 0.016273369936346573
-origin best value 0.006803053746628249
-origin best value 0.01194277748024529
-origin best value 0.006487010454692208
-origin best value 0.021093698486834414
-origin best value 0.006432215516340662
-origin best value 0.006759672223035185
+origin best value 0.016836728666238567
+origin best value 0.004785643898496644
+origin best value 0.005010209731427722
+origin best value 0.006121249267267551
+origin best value 0.004572741206924373
+origin best value 0.04925596549556557
+origin best value 0.22377817468176409
+origin best value 0.0512467390128413
+origin best value 0.007812021311097723
+origin best value 0.006147782331901752
+origin best value 0.1841934627596051
+origin best value 0.007373446010999384
+origin best value 0.004902642066527369
+origin best value 0.005663786717514392
+origin best value 0.0073037845792113445
+origin best value 0.007131237403558472
+origin best value 0.05725744032139333
+origin best value 0.0024791631537217558
+origin best value 0.03321932237939956
+origin best value 0.006171231070319766
+origin best value 0.008702622895546422
+origin best value 0.005198946676353787
+origin best value 0.012928358220984315
+origin best value 0.005333184570216862
+origin best value 0.06381230523312102
+origin best value 0.0027544920869308313
+origin best value 0.006417883363382337
+origin best value 0.005698350623213073
+origin best value 0.002633596895120262
+origin best value 0.0062738602907582396
 
-the worst   value is 0.002041121331914985
-the best    value is 0.002041121331914985
-the average value is 0.002041121331914985
+the worst   value is 0.22377817468176409
+the best    value is 0.0024791631537217558
+the average value is 0.0270338790973801
 --------------------------4---------------------------------
-origin best value 0.003838743313112519
-origin best value 0.06283008029783864
-origin best value 0.023249564799912366
-origin best value 0.08066267770112989
-origin best value 0.005116729209847482
-origin best value 0.0165157510289013
-origin best value 7.783828956407632
-origin best value 5.002351755090306
-origin best value 0.01675914068981876
-origin best value 0.07131353203941089
-origin best value 4.809704134744863
-origin best value 1.475129812655845
-origin best value 0.01050671335222827
-origin best value 2.0738552584327983
-origin best value 4.278371578704285
-origin best value 0.0010307731399251635
-origin best value 0.3219255334389224
-origin best value 5.2579187332461474
-origin best value 0.0953225350586345
-origin best value 0.026775965657386942
-origin best value 2.4157067755560275
-origin best value 0.0031472424775252994
-origin best value 5.473496554210615E-4
-origin best value 0.06115959453110799
-origin best value 2.015745044757229
-origin best value 0.014961874797967168
-origin best value 0.007179741705497238
-origin best value 0.6036754730832772
-origin best value 0.41235561682547206
-origin best value 0.00815243475648546
+origin best value 0.14028637972495375
+origin best value 0.004304919756629806
+origin best value 0.8727291683973247
+origin best value 1.2741335009204016
+origin best value 0.01857122442199459
+origin best value 0.00457066304301389
+origin best value 0.34005874197855324
+origin best value 0.4996598979646303
+origin best value 5.00503733050213
+origin best value 0.008603711813149832
+origin best value 3.4744896155199054
+origin best value 0.012848565013561873
+origin best value 0.017957565112788367
+origin best value 0.016179856599258753
+origin best value 0.04275296811728957
+origin best value 2.0242322949765863
+origin best value 0.0795576148645338
+origin best value 1.7401505254580312
+origin best value 1.3713965723277677
+origin best value 0.02886056867975242
+origin best value 0.08695876800384585
+origin best value 2.866194011955482
+origin best value 0.1586560722241346
+origin best value 0.022122482612859404
+origin best value 0.021938276029676955
+origin best value 0.0036249254145588935
+origin best value 6.568915453844903
+origin best value 0.03319895496338206
+origin best value 0.045950486895990385
+origin best value 0.010916827256470567
 
-the worst   value is 5.473496554210615E-4
-the best    value is 5.473496554210615E-4
-the average value is 5.473496554210615E-4
+the worst   value is 6.568915453844903
+the best    value is 0.0036249254145588935
+the average value is 0.8931619314797851
 --------------------------5---------------------------------
 origin best value 0.0
 origin best value 0.0
@@ -209,247 +210,247 @@ the worst   value is 0.0
 the best    value is 0.0
 the average value is 0.0
 --------------------------6---------------------------------
-origin best value 0.003148394231938923
-origin best value 0.0055257102559473584
-origin best value 3.053579371770748E-4
-origin best value 7.586137503755015E-5
-origin best value 5.318778378962886E-4
-origin best value 0.0011497094958202506
-origin best value 4.696043530354365E-4
-origin best value 0.0024197073000502187
-origin best value 0.002352792821090504
-origin best value 4.6242670469657415E-4
-origin best value 0.008762129647587037
-origin best value 0.0015495842226960134
-origin best value 0.003224491630704495
-origin best value 4.234481017271412E-4
-origin best value 0.0017032186827196567
-origin best value 0.008311830849227056
-origin best value 8.940691184134324E-4
-origin best value 0.006080804040466509
-origin best value 0.017080200658526126
-origin best value 3.4290445084453027E-4
-origin best value 0.003084952527828703
-origin best value 0.0017456507952167636
-origin best value 0.0013922051004592057
-origin best value 5.584265278665585E-4
-origin best value 0.0037417915108376855
-origin best value 0.0023065491757103484
-origin best value 7.276138660023571E-4
-origin best value 0.008122963734499744
-origin best value 0.001735079582386284
-origin best value 0.00645059858286354
+origin best value 0.003115067328129803
+origin best value 0.0031770441903210224
+origin best value 0.006605772394535313
+origin best value 7.761602174661828E-4
+origin best value 0.0034992723490157546
+origin best value 0.003212316945849642
+origin best value 0.007721309002046311
+origin best value 0.0012629174505820306
+origin best value 6.285438609703879E-4
+origin best value 0.002657720419321624
+origin best value 0.00738819169208948
+origin best value 7.981636077858571E-4
+origin best value 7.994691876362683E-4
+origin best value 5.458502885718401E-4
+origin best value 8.817494300835309E-4
+origin best value 0.0017796329376083184
+origin best value 9.501330992377727E-4
+origin best value 0.006484746328488009
+origin best value 1.0670531791535309E-4
+origin best value 3.761646108520151E-4
+origin best value 0.004428418772465343
+origin best value 5.396225899063085E-4
+origin best value 7.607100317861735E-4
+origin best value 0.004637413379208553
+origin best value 0.01061121441635865
+origin best value 0.0016822394229100133
+origin best value 0.005066001577337049
+origin best value 0.0014257004923240021
+origin best value 4.160866333799166E-4
+origin best value 3.6226675187408554E-4
 
-the worst   value is 7.586137503755015E-5
-the best    value is 7.586137503755015E-5
-the average value is 7.586137503755015E-5
+the worst   value is 0.01061121441635865
+the best    value is 1.0670531791535309E-4
+the average value is 0.002756553490868554
 --------------------------7---------------------------------
-origin best value 1.245060581118274
-origin best value 2.6425671167381353
-origin best value 0.264407093752439
-origin best value 0.008413614319289664
-origin best value 1.4772906220670752
-origin best value 0.42453341290656077
-origin best value 0.6929507782729605
-origin best value 0.40759161032721103
-origin best value 0.13266496709333708
-origin best value 0.45474746354353535
-origin best value 1.464711028881073
-origin best value 0.539610162820944
-origin best value 0.0011844597021077874
-origin best value 1.272264219745745
-origin best value 1.5275444276955223
-origin best value 1.784755250403311
-origin best value 1.0340120966928783
-origin best value 1.0207871959565509
-origin best value 0.4051653437261713
-origin best value 0.6708719038393127
-origin best value 1.2845696107113387
-origin best value 0.3245947955532582
-origin best value 1.3882168688170289
-origin best value 1.129280020500607
-origin best value 1.0829268385957445
-origin best value 1.268937094441208
-origin best value 0.047189562184161815
-origin best value 1.271194869941656
-origin best value 1.395075025203857
-origin best value 2.0756055578037262
+origin best value 2.055999258657641
+origin best value 1.0761165604195462
+origin best value 0.3776052679359925
+origin best value 0.24078094523361315
+origin best value 0.4021096807261628
+origin best value 1.2579536262644737
+origin best value 2.41801775183424
+origin best value 0.4087207753641309
+origin best value 1.11183802203014
+origin best value 0.5055595163576623
+origin best value 1.248218789526625
+origin best value 0.12893243630854556
+origin best value 0.6794078120593454
+origin best value 1.4258397128901805
+origin best value 1.3956362681772934
+origin best value 1.5303733558072476
+origin best value 1.1487558137046925
+origin best value 1.232984766396898
+origin best value 2.183386621111744
+origin best value 0.8800666530650663
+origin best value 1.1986579505361004
+origin best value 2.076105455713188
+origin best value 1.1159202783056479
+origin best value 1.5154062395213401
+origin best value 0.3111945538896883
+origin best value 1.130085380052412
+origin best value 0.08354787678756104
+origin best value 1.0088822373439346
+origin best value 1.2957681424491359
+origin best value 1.1632852986395523
 
-the worst   value is 0.0011844597021077874
-the best    value is 0.0011844597021077874
-the average value is 0.0011844597021077874
+the worst   value is 2.41801775183424
+the best    value is 0.08354787678756104
+the average value is 1.08690523490366
 --------------------------8---------------------------------
-origin best value 0.02098300696351929
-origin best value 1.0277174877203277
-origin best value 0.019427559400096772
-origin best value 0.019697717982193996
-origin best value 0.017840564821405724
-origin best value 0.02239033824983183
-origin best value 0.02851853320617126
-origin best value 0.015193798119913726
-origin best value 0.025340896528693424
-origin best value 0.011323944619303195
-origin best value 0.01160129423005829
-origin best value 0.012756258238983964
-origin best value 0.34135642700585267
-origin best value 0.02143423687750401
-origin best value 1.1016288751121768
-origin best value 0.031606573786316705
-origin best value 0.03207194583050965
-origin best value 0.10177582246079853
-origin best value 0.0202834380711292
-origin best value 0.03506373383501371
-origin best value 0.02682553438153379
-origin best value 0.03906330839483774
-origin best value 0.012588369577003267
-origin best value 0.008811719700379417
-origin best value 0.008635955495389869
-origin best value 0.024491966938825716
-origin best value 0.05527950446617469
-origin best value 0.00977698188688736
-origin best value 0.013608972890118753
-origin best value 0.0174494837423258
+origin best value 0.032912655867111784
+origin best value 0.018830398526660463
+origin best value 0.014947300347764259
+origin best value 0.014098211473851041
+origin best value 0.0693459136793213
+origin best value 0.02719058638874161
+origin best value 0.23521132384874166
+origin best value 0.020673323461469995
+origin best value 0.032397456851882556
+origin best value 0.014199111843034462
+origin best value 0.018872259954684
+origin best value 0.03252309888359095
+origin best value 0.018374013117885557
+origin best value 0.04645651169240539
+origin best value 0.015570867799418853
+origin best value 0.00505006173645528
+origin best value 0.015186922161842364
+origin best value 0.011591127101525434
+origin best value 0.013912810265612752
+origin best value 0.1249922861385504
+origin best value 0.017735305814476465
+origin best value 0.10880616277569688
+origin best value 0.1875509294762776
+origin best value 0.013950940030337922
+origin best value 0.018539816786230734
+origin best value 0.030358744573562024
+origin best value 0.04723602076489586
+origin best value 0.016569329824563273
+origin best value 0.02409200389388788
+origin best value 0.01696373984525623
 
-the worst   value is 0.008635955495389869
-the best    value is 0.008635955495389869
-the average value is 0.008635955495389869
+the worst   value is 0.23521132384874166
+the best    value is 0.00505006173645528
+the average value is 0.0421379744975245
 --------------------------9---------------------------------
-origin best value 0.02970520027859902
-origin best value 0.025461580485286017
-origin best value 0.029946599167878896
-origin best value 0.01170070475172258
-origin best value 0.014806281932962628
-origin best value 0.019151511747411476
-origin best value 0.010980915660567026
-origin best value 0.008149840633651761
-origin best value 0.02040928952743115
-origin best value 0.051154128445798364
-origin best value 0.031213777697591927
-origin best value 0.0371079315083942
-origin best value 0.032670615417877524
-origin best value 0.007788731696521611
-origin best value 0.01646597314347531
-origin best value 0.026518324605688703
-origin best value 0.014024250849728248
-origin best value 0.03417544421430563
-origin best value 0.010818304402714696
-origin best value 0.012439457103085139
-origin best value 0.024275659089825097
-origin best value 0.013271133591849171
-origin best value 0.02533554454581055
-origin best value 0.03404035919355353
-origin best value 0.022700994458867974
-origin best value 0.029078548829362116
-origin best value 0.017684070748065994
-origin best value 0.03897512819965143
-origin best value 0.027507865550732036
-origin best value 0.015237111026979444
+origin best value 0.022602340240903684
+origin best value 0.029597423698986214
+origin best value 0.015885054214314742
+origin best value 0.002931066230414392
+origin best value 0.010554624276706948
+origin best value 0.011206521864125185
+origin best value 0.010605182188981876
+origin best value 0.01256961416384772
+origin best value 0.013896236872847911
+origin best value 0.026101172144621487
+origin best value 0.01342287229675898
+origin best value 0.016263906500569414
+origin best value 0.015055438190188841
+origin best value 0.03254717234747362
+origin best value 0.028947931978796637
+origin best value 0.03689090435259745
+origin best value 0.03591026923432317
+origin best value 0.03088981256137746
+origin best value 0.017610596979411475
+origin best value 0.014114268981674005
+origin best value 0.015721263471716762
+origin best value 0.040528765317218274
+origin best value 0.03504736030601341
+origin best value 0.02714716460675559
+origin best value 0.030878150233210055
+origin best value 0.008381465728817816
+origin best value 4.650815391648022E-4
+origin best value 0.015508127835607732
+origin best value 0.0286320947615909
+origin best value 0.03259883129629715
 
-the worst   value is 0.007788731696521611
-the best    value is 0.007788731696521611
-the average value is 0.007788731696521611
+the worst   value is 0.040528765317218274
+the best    value is 4.650815391648022E-4
+the average value is 0.021083690480510456
 --------------------------10---------------------------------
-origin best value 1.762696941372211E-4
-origin best value 9.180667541552017E-4
-origin best value 6.541491737483007E-5
-origin best value 6.444924513471207E-5
-origin best value 1.4094174192810744E-4
-origin best value 5.892590911931305E-4
-origin best value 0.0012564070866710028
-origin best value 5.279194403995801E-5
-origin best value 1.565363171726955E-4
-origin best value 2.9237320203128934E-4
-origin best value 1.348902376259155E-4
-origin best value 5.856552304226355E-5
-origin best value 5.237212092196634E-5
-origin best value 1.7679627014010167E-4
-origin best value 7.086193451005404E-5
-origin best value 1.859145427650735E-4
-origin best value 6.248735123542718E-5
-origin best value 7.875158850619365E-5
-origin best value 8.103190540623289E-5
-origin best value 2.0611020227217881E-4
-origin best value 3.0763707086604244E-5
-origin best value 1.3888331836839314E-4
-origin best value 2.1903002262673986E-4
-origin best value 1.772170180929404E-4
-origin best value 7.506613777888154E-5
-origin best value 2.9359646368735053E-4
-origin best value 5.060071929587349E-5
-origin best value 1.3102218640832179E-5
-origin best value 1.717115869050413E-5
-origin best value 1.5519837866992558E-4
+origin best value 6.912436297340003E-5
+origin best value 4.360733939011538E-4
+origin best value 7.029160871954911E-5
+origin best value 8.872214488702184E-5
+origin best value 7.972700782014747E-5
+origin best value 5.0169154608177776E-5
+origin best value 2.461873734805018E-5
+origin best value 1.6208616039754878E-5
+origin best value 5.6975421016002554E-5
+origin best value 1.2892481295244054E-4
+origin best value 1.3914823475554965E-4
+origin best value 4.24578902472195E-5
+origin best value 0.10262279798433228
+origin best value 2.3368728013021026E-4
+origin best value 2.177336528393395E-5
+origin best value 9.348956886070385E-5
+origin best value 2.606022914230528E-4
+origin best value 7.049026498420595E-5
+origin best value 0.001136135553515986
+origin best value 2.896197720159477E-5
+origin best value 1.9803804079094548E-4
+origin best value 6.281762530097813E-5
+origin best value 3.460435466536756E-4
+origin best value 6.15300081469117E-5
+origin best value 1.4216671588599856E-4
+origin best value 4.100926785208494E-5
+origin best value 4.2750378897812494E-5
+origin best value 1.353587762345614E-4
+origin best value 0.0011547690367949975
+origin best value 2.5544489381563567E-4
 
-the worst   value is 1.3102218640832179E-5
-the best    value is 1.3102218640832179E-5
-the average value is 1.3102218640832179E-5
+the worst   value is 0.10262279798433228
+the best    value is 1.6208616039754878E-5
+the average value is 0.0036036769320458018
 --------------------------11---------------------------------
-origin best value 5.415206173725968E-4
-origin best value 1.6669638854939684E-4
-origin best value 4.2690877242513344E-5
-origin best value 4.514149943589303E-5
-origin best value 6.092475625380878E-5
-origin best value 0.02502983723962674
-origin best value 2.0398446049843836E-4
-origin best value 1.3391802103284936E-4
-origin best value 4.87242652028013E-4
-origin best value 2.8216084449639578E-5
-origin best value 6.737972233904873E-5
-origin best value 0.0010509123010044542
-origin best value 1.5220045117942744E-5
-origin best value 1.0819881934441012E-4
-origin best value 1.0279852574524451E-4
-origin best value 1.134479834235494E-4
-origin best value 3.561129587917233E-4
-origin best value 4.2432196542737356E-5
-origin best value 3.7391304744782645E-4
-origin best value 3.4432359910522126E-5
-origin best value 3.123191820108352E-5
-origin best value 2.491178704088769E-4
-origin best value 5.376060454049507E-4
-origin best value 2.0378458178021337E-4
-origin best value 1.141750064004227E-5
-origin best value 5.207500030515765E-4
-origin best value 1.641383156219278E-4
-origin best value 1.5600968240656323E-4
-origin best value 1.4961911422993696E-4
-origin best value 2.4220357195141546E-5
+origin best value 4.7677797613378954E-5
+origin best value 4.2426403492814074E-5
+origin best value 6.285061633973974E-5
+origin best value 6.578931581394631E-4
+origin best value 1.619301204359374E-5
+origin best value 1.1781400443569498E-4
+origin best value 1.4367245558713715E-4
+origin best value 1.953608982289032E-5
+origin best value 1.3712545573297952E-4
+origin best value 1.507126135496968E-5
+origin best value 0.004908439828081421
+origin best value 1.4687492379874312E-5
+origin best value 1.3903951784848274E-5
+origin best value 2.645975191213583E-4
+origin best value 0.007163933306933859
+origin best value 2.46544571590845E-4
+origin best value 8.939671309696982E-5
+origin best value 3.5363319689551226E-5
+origin best value 1.2027182918651263E-4
+origin best value 6.619869045759575E-5
+origin best value 5.430112322150698E-5
+origin best value 9.919857535650636E-5
+origin best value 2.0443287194751806E-4
+origin best value 6.179499550279356E-5
+origin best value 0.0040255230887223
+origin best value 1.8806528207832056E-5
+origin best value 9.573955543547169E-5
+origin best value 5.0759763654567993E-5
+origin best value 3.032160018469456E-5
+origin best value 1.713389160324695E-4
 
-the worst   value is 1.141750064004227E-5
-the best    value is 1.141750064004227E-5
-the average value is 1.141750064004227E-5
+the worst   value is 0.007163933306933859
+the best    value is 1.3903951784848274E-5
+the average value is 6.331938165050385E-4
 --------------------------------12------------------------------------
-origin best value -1018.5549330237009
-origin best value -783.16242009939
-origin best value -1020.0719757184975
-origin best value -957.052800635845
-origin best value -1138.1987339228783
-origin best value -898.1692717767567
-origin best value -900.1165977152
-origin best value -921.3706511262765
-origin best value -842.384735774504
-origin best value -1020.0719882101919
-origin best value -1039.8089894506513
-origin best value -901.633657024305
-origin best value -1138.5103249619488
-origin best value -1039.8089527736624
-origin best value -901.5954696774108
-origin best value -1018.5548918820771
-origin best value -921.3706552320807
-origin best value -802.9323212710958
-origin best value -986.475913108053
-origin best value -842.4036083797939
-origin best value -921.3607998010775
-origin best value -861.8124074149258
-origin best value -1256.9486461181618
-origin best value -901.600751222788
-origin best value -842.4036078548943
-origin best value -841.746363325536
-origin best value -917.73968276397
-origin best value -1018.7778755196714
-origin best value -624.7714063484972
-origin best value -1138.5011595563742
+origin best value -1128.7946539347174
+origin best value -1020.0716703913283
+origin best value -684.4610865783194
+origin best value -780.1612043213648
+origin best value -802.9323204113246
+origin best value -921.3706551089906
+origin best value -1138.5103269653052
+origin best value -1018.5549268025446
+origin best value -900.1165976284922
+origin best value -1237.7186920356453
+origin best value -1020.0719871575486
+origin best value -842.4036131827211
+origin best value -901.6007531175308
+origin best value -605.4940305867932
+origin best value -783.1624155051566
+origin best value -1039.808990601446
+origin best value -900.116596983643
+origin best value -1020.0020009597054
+origin best value -921.3447313891058
+origin best value -960.8418898847408
+origin best value -901.6336569223377
+origin best value -795.4519263910406
+origin best value -1039.8089913724946
+origin best value -1254.818784272096
+origin best value -960.84192881317
+origin best value -1138.5103237140318
+origin best value -1138.5103260009173
+origin best value -960.8419343742546
+origin best value -1138.5103220725007
+origin best value -1018.5544065747217
 
-the worst   value is -1256.9486461181618
-the best    value is -1256.9486461181618
-the average value is -1256.9486461181618
+the worst   value is -605.4940305867932
+the best    value is -1254.818784272096
+the average value is -965.8340581351329
