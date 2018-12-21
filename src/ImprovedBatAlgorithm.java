@@ -66,7 +66,7 @@ public class ImprovedBatAlgorithm extends AbsBatAlgorithm{
         double end = possibility.get(counter);
         LinkedList<Double> temp = new LinkedList<>();
         while(counter + 1 < windowSize){
-            end += (1 - end) * f() * weights.get(counter) * 1/100;
+            end -= (1 - end) * f() * weights.get(counter) * 1/0100;
 //            end += (1 - end)  * weights.get(counter) * 1/100;
             temp.add(end);
 
@@ -130,6 +130,11 @@ public class ImprovedBatAlgorithm extends AbsBatAlgorithm{
         double firstSection = 0.7;
         double section = (1.0 - firstSection)/(windowSize-1);
 
+//        for (int i = 0; i < v.length; i++) {
+//            for (int j = 0; j < v[0].length; j++) {
+//                v[i][j] = Math.random() * 2 -1;
+//            }
+//        }
 
         int counter = 0;
         double lastEnd = firstSection;
