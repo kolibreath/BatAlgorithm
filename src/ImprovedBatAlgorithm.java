@@ -1,5 +1,6 @@
 import functions.IFunctions;
 
+import java.io.File;
 import java.util.*;
 
 
@@ -18,18 +19,16 @@ public class ImprovedBatAlgorithm extends AbsBatAlgorithm{
     private double lb[];
     private double ub[];
     private double Q[];
-    private double v[][];
+    private double velocity[][];
     private double[][] batPopulationLocation;
     private double[][] S;
     private double[] fitness;
     private double[] best;
     private double BEST[];
-    private double BESTvar1[];
-    private double BESTvar2[];
-    private double BESTvar3[];
     private double fmin;
 
 
+    private File file;
     private double loundnesses[];
     private LinkedList<Double> possibility=new LinkedList<>();
     private int windowSize = 4;
@@ -66,7 +65,7 @@ public class ImprovedBatAlgorithm extends AbsBatAlgorithm{
         double end = possibility.get(counter);
         LinkedList<Double> temp = new LinkedList<>();
         while(counter + 1 < windowSize){
-            end -= (1 - end) * f() * weights.get(counter) * 1/100;
+            end -= (1 - end) * f() * weights.get(counter) * 1/1000;
 //            end += (1 - end)  * weights.get(counter) * 1/100;
             temp.add(end);
 
@@ -79,9 +78,12 @@ public class ImprovedBatAlgorithm extends AbsBatAlgorithm{
 
     }
     IFunctions ff;
-
+    //因为要进入很多次 所以可以把这个值高德大一些 后期不要随便改
+    private double door = Math.pow(Math.E,t);
 
     public ImprovedBatAlgorithm(IFunctions iff, int in, int iNgen, double iA, double ir, double iQmin, double iQmax, double[] iLbvec, double[] iUbvec) {
+
+
         population = in;
         generation = iNgen;
         A = iA;
@@ -89,9 +91,6 @@ public class ImprovedBatAlgorithm extends AbsBatAlgorithm{
         Qmin = iQmin;
         Qmax = iQmax;
         BEST = new double[generation];
-        BESTvar1 = new double[generation];
-        BESTvar2 = new double[generation];
-        BESTvar3 = new double[generation];
         lb = iLbvec;
         ub = iUbvec;
         d = lb.length;
@@ -103,7 +102,7 @@ public class ImprovedBatAlgorithm extends AbsBatAlgorithm{
         best = new double[d];
 
         Q = new double[population];
-        v = new double[population][d];
+        velocity = new double[population][d];
 
         loundnesses = new double[population];
         for (int i = 0; i <loundnesses.length ; i++) {
@@ -131,6 +130,12 @@ public class ImprovedBatAlgorithm extends AbsBatAlgorithm{
         double firstSection = 0.7;
         double section = (1.0 - firstSection)/(windowSize-1);
 
+
+        for (int i = 0; i < velocity.length; i++) {
+            for (int j = 0; j < velocity[0].length ; j++) {
+                velocity[i][j] = Math.random() * 2 - 1;
+            }
+        }
 
         int counter = 0;
         double lastEnd = firstSection;
@@ -214,12 +219,16 @@ public class ImprovedBatAlgorithm extends AbsBatAlgorithm{
 			   }
 			   return s;
 		 }
-	 
-		 double[][] solution() {
+
+
+		 private double[][] solution() {
+
+//		     file  = new File(getFilename());
+
 			  initialize();
              double alfa=0.5264;
              double gamma=4.411;
-			  double A0=0.5026;
+			  double A0;
 			  double r0=0.4205;
 			  Random rndm=new Random();
 			  double fnew=0.0;
@@ -228,17 +237,17 @@ public class ImprovedBatAlgorithm extends AbsBatAlgorithm{
 
 			    changePossibility();
 //                System.out.println(possibility);
-
-				for(int i = 0; i< population; i++) {
-
+//                System.out.println();
+                  int i = 0;
+				for( i = 0; i< population; i++) {
                       A0 = loundnesses[i];
                     //todo fitness 暂时没有改动
 //                    这里将best[]
                    best = windows.get(randomTarget()).getLocation();
                     Q[i] = Qmin + (Qmin - Qmax) * Math.random();
                     for (int j = 0; j < d; j++) {
-                        v[i][j] = v[i][j] + ((batPopulationLocation[i][j] - best[j]) * Q[i]);
-                        S[i][j] = batPopulationLocation[i][j] + v[i][j];
+                        velocity[i][j] = velocity[i][j] + ((batPopulationLocation[i][j] - best[j]) * Q[i]);
+                        S[i][j] = batPopulationLocation[i][j] + velocity[i][j];
                     }
                     batPopulationLocation[i] = simplebounds(batPopulationLocation[i]);
                     if (Math.random() > r0) {
@@ -253,14 +262,15 @@ public class ImprovedBatAlgorithm extends AbsBatAlgorithm{
                     fnew = ff.func(simplebounds(S[i]));
 
                     //修改
-                    if ((fnew <= fitness[i])
-                            ) {
-                        for (int j = 0; j < d; j++) {
-                            batPopulationLocation[i][j] = S[i][j];
-                        }
+                    if ((fnew <= fitness[i] )) {
+
+
+                        //second if
+                        System.arraycopy(S[i], 0, batPopulationLocation[i], 0, d);
                         fitness[i] = fnew;
                         r0 = r0 * (1.0 - Math.exp(-gamma * t));
                         loundnesses[i]= A0 * alfa;
+
                     }
 
                     if (fnew <= fmin) {
@@ -273,7 +283,18 @@ public class ImprovedBatAlgorithm extends AbsBatAlgorithm{
                 }
 
 
+//                //输出best
+//                  FileUtils.Companion.write(file,""+t +" " + i +"\n");
+//                for(Window window : windows){
+//				    String loca = "";
+//				    for(double loc : window.getLocation()){
+//				        loca += loc +" ";
+//                    }
+//                    loca += "\n";
+//				    FileUtils.Companion.write(file,loca);
+//                }
 				BEST[t]=fmin;
+
 				t++;
 		}
 
@@ -300,9 +321,16 @@ public class ImprovedBatAlgorithm extends AbsBatAlgorithm{
 
 	//增加并且排序
 	private void useWindows(double[]location){
-        Window maxValue = windows.stream().max(Window::compareTo).get();
-        if(ff.func(location) < maxValue.getObjectives()){
-            windows.remove(maxValue);
+        double max = windows.get(0).getObjectives();
+        int index = 0;
+        for (int i = 0; i < windows.size(); i++) {
+            if(windows.get(i).getObjectives() < max){
+                index = i;
+                max = windows.get(i).getObjectives();
+            }
+        }
+        if(ff.func(location) < windows.get(index).getObjectives()){
+            windows.remove(index);
             windows.add(new Window(location,ff.func(location)));
         }
         windows.sort(Window::compareTo);
