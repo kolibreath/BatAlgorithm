@@ -35,7 +35,7 @@ public class ImprovedBatAlgorithm extends AbsBatAlgorithm{
 
     private double loundnesses[];
     private LinkedList<Double> possibility=new LinkedList<>();
-    private int windowSize = 4;
+    private int windowSize = 5;
     private LinkedList<Window> windows = new LinkedList<>();
 
 
@@ -109,7 +109,7 @@ public class ImprovedBatAlgorithm extends AbsBatAlgorithm{
 
         loundnesses = new double[population];
         for (int i = 0; i <loundnesses.length ; i++) {
-            loundnesses[i] = Math.random() + 1;
+            loundnesses[i] = Math.random() ;
         }
     }
 
@@ -231,10 +231,9 @@ public class ImprovedBatAlgorithm extends AbsBatAlgorithm{
 
              double alfa=0.5264;
              double gamma=4.411;
-			  double A0=0.5026;
+			  double A0;
 			  double r0=0.4205;
-			  Random rndm=new Random();
-			  double fnew=0.0;
+             double fnew;
 
 
 			  while(t< generation) {
@@ -285,6 +284,14 @@ public class ImprovedBatAlgorithm extends AbsBatAlgorithm{
                     }
                 }
 
+                String builder = ""+t+"\n";
+                 for(Window window : windows){
+				    for(double loc : window.getLocation()){
+				        builder += loc +" ";
+                    }
+                    builder += "\n";
+                 }
+                 FileUtils.Companion.write(file,builder);
 
 				BEST[t]=fmin;
 				t++;

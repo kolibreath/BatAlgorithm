@@ -64,9 +64,9 @@ fun main(args:Array<String>) {
 
 
     println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~IMPROVED~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-    repeat(12) {
+    repeat(1) {
 
-        functions.index = it
+        functions.index = 0
         val container = LinkedList<Double>()
         println("-----------------------------------${functions.index}----------------------------------------------")
 
