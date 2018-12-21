@@ -54,9 +54,9 @@ fun main(args:Array<String>) {
     }
 
     println()
-    println("the worst   value is ${container1.min()}")
+    println("the worst   value is ${container1.max()}")
     println("the best    value is ${container1.min()}")
-    println("the average value is ${container1.min()}")
+    println("the average value is ${container1.average()}")
 
 
 
@@ -81,9 +81,9 @@ fun main(args:Array<String>) {
         }
 
         println()
-        println("the worst   value is ${container.min()}")
+        println("the worst   value is ${container.max()}")
         println("the best    value is ${container.min()}")
-        println("the average value is ${container.min()}")
+        println("the average value is ${container.average()}")
     }
 
     Lower = doubleArrayOf(-500.0, -500.0, -500.0)

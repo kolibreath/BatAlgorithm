@@ -66,7 +66,7 @@ public class ImprovedBatAlgorithm extends AbsBatAlgorithm{
         double end = possibility.get(counter);
         LinkedList<Double> temp = new LinkedList<>();
         while(counter + 1 < windowSize){
-            end += (1 - end) * f() * weights.get(counter) * 1/100;
+            end -= (1 - end) * f() * weights.get(counter) * 1/100;
 //            end += (1 - end)  * weights.get(counter) * 1/100;
             temp.add(end);
 
@@ -79,6 +79,7 @@ public class ImprovedBatAlgorithm extends AbsBatAlgorithm{
 
     }
     IFunctions ff;
+
 
     public ImprovedBatAlgorithm(IFunctions iff, int in, int iNgen, double iA, double ir, double iQmin, double iQmax, double[] iLbvec, double[] iUbvec) {
         population = in;
