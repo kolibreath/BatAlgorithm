@@ -78,7 +78,7 @@ fun main(args:Array<String>) {
             batAlgorithm.setFileName(fileName)
 
             val bestValue = batAlgorithm.bestValue()
-            println("improved best value $index $bestValue")
+            println("improved best value $index  $bestValue")
             container.add(bestValue)
 
         }
