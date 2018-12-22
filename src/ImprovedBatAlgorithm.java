@@ -38,8 +38,47 @@ public class ImprovedBatAlgorithm extends AbsBatAlgorithm{
     private LinkedList<Double> possibility=new LinkedList<>();
     private int windowSize = 4;
 
+    private int recordTime = 100;
     private LinkedList<Window> windows = new LinkedList<>();
+    private int lastModify;
+    private LinkedList<Window> recordWindows = new LinkedList<>();
 
+    //所有的都不变 返回true 只要又一次变动 返回false
+    private boolean isEqual() {
+        for (int i = 0; i < windows.size(); i++) {
+            Window lastWindow = recordWindows.get(i);
+            Window curWindow = windows.get(i);
+
+            if (lastWindow.getObjectives() != curWindow.getObjectives()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private void watchWindows(){
+        //如果现在的windows和记录相比有所变化
+        if( !isEqual()){
+            recordWindows = new LinkedList<>(windows);
+            lastModify = t;
+        }
+        if(isEqual() && t - lastModify == recordTime){
+
+            recordWindows.clear();
+            for (int i = 0; i <windows.size() ; i++) {
+               Window curWindow = windows.get(i);
+               double curLocation[] = curWindow.getLocation();
+                for (int j = 0; j <curLocation.length ; j++) {
+                    double eth = Math.random()*2 - 1;
+                    curLocation[j] +=  eth*aveLoundness()*0.01;
+                }
+               Window window = new Window(curLocation,ff.func(curLocation));
+                recordWindows.add(window);
+            }
+            windows = new LinkedList<>(recordWindows);
+            lastModify = t;
+        }
+    }
 
     private int randomTarget(){
         double d = Math.random();
@@ -230,6 +269,8 @@ public class ImprovedBatAlgorithm extends AbsBatAlgorithm{
 
 			  initialize();
 
+			  recordWindows = new LinkedList<Window>(windows);
+
 			  //file initial file
              file = new File(getFilename());
 
@@ -247,9 +288,18 @@ public class ImprovedBatAlgorithm extends AbsBatAlgorithm{
 			  while(t< generation) {
 
 			    changePossibility();
+//			    watchWindows();
 
 				for(int i = 0; i< population; i++) {
-				      r0 = pulseRate[i];
+
+
+                    //todo buggy 会出现错误不知道在那里出现了windows中的objective没有改变的情况
+                    for (int k = 0; k <windowSize ; k++) {
+                        windows.get(k).setObjectives(ff.func(windows.get(k).getLocation()));
+                    }
+
+
+                    r0 = pulseRate[i];
                       A0 = loundnesses[i];
                     //todo fitness 暂时没有改动
 //                    这里将best[]
@@ -329,15 +379,14 @@ public class ImprovedBatAlgorithm extends AbsBatAlgorithm{
 
 	//增加并且排序
 	private void useWindows(double[]location){
-        double sum = Double.MAX_VALUE;
+        double sum = ff.func(windows.get(0).getLocation());
         int index = 0;
         for(int i = 0; i< windows.size();i++){
-            if(ff.func(windows.get(i).getLocation()) < sum){
+            if(ff.func(windows.get(i).getLocation()) > sum){
                 index = i;
                 sum = ff.func(windows.get(i).getLocation());
             }
         }
-
         if(ff.func(location) < ff.func(windows.get(index).getLocation())){
             windows.remove(index);
             windows.add(new Window(location,ff.func(location)));
