@@ -310,6 +310,18 @@ public class ImprovedBatAlgorithm extends AbsBatAlgorithm{
 			    changePossibility();
 			    watchWindows();
 
+
+                  Collections.sort(windows);
+                  String builder = ""+t+"\n";
+                  for(Window window : windows){
+                      for(double loc : window.getLocation()){
+                          builder += loc +"   ";
+                      }
+
+                      builder += " value "+ window.getObjectives() +"\n";
+                  }
+                  FileUtils.Companion.write(file,builder);
+
 				for(int i = 0; i< population; i++) {
 
 
@@ -337,40 +349,27 @@ public class ImprovedBatAlgorithm extends AbsBatAlgorithm{
                             S[i][j] = best[j] + eth*aveLoundness();
                         }
                     }
-                    //todo 对于S 的位置要进行收敛
+                    //todo
+                    // 对于S 的位置要进行收敛
+
                     //todo 已经确定上界和下界 要进行改良 和 观察in
                     fnew = ff.func(simplebounds(S[i]));
 
                     //修改
-                    if ((fnew <= fitness[i])
-                            ) {
-                        for (int j = 0; j < d; j++) {
-                            batPopulationLocation[i][j] = S[i][j];
-                        }
+                    if ((fnew <= fitness[i])) {
+                        System.arraycopy(S[i], 0, batPopulationLocation[i], 0, d);
                         fitness[i] = fnew;
                         pulseRate[i] = r0 * (1.0 - Math.exp(-gamma * t));
                         loundnesses[i]= A0 * alfa;
                     }
 
                     if (fnew <= fmin) {
-                        for (int j = 0; j < d; j++) {
-                            best[j] = S[i][j];
-                        }
+                        System.arraycopy(S[i], 0, best, 0, d);
                         fmin = fnew;
                         useWindows(best);
                     }
                 }
 
-                Collections.sort(windows);
-                String builder = ""+t+"\n";
-                 for(Window window : windows){
-				    for(double loc : window.getLocation()){
-				        builder += loc +"   ";
-                    }
-
-                    builder += " value "+ window.getObjectives() +"\n";
-                 }
-                 FileUtils.Companion.write(file,builder);
 
 				BEST[t]=fmin;
 				t++;
