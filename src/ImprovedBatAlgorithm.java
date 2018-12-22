@@ -38,9 +38,9 @@ public class ImprovedBatAlgorithm extends AbsBatAlgorithm{
     private LinkedList<Double> possibility=new LinkedList<>();
     private int windowSize = 4;
 
-    private int recordTime = 100;
+    private int recordTime = 20;
     private LinkedList<Window> windows = new LinkedList<>();
-    private int lastModify;
+    private double lastModify = 0.0;
     private LinkedList<Window> recordWindows = new LinkedList<>();
 
     //所有的都不变 返回true 只要又一次变动 返回false
@@ -62,19 +62,39 @@ public class ImprovedBatAlgorithm extends AbsBatAlgorithm{
             recordWindows = new LinkedList<>(windows);
             lastModify = t;
         }
-        if(isEqual() && t - lastModify == recordTime){
+        if(isEqual() && t - lastModify >= (recordTime + t/5)){
 
             recordWindows.clear();
-            for (int i = 0; i <windows.size() ; i++) {
-               Window curWindow = windows.get(i);
-               double curLocation[] = curWindow.getLocation();
-                for (int j = 0; j <curLocation.length ; j++) {
-                    double eth = Math.random()*2 - 1;
-                    curLocation[j] +=  eth*aveLoundness()*0.01;
-                }
-               Window window = new Window(curLocation,ff.func(curLocation));
-                recordWindows.add(window);
-            }
+                  for (Window curWindow : windows) {
+
+                      random = new Random();
+
+                      int powCounter = 1;
+                      double curLocation[] = new double[d];
+                      for (int i = 0; i < d; i++) {
+                          curLocation[i] = curWindow.getLocation()[i];
+                      }
+
+                      for (int j = 0; j < curLocation.length; j++) {
+                          double eth = Math.random() * 2 - 1;
+//                        curLocation[j] += eth * aveLoundness() * Math.pow(0.1,powCounter);
+                          curLocation[j] += eth * aveLoundness() * 0.001;
+//                    curLocation[j] +=  random.nextGaussian() * 0.001;
+                      }
+//                while (true) {
+//
+////                    if (ff.func(curLocation) <= curWindow.getObjectives() || Math.random() < 0.7)
+////                    if ( Math.random() < 0.2)
+//////                    if ( ff.func(curLocation) <= curWindow.getObjectives() )
+////                        break;
+////                    else {
+////                        powCounter++;
+////                    }
+//                }
+
+                      Window window = new Window(curLocation, ff.func(curLocation));
+                      recordWindows.add(window);
+                  }
             windows = new LinkedList<>(recordWindows);
             lastModify = t;
         }
@@ -155,7 +175,7 @@ public class ImprovedBatAlgorithm extends AbsBatAlgorithm{
 
         loundnesses = new double[population];
         for (int i = 0; i <loundnesses.length ; i++) {
-            loundnesses[i] = Math.random() ;
+            loundnesses[i] = Math.random() + 1 ;
         }
     }
 
@@ -288,7 +308,7 @@ public class ImprovedBatAlgorithm extends AbsBatAlgorithm{
 			  while(t< generation) {
 
 			    changePossibility();
-//			    watchWindows();
+			    watchWindows();
 
 				for(int i = 0; i< population; i++) {
 
@@ -313,7 +333,7 @@ public class ImprovedBatAlgorithm extends AbsBatAlgorithm{
                     if (Math.random() > r0) {
                         for (int j = 0; j < d; j++) {
                             double eth = Math.random()*2 - 1;
-//                        S[i][j] = best[j] + (0.001 * rndm.nextGaussian());
+//                        S[i][j] = best[j] + (0.001 * random.nextGaussian());
                             S[i][j] = best[j] + eth*aveLoundness();
                         }
                     }
