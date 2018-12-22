@@ -1,34 +1,458 @@
-improved best value 0   1.7079282894403258E-9
-improved best value 1   1.1503641730099002E-17
-improved best value 2   8.90037736881467E-8
-improved best value 3   7.494978781700619E-8
-improved best value 4   9.45172870759803E-10
-improved best value 5   3.2761449354467644E-7
-improved best value 6   2.2725428925266913E-26
-improved best value 7   4.806657371326305E-13
-improved best value 8   1.0757536946228806E-21
-improved best value 9   2.085360799758641E-6
-improved best value 10  9.00484678024939E-12
-improved best value 11  5.5906469475643734E-6
-improved best value 12  7.056835028322567E-17
-improved best value 13  7.125642832839337E-13
-improved best value 14  1.4898189687100538E-7
-improved best value 15  1.0416158481153372E-16
-improved best value 16  6.855765661561857E-11
-improved best value 17  1.233901304956311E-16
-improved best value 18  7.834691052413868E-11
-improved best value 19  7.391878620566778E-14
-improved best value 20  7.252825854864907E-18
-improved best value 21  1.2676654370727006E-19
-improved best value 22  4.876745648177585E-25
-improved best value 23  1.8507447511755828E-7
-improved best value 24  0.00561373790353796
-improved best value 25  3.262382447075034E-17
-improved best value 26  6.004329029317589E-10
-improved best value 27  1.2295932595438745E-12
-improved best value 28  3.945479673741024E-11
-improved best value 29  1.4195277761643052E-9
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~IMPROVED~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------------------0----------------------------------------------
+original best value 0  1.4166324777032252E-11
+original best value 1  1.0834059350240495E-9
+original best value 2  4.517002556015881E-39
+original best value 3  1.5102437680473088E-23
+original best value 4  1.8503431153356068E-11
+original best value 5  3.3438690586667405E-18
+original best value 6  0.014859399529724754
+original best value 7  1.658030992243465E-15
+original best value 8  7.074187835364806E-21
+original best value 9  4.0539106588810696E-8
+original best value 10  0.003089604518917716
+original best value 11  6.507400184859721E-7
+original best value 12  3.101369565686686E-22
+original best value 13  3.03067349109334E-17
+original best value 14  4.984421883403373E-17
+original best value 15  1.178693397340591E-10
+original best value 16  5.553313477670296E-9
+original best value 17  6.259415542987846E-7
+original best value 18  3.25211473376737E-20
+original best value 19  7.1030186255662975E-15
+original best value 20  1.8253416953903144E-11
+original best value 21  5.211286615340242E-7
+original best value 22  2.1251008612778906E-7
+original best value 23  1.118732873271294E-22
+original best value 24  6.991657031276335E-38
+original best value 25  3.348845020440335E-12
+original best value 26  1.280765872846029E-9
+original best value 27  1.4282081224986147E-9
+original best value 28  7.510670595652796E-16
+original best value 29  2.8805685077842398E-12
 
-the worst   value is 0.00561373790353796
-the best    value is 2.2725428925266913E-26
-the average value is 1.8740814688784883E-4
+the worst   value is 0.014859399529724754
+the best    value is 4.517002556015881E-39
+the average value is 5.983688142931476E-4
+-----------------------------------1----------------------------------------------
+original best value 0  0.026680716522575417
+original best value 1  1.4085753432091726E-6
+original best value 2  9.51437240176837E-14
+original best value 3  1.8328873332077888E-11
+original best value 4  1.3529926524713166E-9
+original best value 5  1.4353309336392562E-9
+original best value 6  2.2015132025793566E-12
+original best value 7  1.9035122801374147E-6
+original best value 8  4.902145545424443E-5
+original best value 9  5.600313421700498E-12
+original best value 10  1.878909459745191E-6
+original best value 11  0.023133003755062675
+original best value 12  9.487563273741033E-10
+original best value 13  7.559574240817672E-6
+original best value 14  0.11996158252972872
+original best value 15  0.004610321491888311
+original best value 16  3.2773842596799525E-10
+original best value 17  1.8359329241556374E-8
+original best value 18  1.9692797787026206E-21
+original best value 19  1.6634457745645073E-7
+original best value 20  1.0168208867274142E-6
+original best value 21  4.4381615191551194E-8
+original best value 22  9.303989880520557E-4
+original best value 23  1.2292921725503188E-6
+original best value 24  0.3856459732756215
+original best value 25  1.1580484152804805E-6
+original best value 26  5.952657874716484E-6
+original best value 27  7.129342222875523E-13
+original best value 28  7.51483063750362E-4
+original best value 29  1.7441678039858476E-5
+
+the worst   value is 0.3856459732756215
+the best    value is 1.9692797787026206E-21
+the average value is 0.01872674277760418
+-----------------------------------2----------------------------------------------
+original best value 0  3.3522804869347206E-6
+original best value 1  2.0837744319084283E-5
+original best value 2  8.260100181996324E-12
+original best value 3  6.18126157039055E-12
+original best value 4  3.0096841477153044E-6
+original best value 5  6.300905858459283E-23
+original best value 6  6.29217330078145E-7
+original best value 7  1.1687731116894162E-9
+original best value 8  8.375885275134486E-12
+original best value 9  8.94170496485699E-16
+original best value 10  8.654617659080386E-10
+original best value 11  1.183206585167501E-14
+original best value 12  1.987431034166095E-12
+original best value 13  1.856169917007609E-5
+original best value 14  1.50128583120633E-8
+original best value 15  2.5298240903799074E-12
+original best value 16  1.7432139465918424E-9
+original best value 17  5.968849474169055E-12
+original best value 18  1.3626706651222755E-12
+original best value 19  8.440737130674641E-10
+original best value 20  1.0396428784413576E-6
+original best value 21  1.5480606802368622E-7
+original best value 22  8.896195927916912E-6
+original best value 23  1.7529452385494565E-5
+original best value 24  8.567777385190345E-7
+original best value 25  1.5440868748471248E-7
+original best value 26  5.019593007902852E-4
+original best value 27  2.510491673838501E-6
+original best value 28  1.0943799782647748E-5
+original best value 29  2.610204808167843E-12
+
+the worst   value is 5.019593007902852E-4
+the best    value is 6.300905858459283E-23
+the average value is 1.96818391018781E-5
+-----------------------------------3----------------------------------------------
+original best value 0  1.4450308849686842E-6
+original best value 1  4.280319773776326E-18
+original best value 2  2.4768241740321925E-8
+original best value 3  1.1117191208549075E-9
+original best value 4  1.495864219088214E-9
+original best value 5  0.004010762473801381
+original best value 6  1.692755959583346E-8
+original best value 7  5.252346738462314E-7
+original best value 8  2.0937564028792368E-18
+original best value 9  1.4173481653576604E-6
+original best value 10  4.208168285932222E-5
+original best value 11  3.4912847054159034E-7
+original best value 12  3.4730616165488037E-4
+original best value 13  0.0038131091986811235
+original best value 14  9.418912300511502E-12
+original best value 15  4.7581178733330254E-8
+original best value 16  1.5918255248344214E-4
+original best value 17  1.3280239032440736E-7
+original best value 18  7.839790116625782E-8
+original best value 19  6.227556562119709E-12
+original best value 20  0.03240633768642281
+original best value 21  4.2653937086971495E-7
+original best value 22  1.8828276070692026E-4
+original best value 23  0.009432704724489479
+original best value 24  3.341273120684425E-5
+original best value 25  2.242527155874855E-11
+original best value 26  1.6655822176787876E-8
+original best value 27  1.7105939727354983E-10
+original best value 28  5.819468708352453E-4
+original best value 29  4.4024265250824637E-10
+
+the worst   value is 0.03240633768642281
+the best    value is 2.0937564028792368E-18
+the average value is 0.0017006536838252634
+-----------------------------------4----------------------------------------------
+original best value 0  7.1407723177606925
+original best value 1  0.021210212848090697
+original best value 2  0.004987571163207251
+original best value 3  1.157220507868506
+original best value 4  0.002893972610063198
+original best value 5  0.0018973424806689502
+original best value 6  2.075549969530462E-4
+original best value 7  8.149841901072698
+original best value 8  5.742620620987704
+original best value 9  0.010655209145118298
+original best value 10  0.021939848795861517
+original best value 11  0.003598517403237497
+original best value 12  0.007493394514806758
+original best value 13  1.0990321547898887
+original best value 14  8.632486263038459E-4
+original best value 15  0.05578361038568069
+original best value 16  0.024747264140409935
+original best value 17  0.13641719898260465
+original best value 18  0.01080340085500322
+original best value 19  0.004084261956770783
+original best value 20  0.3900475946911765
+original best value 21  2.76524458978295E-4
+original best value 22  1.161017147369026
+original best value 23  0.18610320317069623
+original best value 24  0.04606479924794288
+original best value 25  0.04203700029526659
+original best value 26  0.015164504850030548
+original best value 27  7.945762097745022E-4
+original best value 28  0.029663992179465897
+original best value 29  0.05040920765278824
+
+the worst   value is 8.149841901072698
+the best    value is 2.075549969530462E-4
+the average value is 0.8506216220503137
+-----------------------------------5----------------------------------------------
+original best value 0  0.0
+original best value 1  0.0
+original best value 2  0.0
+original best value 3  0.0
+original best value 4  0.0
+original best value 5  0.0
+original best value 6  0.0
+original best value 7  0.0
+original best value 8  0.0
+original best value 9  0.0
+original best value 10  0.0
+original best value 11  0.0
+original best value 12  0.0
+original best value 13  0.0
+original best value 14  0.0
+original best value 15  0.0
+original best value 16  0.0
+original best value 17  0.0
+original best value 18  0.0
+original best value 19  0.0
+original best value 20  0.0
+original best value 21  0.0
+original best value 22  0.0
+original best value 23  0.0
+original best value 24  0.0
+original best value 25  0.0
+original best value 26  0.0
+original best value 27  0.0
+original best value 28  0.0
+original best value 29  0.0
+
+the worst   value is 0.0
+the best    value is 0.0
+the average value is 0.0
+-----------------------------------6----------------------------------------------
+original best value 0  0.0032703938801578796
+original best value 1  1.2007976337235282E-5
+original best value 2  6.474746158972687E-4
+original best value 3  0.0010507498369331221
+original best value 4  0.0018254108274933871
+original best value 5  0.002036867764537974
+original best value 6  6.839734525257563E-4
+original best value 7  8.965430775938732E-4
+original best value 8  3.70315184090946E-4
+original best value 9  3.383042129874503E-4
+original best value 10  8.331208753038564E-4
+original best value 11  9.884292499630523E-4
+original best value 12  2.8859141844092665E-4
+original best value 13  1.1838544361469962E-4
+original best value 14  0.005357168977850244
+original best value 15  0.002217700262053751
+original best value 16  3.343700030567874E-4
+original best value 17  0.0021842631542105
+original best value 18  0.0019097443916903404
+original best value 19  0.006296953818539803
+original best value 20  5.154182071995955E-4
+original best value 21  7.371982653791065E-4
+original best value 22  6.97494397727664E-5
+original best value 23  0.0019669178193889524
+original best value 24  0.0014516903825556918
+original best value 25  0.004777881549548565
+original best value 26  0.0016228699902386967
+original best value 27  5.866064275570746E-4
+original best value 28  3.8199443980006754E-4
+original best value 29  7.375310552954983E-4
+
+the worst   value is 0.006296953818539803
+the best    value is 1.2007976337235282E-5
+the average value is 0.0014836208666671625
+-----------------------------------7----------------------------------------------
+original best value 0  0.9949590570933005
+original best value 1  5.293543381412746E-13
+original best value 2  2.1980031600575014
+original best value 3  2.0124591820027646
+original best value 4  1.632375971228445
+original best value 5  2.8717219113143475
+original best value 6  1.2693542563858013
+original best value 7  2.991402186985674
+original best value 8  2.1862632378146394
+original best value 9  1.827034264987697
+original best value 10  0.9949595419563373
+original best value 11  1.9996164302904091
+original best value 12  0.9949590570932898
+original best value 13  0.9951462388258534
+original best value 14  2.480998520394607
+original best value 15  1.9899780331997228
+original best value 16  0.994959057097434
+original best value 17  1.400234210997457
+original best value 18  2.067143540283327
+original best value 19  0.9949590570932898
+original best value 20  4.974790251208372
+original best value 21  0.0011100926637581665
+original best value 22  0.9949590570932898
+original best value 23  0.994959185117267
+original best value 24  0.9949590570932898
+original best value 25  0.9949592369084979
+original best value 26  0.47238585487177076
+original best value 27  1.6137136589070895
+original best value 28  1.9899717176870375
+original best value 29  4.037589462768665E-8
+
+the worst   value is 4.974790251208372
+the best    value is 5.293543381412746E-13
+the average value is 1.53094450223429
+-----------------------------------8----------------------------------------------
+original best value 0  1.6161785265644824E-6
+original best value 1  6.043610056849502E-12
+original best value 2  2.6613822257104403E-11
+original best value 3  3.9968028886505635E-15
+original best value 4  2.7755575615628914E-13
+original best value 5  1.483850142180998E-5
+original best value 6  7.549165959019888E-8
+original best value 7  1.2392857101861665E-5
+original best value 8  1.5671307927478395E-4
+original best value 9  1.6510582772299998E-4
+original best value 10  8.465944026174732E-4
+original best value 11  4.715181387560108E-7
+original best value 12  1.6505741616601455E-5
+original best value 13  2.351225880659058E-10
+original best value 14  4.440892098500626E-16
+original best value 15  1.361232822905123E-6
+original best value 16  1.3664927820844497E-5
+original best value 17  3.3541840004591705E-5
+original best value 18  1.825184434922633E-5
+original best value 19  8.024819964091989E-8
+original best value 20  9.13611338138054E-7
+original best value 21  3.4419806895913396E-4
+original best value 22  1.4617424159979464E-8
+original best value 23  1.0733636202076013E-12
+original best value 24  3.3285063594235E-10
+original best value 25  6.81115658349718E-5
+original best value 26  1.1426366482725214E-4
+original best value 27  1.6571906063989061E-4
+original best value 28  1.5035501885751756E-5
+original best value 29  6.240630234799482E-10
+
+the worst   value is 8.465944026174732E-4
+the best    value is 4.440892098500626E-16
+the average value is 6.631570027453293E-5
+-----------------------------------9----------------------------------------------
+original best value 0  0.019798436099727867
+original best value 1  0.016228457892376036
+original best value 2  0.02107823435197609
+original best value 3  0.012320988875106686
+original best value 4  0.029586629383688612
+original best value 5  0.01010539774247965
+original best value 6  0.007397223895212357
+original best value 7  0.022185660857256484
+original best value 8  0.018223342112709595
+original best value 9  0.009287042485622177
+original best value 10  0.02226782853576481
+original best value 11  2.068976443506676E-4
+original best value 12  0.013531775429160398
+original best value 13  0.02962786419575658
+original best value 14  0.019536797797696237
+original best value 15  0.029576773629982456
+original best value 16  0.03897780315936861
+original best value 17  0.021278901581041065
+original best value 18  0.022568846398663744
+original best value 19  0.049306117463340904
+original best value 20  0.019719489248184785
+original best value 21  0.009245718988472151
+original best value 22  0.010302864907847709
+original best value 23  0.011486995165842728
+original best value 24  0.02958662877841789
+original best value 25  0.021997119720663982
+original best value 26  0.010360394775058901
+original best value 27  0.022767309795194923
+original best value 28  0.02958662892125996
+original best value 29  0.00985728460782076
+
+the worst   value is 0.049306117463340904
+the best    value is 2.068976443506676E-4
+the average value is 0.019600048481334828
+-----------------------------------10----------------------------------------------
+original best value 0  1.1280010179081512E-4
+original best value 1  1.1378152695469084E-8
+original best value 2  1.0498390441368628E-6
+original best value 3  1.2212566493567805E-4
+original best value 4  9.915886287577636E-4
+original best value 5  1.1407941482006254E-8
+original best value 6  3.1934614858952266E-8
+original best value 7  1.2622987304801025E-7
+original best value 8  4.289108595195184E-5
+original best value 9  0.059542009872029775
+original best value 10  2.710399408221583E-7
+original best value 11  1.4355910681676991E-5
+original best value 12  7.762264203805623E-7
+original best value 13  2.892811920806993E-5
+original best value 14  3.6141123714857756E-15
+original best value 15  3.6826671696268477E-4
+original best value 16  9.8969308213581E-14
+original best value 17  3.630092124567522E-8
+original best value 18  6.068310487988729E-16
+original best value 19  3.101250331590878E-6
+original best value 20  5.3094524341921286E-9
+original best value 21  3.963588484277151E-6
+original best value 22  2.2647999114135104E-8
+original best value 23  1.3267908454722776E-11
+original best value 24  7.837163726256535E-12
+original best value 25  1.8809186250781063E-5
+original best value 26  7.421457060404949E-5
+original best value 27  6.39316987247497E-5
+original best value 28  1.0022247485060621E-4
+original best value 29  3.8763011981144925E-10
+
+the worst   value is 0.059542009872029775
+the best    value is 6.068310487988729E-16
+the average value is 0.002049651719758769
+-----------------------------------11----------------------------------------------
+original best value 0  1.403235656620341E-9
+original best value 1  7.604066369578066E-13
+original best value 2  1.0811487215198336E-16
+original best value 3  1.5060400777655114E-30
+original best value 4  4.391736883199791E-13
+original best value 5  3.3677581843852355E-10
+original best value 6  5.352397988704776E-6
+original best value 7  5.333562066430574E-7
+original best value 8  0.0010760787065604023
+original best value 9  4.219230128544724E-8
+original best value 10  3.999419272015457E-9
+original best value 11  6.960812162178686E-11
+original best value 12  1.0524310813032792E-9
+original best value 13  4.329175767217124E-9
+original best value 14  9.742788333073126E-8
+original best value 15  6.015196098214078E-11
+original best value 16  4.184823623308435E-6
+original best value 17  3.38078619913735E-13
+original best value 18  5.063268568791084E-7
+original best value 19  9.743786959686632E-8
+original best value 20  4.1266232438680454E-6
+original best value 21  7.884381622940917E-19
+original best value 22  2.33593202792751E-8
+original best value 23  1.5064141935205712E-6
+original best value 24  1.2260140532440266E-10
+original best value 25  2.577082070930521E-5
+original best value 26  1.9739286383571566E-9
+original best value 27  2.3016693270622266E-7
+original best value 28  2.465735415580626E-10
+original best value 29  3.4034113109132604E-8
+
+the worst   value is 0.0010760787065604023
+the best    value is 1.5060400777655114E-30
+the average value is 3.728658944139901E-5
+--------------------------12---------------------------------
+origin best value -831.5946102687096
+origin best value -743.7022786647357
+origin best value -960.841948058783
+origin best value -704.0559920520134
+origin best value -1022.7423960004404
+origin best value -901.6336579739875
+origin best value -1018.5549330746569
+origin best value -1138.5102535977771
+origin best value -1039.8089924267242
+origin best value -1138.5103272028634
+origin best value -901.600756496422
+origin best value -1018.5549330447052
+origin best value -900.116598421906
+origin best value -780.1612043352093
+origin best value -1039.8089924267274
+origin best value -1138.5103272028634
+origin best value -783.1624218819841
+origin best value -921.3706578121868
+origin best value -901.6336556654394
+origin best value -960.5574893241676
+origin best value -780.1612043342345
+origin best value -900.1165984617528
+origin best value -1138.5081781841977
+origin best value -1138.5103266177882
+origin best value -1018.5549330761456
+origin best value -1039.8089924267283
+origin best value -909.2485057039061
+origin best value -919.8368308362961
+origin best value -862.0487347679359
+origin best value -723.4727415557098
+
+the worst   value is -704.0559920520134
+the best    value is -1138.5103272028634
+the average value is -942.5233157299
+
+Process finished with exit code 0

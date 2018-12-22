@@ -292,7 +292,7 @@ public class ImprovedBatAlgorithm extends AbsBatAlgorithm{
 			  recordWindows = new LinkedList<Window>(windows);
 
 			  //file initial file
-             file = new File(getFilename());
+//             file = new File(getFilename());
 
              double alfa=0.5264;
              double gamma=4.411;
@@ -310,17 +310,17 @@ public class ImprovedBatAlgorithm extends AbsBatAlgorithm{
 			    changePossibility();
 			    watchWindows();
 
-
-                  Collections.sort(windows);
-                  String builder = ""+t+"\n";
-                  for(Window window : windows){
-                      for(double loc : window.getLocation()){
-                          builder += loc +"   ";
-                      }
-
-                      builder += " value "+ window.getObjectives() +"\n";
-                  }
-                  FileUtils.Companion.write(file,builder);
+//
+//                  Collections.sort(windows);
+//                  String builder = ""+t+"\n";
+//                  for(Window window : windows){
+//                      for(double loc : window.getLocation()){
+//                          builder += loc +"   ";
+//                      }
+//
+//                      builder += " value "+ window.getObjectives() +"\n";
+//                  }
+//                  FileUtils.Companion.write(file,builder);
 
 				for(int i = 0; i< population; i++) {
 
@@ -371,7 +371,7 @@ public class ImprovedBatAlgorithm extends AbsBatAlgorithm{
                 }
 
 
-				BEST[t]=fmin;
+				BEST[t]= windows.get(0).getObjectives();
 				t++;
 		}
 
