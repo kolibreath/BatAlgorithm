@@ -1,6 +1,7 @@
 
 import functions.IFunctions;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -65,6 +66,7 @@ public class OriginalBatAlgorithm extends AbsBatAlgorithm{
         fmin=d1[0];
         int index=(int)d1[1];
         best=Sol[index];
+
     }
 
     double[] getMinValue(double[] a) {
@@ -99,6 +101,9 @@ public class OriginalBatAlgorithm extends AbsBatAlgorithm{
         return Math.abs(random.nextInt()) %   population;
     }
     private double[][] solution() {
+
+
+
         int t=1;
         initialize();
         double alfa=0.5264;
@@ -147,6 +152,7 @@ public class OriginalBatAlgorithm extends AbsBatAlgorithm{
             }
 
 
+//            FileUtils.Companion.write(file,t+"   "+fmin+"\n");
             BEST[t]=fmin;
             t++;
         }
