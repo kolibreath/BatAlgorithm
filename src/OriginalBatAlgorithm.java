@@ -28,6 +28,8 @@ public class OriginalBatAlgorithm extends AbsBatAlgorithm{
     private double fmin;
     private IFunctions ff;
 
+    private File file;
+
     double[] loundnesses ;
     public OriginalBatAlgorithm(IFunctions iff, int in, int iNgen, double iA, double ir, double iQmin, double iQmax, double[] iLbvec, double[] iUbvec) {
         population =in;
@@ -102,6 +104,7 @@ public class OriginalBatAlgorithm extends AbsBatAlgorithm{
     }
     private double[][] solution() {
 
+        file = new File(getFilename());
 
 
         int t=1;
@@ -152,7 +155,7 @@ public class OriginalBatAlgorithm extends AbsBatAlgorithm{
             }
 
 
-//            FileUtils.Companion.write(file,t+"   "+fmin+"\n");
+            FileUtils.Companion.write(file,t+"   "+fmin+"\n");
             BEST[t]=fmin;
             t++;
         }

@@ -30,6 +30,8 @@ public class ImprovedBatAlgorithm extends AbsBatAlgorithm{
     private double BESTvar3[];
     private double fmin;
 
+    private double firstSection = 0.5;
+
     private File file;
 
     Random random = new Random();
@@ -135,7 +137,6 @@ public class ImprovedBatAlgorithm extends AbsBatAlgorithm{
         LinkedList<Double> temp = new LinkedList<>();
         while(counter + 1 < windowSize){
             end -= (1 - end) * f() * weights.get(counter) * 1/100;
-//            end += (1 - end)  * weights.get(counter) * 1/100;
             temp.add(end);
 
             if(counter == windowSize -2)break;
@@ -144,7 +145,18 @@ public class ImprovedBatAlgorithm extends AbsBatAlgorithm{
         }
 
         possibility = temp;
+    }
 
+    //s=0.8-（0.8-1/k）*t/T
+    private double changeFirstSection(){
+        return firstSection - (firstSection - 1/population) * t / generation;
+    }
+    private void changePossibilityVector(){
+        firstSection = changeFirstSection();
+        double rest = ( 1 - firstSection) / ( population - 1);
+        possibility.clear();
+        possibility.add(firstSection);
+        for (int i = 0; i < generation - 1 ; i++) possibility.add(rest);
     }
 
     IFunctions ff;
@@ -196,7 +208,7 @@ public class ImprovedBatAlgorithm extends AbsBatAlgorithm{
         int index = (int) d1[1];
         best = batPopulationLocation[index];
 
-        double firstSection = 0.5;
+        //todo check initial
         double section = (1.0 - firstSection) / (windowSize - 1);
 
 
@@ -262,20 +274,20 @@ public class ImprovedBatAlgorithm extends AbsBatAlgorithm{
                 minval = a[i];
             }
         }
+
         for (int i = 0; i < a.length; i++) {
             if (b[i] == minval) {
                 m = i;
                 break;
             }
         }
-        ;
         double[] dep = new double[2];
         dep[0] = minval;
         dep[1] = m;
         return dep;
     }
 
-		 double[] simplebounds(double s[]) {
+    private double[] simplebounds(double s[]) {
 			   for(int i=0;i<d;i++)
 			   {if(s[i]<= lb[i])
 				{s[i]= lb[i];}
@@ -284,112 +296,103 @@ public class ImprovedBatAlgorithm extends AbsBatAlgorithm{
 			   }
 			   return s;
 		 }
-	 
-		 double[][] solution() {
 
-			  initialize();
+		 private double[][] solution() {
 
-			  recordWindows = new LinkedList<Window>(windows);
+             initialize();
 
-			  //file initial file
-//             file = new File(getFilename());
+             recordWindows = new LinkedList<Window>(windows);
 
-             double alfa=0.5264;
-             double gamma=4.411;
-			  double A0;
-			  double r0;
+             file = new File(getFilename());
+
+             double alfa = 0.5264;
+             double gamma = 4.411;
+             double A0;
+             double r0;
              double fnew;
 
              double pulseRate[] = new double[population];
-             for(int i = 0; i<population;i++){
+             for (int i = 0; i < population; i++) {
                  pulseRate[i] = Math.random();
              }
 
-			  while(t< generation) {
+             while (t < generation) {
 
-			    changePossibility();
-			    watchWindows();
-
-//
-//                  Collections.sort(windows);
-//                  String builder = ""+t+"\n";
-//                  for(Window window : windows){
-//                      for(double loc : window.getLocation()){
-//                          builder += loc +"   ";
-//                      }
-//
-//                      builder += " value "+ window.getObjectives() +"\n";
-//                  }
-//                  FileUtils.Companion.write(file,builder);
-
-				for(int i = 0; i< population; i++) {
+                 changePossibility();
+                 watchWindows();
 
 
-                    //todo buggy 会出现错误不知道在那里出现了windows中的objective没有改变的情况
-                    for (int k = 0; k <windowSize ; k++) {
-                        windows.get(k).setObjectives(ff.func(windows.get(k).getLocation()));
-                    }
+                 Collections.sort(windows);
+                 String builder = t + "      " + windows.get(0).getObjectives() + "\n";
+                 FileUtils.Companion.write(file, builder);
+
+                 for (int i = 0; i < population; i++) {
 
 
-                    r0 = pulseRate[i];
-                      A0 = loundnesses[i];
-                    //todo fitness 暂时没有改动
+                     //todo buggy 会出现错误不知道在那里出现了windows中的objective没有改变的情况
+                     for (int k = 0; k < windowSize; k++) {
+                         windows.get(k).setObjectives(ff.func(windows.get(k).getLocation()));
+                     }
+
+
+                     r0 = pulseRate[i];
+                     A0 = loundnesses[i];
+                     //todo fitness 暂时没有改动
 //                    这里将best[]
-                   best = windows.get(randomTarget()).getLocation();
-                    Q[i] = Qmin + (Qmin - Qmax) * Math.random();
-                    for (int j = 0; j < d; j++) {
-                        v[i][j] = v[i][j] + ((batPopulationLocation[i][j] - best[j]) * Q[i]);
-                        S[i][j] = batPopulationLocation[i][j] + v[i][j];
-                    }
-                    batPopulationLocation[i] = simplebounds(batPopulationLocation[i]);
-                    if (Math.random() > r0) {
-                        for (int j = 0; j < d; j++) {
-                            double eth = Math.random()*2 - 1;
+                     best = windows.get(randomTarget()).getLocation();
+                     Q[i] = Qmin + (Qmin - Qmax) * Math.random();
+                     for (int j = 0; j < d; j++) {
+                         v[i][j] = v[i][j] + ((batPopulationLocation[i][j] - best[j]) * Q[i]);
+                         S[i][j] = batPopulationLocation[i][j] + v[i][j];
+                     }
+                     batPopulationLocation[i] = simplebounds(batPopulationLocation[i]);
+                     if (Math.random() > r0) {
+                         for (int j = 0; j < d; j++) {
+                             double eth = Math.random() * 2 - 1;
 //                        S[i][j] = best[j] + (0.001 * random.nextGaussian());
-                            S[i][j] = best[j] + eth*aveLoundness();
-                        }
-                    }
-                    //todo
-                    // 对于S 的位置要进行收敛
+                             S[i][j] = best[j] + eth * aveLoundness();
+                         }
+                     }
+                     //todo
+                     // 对于S 的位置要进行收敛
 
-                    //todo 已经确定上界和下界 要进行改良 和 观察in
-                    fnew = ff.func(simplebounds(S[i]));
+                     //todo 已经确定上界和下界 要进行改良 和 观察in
+                     fnew = ff.func(simplebounds(S[i]));
 
-                    //修改
-                    if ((fnew <= fitness[i])) {
-                        System.arraycopy(S[i], 0, batPopulationLocation[i], 0, d);
-                        fitness[i] = fnew;
-                        pulseRate[i] = r0 * (1.0 - Math.exp(-gamma * t));
-                        loundnesses[i]= A0 * alfa;
-                    }
+                     //修改
+                     if ((fnew <= fitness[i])) {
+                         System.arraycopy(S[i], 0, batPopulationLocation[i], 0, d);
+                         fitness[i] = fnew;
+                         pulseRate[i] = r0 * (1.0 - Math.exp(-gamma * t));
+                         loundnesses[i] = A0 * alfa;
+                     }
 
-                    if (fnew <= fmin) {
-                        System.arraycopy(S[i], 0, best, 0, d);
-                        fmin = fnew;
-                        useWindows(best);
-                    }
-                }
-
-
-				BEST[t]= windows.get(0).getObjectives();
-				t++;
-		}
+                     if (fnew <= fmin) {
+                         System.arraycopy(S[i], 0, best, 0, d);
+                         fmin = fnew;
+                         useWindows(best);
+                     }
+                 }
 
 
-
-		double[] plott=new double[generation];
-		for(int i = 0; i< generation; i++) {
-				plott[i]=i;
-		}
+                 BEST[t] = windows.get(0).getObjectives();
+                 t++;
+             }
 
 
-		double[][] dep=new double[2][d];
-		dep[0][0]=fmin;
-		for(int i=0;i<d;i++) {
-			dep[1][i]=best[i];
-		}
-		return dep;
-	}
+             double[] plott = new double[generation];
+             for (int i = 0; i < generation; i++) {
+                 plott[i] = i;
+             }
+
+
+             double[][] dep = new double[2][d];
+             dep[0][0] = fmin;
+             for (int i = 0; i < d; i++) {
+                 dep[1][i] = best[i];
+             }
+             return dep;
+         }
 
     private double aveLoundness(){
         return Arrays.stream(loundnesses).sum();

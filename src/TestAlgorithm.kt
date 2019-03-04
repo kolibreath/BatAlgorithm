@@ -20,17 +20,17 @@ fun main(args:Array<String>) {
 
 
     println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ORIGIN~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`")
-    repeat(1) {
+    repeat(0) {
         println("--------------------------$it---------------------------------")
         functions.index = 0
 
         val container = LinkedList<Double>()
-        repeat(30) {index ->
-
-//            C:\Users\73478\Desktop\pig\src\result
-
+        repeat(10) {index ->
+            val fileName = "/Users/kolibreath/githubProjects/pig/src/result/origin_${functions.index}_$index.txt"
+            val file = File(fileName)
+            file.delete()
             batAlgorithm = OriginalBatAlgorithm(functions, n, Ngen, A, r, Qmin, Qmax, Lower, Upper)
-
+            batAlgorithm.setFileName(fileName)
 
             val bestValue = batAlgorithm.bestValue()
             println("origin best value $bestValue")
@@ -70,33 +70,33 @@ fun main(args:Array<String>) {
 //    Lower = doubleArrayOf(-10.0, -10.0, -10.0)//  f11 griewank
 //    Upper = doubleArrayOf(10.0, 10.0, 10.0)
 
-//
-//    println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~IMPROVED~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-//    repeat(1) {
-//
-//        functions.index = 9
-//        val container = LinkedList<Double>()
-//        println("-----------------------------------${functions.index}----------------------------------------------")
-//
-//        repeat(30) {index ->
-////            val fileName = "/home/kolibreath/githubProject/ImprovedBatAlgorithm/src/result/improved${functions.index}_$index.txt"
-////            val file = File(fileName)
-////            file.delete()
-//            batAlgorithm = ImprovedBatAlgorithm(functions, n, Ngen, A, r, Qmin, Qmax, Lower, Upper)
-////            batAlgorithm.setFileName(fileName)
-//
-//            val bestValue = batAlgorithm.bestValue()
-//            println("original best value $index  $bestValue")
-//            container.add(bestValue)
-//
-//        }
-//
-//        println()
-//        println("the std     value is ${container.std()}")
-//        println("the worst   value is ${container.max()}")
-//        println("the best    value is ${container.min()}")
-//        println("the average value is ${container.average()}")
-//    }
+
+    println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~IMPROVED~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+    repeat(1) {
+
+        functions.index = 0
+        val container = LinkedList<Double>()
+        println("-----------------------------------${functions.index}----------------------------------------------")
+
+        repeat(10) {index ->
+            val fileName = "/Users/kolibreath/githubProjects/pig/src/result/improved${functions.index}_$index.txt"
+            val file = File(fileName)
+            file.delete()
+            batAlgorithm = ImprovedBatAlgorithm(functions, n, Ngen, A, r, Qmin, Qmax, Lower, Upper)
+            batAlgorithm.setFileName(fileName)
+
+            val bestValue = batAlgorithm.bestValue()
+            println("original best value $index  $bestValue")
+            container.add(bestValue)
+
+        }
+
+        println()
+        println("the std     value is ${container.std()}")
+        println("the worst   value is ${container.max()}")
+        println("the best    value is ${container.min()}")
+        println("the average value is ${container.average()}")
+    }
 
 //    Lower = doubleArrayOf(-500.0, -500.0, -500.0)
 //    Upper = doubleArrayOf(500.0, 500.0, 500.0)
