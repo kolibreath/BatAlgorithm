@@ -1,6 +1,8 @@
 import functions.IFunctions;
+import sun.tools.tree.DoubleExpression;
 
 import java.io.File;
+import java.math.BigDecimal;
 import java.util.*;
 
 
@@ -30,7 +32,10 @@ public class ImprovedBatAlgorithm extends AbsBatAlgorithm{
     private double BESTvar3[];
     private double fmin;
 
-    private double firstSection = 0.5;
+    private double firstSection = 0.8;
+
+    //和origin中的bat的操作相同
+    private int imporvedCounter = 0;
 
     private File file;
 
@@ -125,38 +130,36 @@ public class ImprovedBatAlgorithm extends AbsBatAlgorithm{
 
 
 
+//    private void changePossibility(){
+//        LinkedList<Double> weights = new LinkedList<>();
+//        for (int i = 0; i < windowSize; i++) {
+//            double weightVariable = 0.90;
+//            weights.add(Math.pow(weightVariable,i));
+//        }
+//
+//        int counter = 0;
+//        double end = possibility.get(counter);
+//        LinkedList<Double> temp = new LinkedList<>();
+//        while(counter + 1 < windowSize){
+//            end -= (1 - end) * f() * weights.get(counter) * 1/100;
+//            temp.add(end);
+//
+//            if(counter == windowSize -2)break;
+//            end = possibility.get(counter + 1);
+//            counter ++;
+//        }
+//
+//        possibility = temp;
+//    }
+
+
     private void changePossibility(){
-        LinkedList<Double> weights = new LinkedList<>();
-        for (int i = 0; i < windowSize; i++) {
-            double weightVariable = 0.90;
-            weights.add(Math.pow(weightVariable,i));
-        }
-
-        int counter = 0;
-        double end = possibility.get(counter);
-        LinkedList<Double> temp = new LinkedList<>();
-        while(counter + 1 < windowSize){
-            end -= (1 - end) * f() * weights.get(counter) * 1/100;
-            temp.add(end);
-
-            if(counter == windowSize -2)break;
-            end = possibility.get(counter + 1);
-            counter ++;
-        }
-
-        possibility = temp;
-    }
-
-    //s=0.8-（0.8-1/k）*t/T
-    private double changeFirstSection(){
-        return firstSection - (firstSection - 1/population) * t / generation;
-    }
-    private void changePossibilityVector(){
-        firstSection = changeFirstSection();
-        double rest = ( 1 - firstSection) / ( population - 1);
+        double temp  = firstSection -  (firstSection - ( 1.0/ windowSize)) * t / generation;
+        double rest  = ( 1 - temp) / ( windowSize - 1);
         possibility.clear();
-        possibility.add(firstSection);
-        for (int i = 0; i < generation - 1 ; i++) possibility.add(rest);
+        possibility.add(temp);
+        for (int i = 0; i < windowSize - 1 ; i++) possibility.add(rest);
+//        System.out.println("possibility" + possibility);
     }
 
     IFunctions ff;
@@ -318,13 +321,17 @@ public class ImprovedBatAlgorithm extends AbsBatAlgorithm{
 
              while (t < generation) {
 
+                 if(imporvedCounter % 1000 ==0 )
+                     FileUtils.Companion.write(file,fmin +"\n");
+
                  changePossibility();
                  watchWindows();
 
 
                  Collections.sort(windows);
                  String builder = t + "      " + windows.get(0).getObjectives() + "\n";
-                 FileUtils.Companion.write(file, builder);
+//                 FileUtils.Companion.write(file, builder);
+
 
                  for (int i = 0; i < population; i++) {
 
@@ -358,6 +365,7 @@ public class ImprovedBatAlgorithm extends AbsBatAlgorithm{
 
                      //todo 已经确定上界和下界 要进行改良 和 观察in
                      fnew = ff.func(simplebounds(S[i]));
+                     imporvedCounter++;
 
                      //修改
                      if ((fnew <= fitness[i])) {
@@ -373,7 +381,6 @@ public class ImprovedBatAlgorithm extends AbsBatAlgorithm{
                          useWindows(best);
                      }
                  }
-
 
                  BEST[t] = windows.get(0).getObjectives();
                  t++;

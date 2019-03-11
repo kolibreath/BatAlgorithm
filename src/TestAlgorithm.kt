@@ -18,14 +18,23 @@ fun main(args:Array<String>) {
 
     val functions = ImplementedFunctions()
 
+//    val fileName = "/Users/kolibreath/githubProjects/pig/src/result/fuck.txt"
+//    val file = File(fileName)
+//    var counter = 0
+//    repeat(20) {
+//        file.appendText("$counter \n")
+//        counter += 1000
+//    }
+
+    val indexControl = 11
 
     println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ORIGIN~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`")
-    repeat(0) {
+    repeat(1) {
         println("--------------------------$it---------------------------------")
-        functions.index = 0
+        functions.index = indexControl
 
         val container = LinkedList<Double>()
-        repeat(10) {index ->
+        repeat(30) {index ->
             val fileName = "/Users/kolibreath/githubProjects/pig/src/result/origin_${functions.index}_$index.txt"
             val file = File(fileName)
             file.delete()
@@ -33,7 +42,7 @@ fun main(args:Array<String>) {
             batAlgorithm.setFileName(fileName)
 
             val bestValue = batAlgorithm.bestValue()
-            println("origin best value $bestValue")
+            println("$bestValue")
             container.add(bestValue)
         }
 
@@ -72,9 +81,10 @@ fun main(args:Array<String>) {
 
 
     println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~IMPROVED~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-    repeat(1) {
+    repeat(0) {
 
-        functions.index = 0
+
+        functions.index = indexControl
         val container = LinkedList<Double>()
         println("-----------------------------------${functions.index}----------------------------------------------")
 
@@ -86,7 +96,7 @@ fun main(args:Array<String>) {
             batAlgorithm.setFileName(fileName)
 
             val bestValue = batAlgorithm.bestValue()
-            println("original best value $index  $bestValue")
+            println("$bestValue")
             container.add(bestValue)
 
         }

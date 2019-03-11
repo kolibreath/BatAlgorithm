@@ -28,6 +28,8 @@ public class OriginalBatAlgorithm extends AbsBatAlgorithm{
     private double fmin;
     private IFunctions ff;
 
+    //评估函数调用次数计数
+    private int counter = 0;
     private File file;
 
     double[] loundnesses ;
@@ -116,6 +118,9 @@ public class OriginalBatAlgorithm extends AbsBatAlgorithm{
         Random rndm=new Random();
         double fnew=0.0;
         while(t<Ngen) {
+            if(counter % 1000 ==0)
+                FileUtils.Companion.write(file,fmin + "\n");
+
             for(int i = 0; i< population; i++) {
                 //改变这只蝙蝠的平均响度
                 A0 = loundnesses[i];
@@ -134,7 +139,10 @@ public class OriginalBatAlgorithm extends AbsBatAlgorithm{
                         S[i][j] = best[j] + eth*aveLoundness();
                     }
                 }
+                //每调用一次评估函数counter ++ 记录 1000 2000 3000 ... 的结果
                 fnew = ff.func(simplebounds(S[i]));
+                counter++;
+
 
                 if ((fnew <= fitness[i]) && (Math.random() < A0)) {
                     System.arraycopy(S[i], 0, Sol[i], 0, d);
@@ -152,10 +160,10 @@ public class OriginalBatAlgorithm extends AbsBatAlgorithm{
                     fmin = fnew;
                 }
 
+
+
             }
 
-
-            FileUtils.Companion.write(file,t+"   "+fmin+"\n");
             BEST[t]=fmin;
             t++;
         }
