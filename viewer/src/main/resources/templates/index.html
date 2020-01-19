@@ -17,6 +17,7 @@
 
     <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" th:src="@{/js/three.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/OrbitControls.js}"></script>
 </head>
 <body>
 <script>
@@ -38,9 +39,12 @@
        camera.updateProjectionMatrix();
 
     });
-    //
+
+
+    controls = new THREE.OrbitControls(camera, renderer.domElement);
+
     var geometry = new THREE.BoxGeometry(1,1,1);
-    var material = new THREE.MeshBasicMaterial({color:0xFFFFFF,wireframe:false});
+    var material = new THREE.MeshBasicMaterial({color:0xFFFFFF,wireframe:true});
     var cube = new THREE.Mesh(geometry,material);
     scene.add(cube);
 
