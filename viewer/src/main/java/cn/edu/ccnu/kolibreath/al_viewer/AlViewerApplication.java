@@ -15,4 +15,5 @@ public class AlViewerApplication {
     public String index(){
         return "index";
     }
+
 }

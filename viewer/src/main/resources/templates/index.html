@@ -15,60 +15,490 @@
         }
     </style>
 
+    <!--<style>-->
+        <!--#world{-->
+            <!--position: absolute;-->
+            <!--width: 100%;-->
+            <!--height: 100%;-->
+            <!--overflow: hidden;-->
+            <!--background: linear-gradient(#e4e0ba, #f7d9aa);-->
+        <!--}-->
+    <!--</style>-->
+    <!--<div id="world"> </div>-->
     <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" th:src="@{/js/three.min.js}"></script>
     <script type="text/javascript" th:src="@{/js/OrbitControls.js}"></script>
 </head>
 <body>
+
 <script>
-    var scene = new THREE.Scene();
-    var camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1,1000);
-    var renderer = new    THREE.WebGLRenderer();
 
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild( renderer.domElement);
+    (function(){var script=document.createElement('script');script.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='//mrdoob.github.io/stats.js/build/stats.min.js';document.head.appendChild(script);})()
+
+    let camera, scene, renderer, controls;
+    init(1,1);
+    animate();
+
+    function init(length, division) {
+        scene = new THREE.Scene();
+        camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 10000);
+        // camera.position.set(0, 0, 1.5).setLength(100);
+        camera.position.x = length;
+        camera.position.y = length;
+        camera.position.z = length;
+
+        renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        //renderer.setClearColor(0xcccccc);
+        document.body.appendChild(renderer.domElement);
+
+        controls = new THREE.OrbitControls(camera, renderer.domElement);
+
+        // let gridXz = new THREE.GridHelper(length,division,0xEED5B7, 0xEED5B7);
+        // gridXz.position.x = length / 2;
+        // gridXz.position.y = 0;
+        // gridXz.position.z = length / 2;
+        // scene.add(gridXz);
+        //
+        // let gridXy = new THREE.GridHelper(length,division,0xEED5B7, 0xEED5B7);
+        // gridXy.rotation.x = Math.PI /2 ;
+        // gridXy.position.x = length / 2;
+        // gridXy.position.y = length / 2;
+        // gridXy.position.z = 0;
+        // scene.add(gridXy);
+        //
+        // let gridYz = new THREE.GridHelper(length,division,0xEED5B7, 0xEED5B7);
+        // gridYz.rotation.z = Math.PI /2;
+        // gridYz.position.x = 0;
+        // gridYz.position.y = length / 2;
+        // gridYz.position.z = length / 2;
+        // scene.add(gridYz);
+        //
+        // let axes = new THREE.AxesHelper(3);
+        // scene.add(axes);
 
 
-    //调整屏幕大小
-    window.addEventListener("resize",function(){
-       var width = window.innerWidth;
-       var height = window.innerHeight;
+        initAxisScale(division);
 
-       renderer.setSize(width, height);
-        camera.aspect = width / height;
-       camera.updateProjectionMatrix();
+    }
+    //初始化刻度
+    function initAxisScale(division){
+        let loader = new THREE.FontLoader();
 
+            loader.load("fonts/helvetiker_regular.typeface.json", function (font) {
+                for (let i = 0; i <=division; i++) {
+                    let x = length / division * i;
+
+                    let content = i + "";
+                    let geometry = new THREE.TextGeometry(content, {
+                        font: font,
+                        size: 0.1,
+                        height: 0.1,
+                        curveSegments: 12,
+                        bevelEnabled: true,
+                        bevelThickness: 10,
+                        bevelSize: 8,
+                        bevelOffset: 0,
+                        bevelSegments: 5
+                    });
+
+                    let material = new THREE.MeshBasicMaterial(
+                        {
+                            color: 0xFF00FF,
+                            wireframe: true
+                        }
+                    );
+
+                    let mesh = new THREE.Mesh(geometry, material);
+                    mesh.position.x = x;
+                    mesh.position.y = 0;
+                    mesh.position.z = 10;
+                    scene.add(mesh);
+                }
     });
+    }
 
+    function animate() {
+        requestAnimationFrame(animate);
+        render();
+    }
 
-    controls = new THREE.OrbitControls(camera, renderer.domElement);
-
-    var geometry = new THREE.BoxGeometry(1,1,1);
-    var material = new THREE.MeshBasicMaterial({color:0xFFFFFF,wireframe:true});
-    var cube = new THREE.Mesh(geometry,material);
-    scene.add(cube);
-
-
-    camera.position.z = 3;
-
-    //game logic
-     var update = function(){
-
-     };
-
-     // draw scene
-    var render = function(){
-        renderer.render(scene,camera);
-    };
-
-    var GameLoop = function(){
-      requestAnimationFrame(GameLoop);
-
-      update();
-      render();
-    };
-
-    GameLoop();
+    function render() {
+        renderer.render(scene, camera);
+    }
 </script>
+
+<!--<script type="text/javascript">-->
+    <!--let Colors = {-->
+        <!--red:0xf25346,-->
+        <!--white:0xd8d0d1,-->
+        <!--brown:0x59332e,-->
+        <!--pink:0xF5986E,-->
+        <!--brownDark:0x23190f,-->
+        <!--blue:0x68c3c0-->
+    <!--};-->
+
+    <!--window.addEventListener("load",init,false);-->
+
+    <!--function  init() {-->
+        <!--//场景-->
+        <!--createScene();-->
+
+        <!--//光源-->
+        <!--createLights();-->
+
+        <!--//添加对象-->
+        <!--createPlane();-->
+        <!--createSea();-->
+        <!--createSky();-->
+
+
+        <!--//添加监听器-->
+        <!--document.addEventListener('mousemove', handleMouseMove, false);-->
+        <!--//刷新-->
+        <!--loop();-->
+    <!--}-->
+
+    <!--let scene , camera, fieldOfView, aspectRatio, nearPlane, farPlane, HEIGHT, WIDTH, renderer, container;-->
+
+    <!--function createScene(){-->
+
+        <!--HEIGHT = window.innerHeight;-->
+        <!--WIDTH = window.innerWidth;-->
+
+        <!--scene = new THREE.Scene();-->
+
+        <!--scene.fog = new THREE.Fog(0xf7d9aa, 100, 950);-->
+
+        <!--aspectRatio = WIDTH / HEIGHT;-->
+        <!--fieldOfView = 60;-->
+        <!--nearPlane = 1;-->
+        <!--farPlane = 100000;-->
+
+        <!--camera = new THREE.PerspectiveCamera(-->
+            <!--fieldOfView,-->
+            <!--aspectRatio,-->
+            <!--nearPlane,-->
+            <!--farPlane-->
+        <!--);-->
+
+        <!--camera.position.x = 0;-->
+        <!--camera.position.y = 200;-->
+        <!--camera.position.z = 100;-->
+
+        <!--renderer = new THREE.WebGLRenderer({-->
+            <!--alpha: true,-->
+            <!--antialias:true-->
+        <!--});-->
+
+        <!--renderer.setSize(WIDTH,HEIGHT);-->
+
+        <!--//阴影地图-->
+        <!--renderer.shadowMap.enabled  = true;-->
+
+        <!--container = document.getElementById("world");-->
+        <!--container.appendChild(renderer.domElement);-->
+
+        <!--window.addEventListener("resize", handleWindowResize, false);-->
+    <!--}-->
+
+    <!--function handleWindowResize(){-->
+        <!--HEIGHT = window.innerHeight;-->
+        <!--WIDTH = window.innerWidth;-->
+
+        <!--renderer.setSize(WIDTH, HEIGHT);-->
+        <!--camera.aspect = WIDTH / HEIGHT;-->
+        <!--camera.updateProjectionMatrix();-->
+    <!--}-->
+
+    <!--let hemisphereLight , shadowLight;-->
+    <!--function  createLights() {-->
+        <!--// 第一个参数是天空的颜色，第二个参数是地上的颜色，第三个参数是光源的强度-->
+        <!--hemisphereLight = new THREE.HemisphereLight(0xaaaaaa,0x000000, .9);-->
+
+        <!--// 方向光是从一个特定的方向的照射-->
+        <!--// 类似太阳，即所有光源是平行的-->
+        <!--// 第一个参数是关系颜色，第二个参数是光源强度-->
+        <!--shadowLight = new THREE.DirectionalLight(0xffffff, .9);-->
+
+
+        <!--//设置光源方向-->
+        <!--shadowLight.position.set(150, 350, 350);-->
+
+        <!--//光源投影-->
+        <!--shadowLight.castShadow = true;-->
+
+        <!--// 定义可见域的投射阴影-->
+        <!--shadowLight.shadow.camera.left = -400;-->
+        <!--shadowLight.shadow.camera.right = 400;-->
+        <!--shadowLight.shadow.camera.top = 400;-->
+        <!--shadowLight.shadow.camera.bottom = -400;-->
+        <!--shadowLight.shadow.camera.near = 1;-->
+        <!--shadowLight.shadow.camera.far = 1000;-->
+
+        <!--// 定义阴影的分辨率；虽然分辨率越高越好，但是需要付出更加昂贵的代价维持高性能的表现。-->
+        <!--shadowLight.shadow.mapSize.width = 2048;-->
+        <!--shadowLight.shadow.mapSize.height = 2048;-->
+
+        <!--// 为了使这些光源呈现效果，只需要将它们添加到场景中-->
+        <!--scene.add(hemisphereLight);-->
+        <!--scene.add(shadowLight);-->
+    <!--}-->
+
+    <!--Sea = function(){-->
+        <!--// 创建一个圆柱几何体-->
+        <!--// 参数为：顶面半径，底面半径，高度，半径分段，高度分段-->
+        <!--let geom = new THREE.CylinderGeometry(600, 600, 800, 40, 10);-->
+
+        <!--geom.applyMatrix(new THREE.Matrix4().makeRotationX(- Math.PI / 2));-->
+
+        <!--let mat  = new THREE.MeshPhongMaterial({-->
+            <!--color:Colors.blue,-->
+            <!--transparent:true,-->
+            <!--opacity:.6,-->
+            <!--shading:THREE.FlatShading-->
+        <!--});-->
+
+        <!--this.mesh = new THREE.Mesh(geom, mat);-->
+        <!--this.mesh.receiveShadow = true;-->
+    <!--};-->
+
+    <!--let sea;-->
+
+    <!--function createSea(){-->
+        <!--sea = new Sea();-->
+        <!--sea.mesh.position.y = -600;-->
+
+        <!--scene.add(sea.mesh);-->
+    <!--}-->
+
+    <!--Cloud = function(){-->
+        <!--//创建一个空的容器-->
+        <!--this.mesh = new THREE.Object3D();-->
+
+        <!--//创建一个正方体-->
+        <!--//用作复制创建方块云-->
+        <!--let gemo = new THREE.BoxGeometry(20,20,20);-->
+
+        <!--let mat = new THREE.MeshPhongMaterial({-->
+            <!--color:Colors.white-->
+        <!--});-->
+
+        <!--let nBlocks = 3 + Math.floor(Math.random()*3);-->
+        <!--for( let i = 0; i < nBlocks; i++){-->
+            <!--let m = new THREE.Mesh(gemo, mat);-->
+
+
+            <!--//设置方向和旋转角度-->
+            <!--m.position.x = i *15;-->
+            <!--m.position.y = Math.random()*10;-->
+            <!--m.position.z = Math.random()*Math.PI*10;-->
+
+            <!--m.rotation.z= Math.random()*Math.PI*2;-->
+            <!--m.rotation.y= Math.random()*Math.PI*2;-->
+
+            <!--//缩放-->
+            <!--let s = .1 + Math.random()*.9;-->
+            <!--m.scale.set(s,s,s);-->
+
+            <!--//允许接受和生成投影-->
+            <!--m.castShadow = true;-->
+            <!--m.receiveShadow = true;-->
+
+            <!--this. mesh.add(m);-->
+        <!--}-->
+    <!--};-->
+
+    <!--Sky =function(){-->
+        <!--this.mesh = new THREE.Object3D();-->
+
+        <!--//选取若干云朵-->
+        <!--this.nClouds = 20;-->
+
+
+        <!--//均匀散布 统一的角度放置-->
+        <!--let stepAngle = Math.PI*2/ this.nClouds;-->
+
+        <!--//创建云对象-->
+        <!--for (let i = 0; i<this.nClouds; i++){-->
+            <!--let c = new Cloud();-->
+            <!--let a = stepAngle * i;-->
+            <!--let h = 750 + Math.random()*200;-->
+
+            <!--// 三角函数！！！希望你还记得数学学过的东西 :)-->
+            <!--// 假如你不记得:-->
+            <!--// 我们简单地把极坐标转换成笛卡坐标-->
+            <!--c.mesh.position.y = Math.sin(a)*h;-->
+            <!--c.mesh.position.x = Math.cos(a)*h;-->
+
+            <!--// 根据云的位置旋转它-->
+            <!--c.mesh.rotation.z = a + Math.PI/2;-->
+
+            <!--// 为了有更好的效果，我们把云放置在场景中的随机深度位置-->
+            <!--c.mesh.position.z = -400-Math.random()*400;-->
+
+            <!--// 而且我们为每朵云设置一个随机大小-->
+            <!--var s = 1+Math.random()*2;-->
+            <!--c.mesh.scale.set(s,s,s);-->
+
+            <!--// 不要忘记将每朵云的网格添加到场景中-->
+            <!--this.mesh.add(c.mesh);-->
+        <!--}-->
+    <!--};-->
+
+    <!--let sky ;-->
+    <!--function createSky(){-->
+        <!--sky = new Sky();-->
+        <!--sky.mesh.position.y =-600;-->
+        <!--scene.add(sky.mesh);-->
+    <!--}-->
+
+    <!--let AirPlane = function() {-->
+
+        <!--this.mesh = new THREE.Object3D();-->
+
+        <!--// 创建机舱-->
+        <!--var geomCockpit = new THREE.BoxGeometry(60, 50, 50, 1, 1, 1);-->
+        <!--var matCockpit = new THREE.MeshPhongMaterial({-->
+            <!--color: Colors.red,-->
+            <!--shading: THREE.FlatShading-->
+        <!--});-->
+        <!--var cockpit = new THREE.Mesh(geomCockpit, matCockpit);-->
+        <!--cockpit.castShadow = true;-->
+        <!--cockpit.receiveShadow = true;-->
+        <!--this.mesh.add(cockpit);-->
+
+        <!--// 创建引擎-->
+        <!--var geomEngine = new THREE.BoxGeometry(20, 50, 50, 1, 1, 1);-->
+        <!--var matEngine = new THREE.MeshPhongMaterial({-->
+            <!--color: Colors.white,-->
+            <!--shading: THREE.FlatShading-->
+        <!--});-->
+        <!--var engine = new THREE.Mesh(geomEngine, matEngine);-->
+        <!--engine.position.x = 40;-->
+        <!--engine.castShadow = true;-->
+        <!--engine.receiveShadow = true;-->
+        <!--this.mesh.add(engine);-->
+
+        <!--// 创建机尾-->
+        <!--var geomTailPlane = new THREE.BoxGeometry(15, 20, 5, 1, 1, 1);-->
+        <!--var matTailPlane = new THREE.MeshPhongMaterial({-->
+            <!--color: Colors.red,-->
+            <!--shading: THREE.FlatShading-->
+        <!--});-->
+        <!--var tailPlane = new THREE.Mesh(geomTailPlane, matTailPlane);-->
+        <!--tailPlane.position.set(-35, 25, 0);-->
+        <!--tailPlane.castShadow = true;-->
+        <!--tailPlane.receiveShadow = true;-->
+        <!--this.mesh.add(tailPlane);-->
+
+        <!--// 创建机翼-->
+        <!--var geomSideWing = new THREE.BoxGeometry(40, 8, 150, 1, 1, 1);-->
+        <!--var matSideWing = new THREE.MeshPhongMaterial({-->
+            <!--color: Colors.red,-->
+            <!--shading: THREE.FlatShading-->
+        <!--});-->
+        <!--var sideWing = new THREE.Mesh(geomSideWing, matSideWing);-->
+        <!--sideWing.castShadow = true;-->
+        <!--sideWing.receiveShadow = true;-->
+        <!--this.mesh.add(sideWing);-->
+
+        <!--// 创建螺旋桨-->
+        <!--var geomPropeller = new THREE.BoxGeometry(20, 10, 10, 1, 1, 1);-->
+        <!--var matPropeller = new THREE.MeshPhongMaterial({-->
+            <!--color: Colors.brown,-->
+            <!--shading: THREE.FlatShading-->
+        <!--});-->
+        <!--this.propeller = new THREE.Mesh(geomPropeller, matPropeller);-->
+        <!--this.propeller.castShadow = true;-->
+        <!--this.propeller.receiveShadow = true;-->
+
+        <!--// 创建螺旋桨的桨叶-->
+        <!--var geomBlade = new THREE.BoxGeometry(1, 100, 20, 1, 1, 1);-->
+        <!--var matBlade = new THREE.MeshPhongMaterial({-->
+            <!--color: Colors.brownDark,-->
+            <!--shading: THREE.FlatShading-->
+        <!--});-->
+
+        <!--var blade = new THREE.Mesh(geomBlade, matBlade);-->
+        <!--blade.position.set(8, 0, 0);-->
+        <!--blade.castShadow = true;-->
+        <!--blade.receiveShadow = true;-->
+        <!--this.propeller.add(blade);-->
+        <!--this.propeller.position.set(50, 0, 0);-->
+        <!--this.mesh.add(this.propeller);-->
+    <!--};-->
+
+    <!--let airplane;-->
+
+    <!--function  createPlane() {-->
+        <!--airplane = new AirPlane();-->
+        <!--airplane.mesh.scale.set(.25, .25, .25);-->
+        <!--airplane.mesh.position.y = 100;-->
+        <!--scene.add(airplane.mesh);-->
+    <!--}-->
+
+
+    <!--function loop(){-->
+        <!--// 使螺旋桨旋转并转动大海和云-->
+        <!--airplane.propeller.rotation.x += 0.3;-->
+        <!--sea.mesh.rotation.z += .005;-->
+        <!--sky.mesh.rotation.z += .01;-->
+
+
+        <!--// 更新每帧的飞机-->
+        <!--updatePlane();-->
+
+        <!--// 渲染场景-->
+        <!--renderer.render(scene, camera);-->
+
+        <!--// 重新调用 render() 函数-->
+        <!--requestAnimationFrame(loop);-->
+    <!--}-->
+
+
+    <!--var mousePos={x:0, y:0};-->
+
+    <!--// mousemove 事件处理函数-->
+
+    <!--function handleMouseMove(event) {-->
+
+        <!--// 这里我把接收到的鼠标位置的值转换成归一化值，在-1与1之间变化-->
+        <!--// 这是x轴的公式:-->
+
+        <!--var tx = -1 + (event.clientX / WIDTH)*2;-->
+
+        <!--// 对于 y 轴，我们需要一个逆公式-->
+        <!--// 因为 2D 的 y 轴与 3D 的 y 轴方向相反-->
+
+        <!--var ty = 1 - (event.clientY / HEIGHT)*2;-->
+        <!--mousePos = {x:tx, y:ty};-->
+    <!--}-->
+
+    <!--function updatePlane(){-->
+
+        <!--// 让我们在x轴上-100至100之间和y轴25至175之间移动飞机-->
+        <!--// 根据鼠标的位置在-1与1之间的范围，我们使用的 normalize 函数实现（如下）-->
+
+        <!--var targetX = normalize(mousePos.x, -1, 1, -100, 100);-->
+        <!--var targetY = normalize(mousePos.y, -1, 1, 25, 175);-->
+
+        <!--// 更新飞机的位置-->
+        <!--airplane.mesh.position.y = targetY;-->
+        <!--airplane.mesh.position.x = targetX;-->
+        <!--airplane.propeller.rotation.x += 0.3;-->
+    <!--}-->
+
+    <!--function normalize(v,vmin,vmax,tmin, tmax){-->
+
+        <!--var nv = Math.max(Math.min(v,vmax), vmin);-->
+        <!--var dv = vmax-vmin;-->
+        <!--var pc = (nv-vmin)/dv;-->
+        <!--var dt = tmax-tmin;-->
+        <!--var tv = tmin + (pc*dt);-->
+        <!--return tv;-->
+    <!--}-->
+
+<!--</script>-->
 </body>
 </html>
