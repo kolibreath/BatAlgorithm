@@ -78,8 +78,10 @@
         scene.add(axes);
 
         initAxisNumber(length, division);
+        initLineOfRealm(length);
     }
 
+    //绘制刻度
     function initAxisNumber(length, division){
         let loader = new THREE.FontLoader();
 
@@ -113,6 +115,32 @@
 
             }
         );
+    }
+
+    //绘制边缘加粗的直线
+    function initLineOfRealm(length){
+        let lineMaterial = new THREE.LineBasicMaterial({
+            vertexColors:THREE.VertexColors,
+            linewidth:3
+        });
+        let color1 = new THREE.Color(0xEE00DD), color2 = new THREE.Color(0xEEC0B0);
+
+
+        //Y轴
+        let starts = [new THREE.Vector3(0,0,0),new THREE.Vector3(0,0,0),new THREE.Vector3(0,0,0)];
+        let ends = [ new THREE.Vector3(0,0,length), new THREE.Vector3(0,length,0), new THREE.Vector3(length,0,0)];
+
+
+        for(let i =0;i<3;i++){
+            let geom = new THREE.Geometry();
+            geom.vertices.push(starts[i]);
+            geom.vertices.push(ends[i]);
+            geom.colors.push(color1,color2);
+
+            let line = new THREE.Line(geom, lineMaterial);
+            console.log(line);
+            scene.add(line);
+        }
     }
 
     function animate() {
