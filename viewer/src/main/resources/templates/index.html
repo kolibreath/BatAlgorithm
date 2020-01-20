@@ -36,7 +36,7 @@
     (function(){var script=document.createElement('script');script.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='//mrdoob.github.io/stats.js/build/stats.min.js';document.head.appendChild(script);})()
 
     let camera, scene, renderer, controls;
-    init(1,1);
+    init(80,10);
     animate();
 
     function init(length, division) {
@@ -54,68 +54,65 @@
 
         controls = new THREE.OrbitControls(camera, renderer.domElement);
 
-        // let gridXz = new THREE.GridHelper(length,division,0xEED5B7, 0xEED5B7);
-        // gridXz.position.x = length / 2;
-        // gridXz.position.y = 0;
-        // gridXz.position.z = length / 2;
-        // scene.add(gridXz);
-        //
-        // let gridXy = new THREE.GridHelper(length,division,0xEED5B7, 0xEED5B7);
-        // gridXy.rotation.x = Math.PI /2 ;
-        // gridXy.position.x = length / 2;
-        // gridXy.position.y = length / 2;
-        // gridXy.position.z = 0;
-        // scene.add(gridXy);
-        //
-        // let gridYz = new THREE.GridHelper(length,division,0xEED5B7, 0xEED5B7);
-        // gridYz.rotation.z = Math.PI /2;
-        // gridYz.position.x = 0;
-        // gridYz.position.y = length / 2;
-        // gridYz.position.z = length / 2;
-        // scene.add(gridYz);
-        //
-        // let axes = new THREE.AxesHelper(3);
-        // scene.add(axes);
+        let gridXz = new THREE.GridHelper(length,division,0xEED5B7, 0xEED5B7);
+        gridXz.position.x = length / 2;
+        gridXz.position.y = 0;
+        gridXz.position.z = length / 2;
+        scene.add(gridXz);
 
+        let gridXy = new THREE.GridHelper(length,division,0xEED5B7, 0xEED5B7);
+        gridXy.rotation.x = Math.PI /2 ;
+        gridXy.position.x = length / 2;
+        gridXy.position.y = length / 2;
+        gridXy.position.z = 0;
+        scene.add(gridXy);
 
-        initAxisScale(division);
+        let gridYz = new THREE.GridHelper(length,division,0xEED5B7, 0xEED5B7);
+        gridYz.rotation.z = Math.PI /2;
+        gridYz.position.x = 0;
+        gridYz.position.y = length / 2;
+        gridYz.position.z = length / 2;
+        scene.add(gridYz);
 
+        let axes = new THREE.AxesHelper(3);
+        scene.add(axes);
+
+        initAxisNumber(length, division);
     }
-    //初始化刻度
-    function initAxisScale(division){
+
+    function initAxisNumber(length, division){
         let loader = new THREE.FontLoader();
 
-            loader.load("fonts/helvetiker_regular.typeface.json", function (font) {
-                for (let i = 0; i <=division; i++) {
-                    let x = length / division * i;
+        loader.load("fonts/helvetiker_regular.typeface.json", function(font) {
+            //渲染x y z轴
+            for (let i = 0; i <= division ; i++) {
+                let x = length / division * (i);
+                let content = i + "";
+                let geometry = new THREE.TextGeometry(content, {
+                    font: font,
+                    size: 3,
+                    height: 0.1,
+                }) ;
+                //创建法向量材质
+                let meshMaterial = new THREE.MeshNormalMaterial({
+                    flatShading: THREE.FlatShading,
+                    transparent: true,
+                    opacity: 0.9
+                });
+                let meshX = new THREE.Mesh(geometry, meshMaterial);
+                let meshY = new THREE.Mesh(geometry, meshMaterial);
+                let meshZ = new THREE.Mesh(geometry, meshMaterial);
+                meshX.position.set(x, 0, 0);
+                meshY.position.set(0, x, 0);
+                meshZ.position.set(0, 0, x);
 
-                    let content = i + "";
-                    let geometry = new THREE.TextGeometry(content, {
-                        font: font,
-                        size: 0.1,
-                        height: 0.1,
-                        curveSegments: 12,
-                        bevelEnabled: true,
-                        bevelThickness: 10,
-                        bevelSize: 8,
-                        bevelOffset: 0,
-                        bevelSegments: 5
-                    });
+                scene.add(meshX);
+                scene.add(meshY);
+                scene.add(meshZ);
+            }
 
-                    let material = new THREE.MeshBasicMaterial(
-                        {
-                            color: 0xFF00FF,
-                            wireframe: true
-                        }
-                    );
-
-                    let mesh = new THREE.Mesh(geometry, material);
-                    mesh.position.x = x;
-                    mesh.position.y = 0;
-                    mesh.position.z = 10;
-                    scene.add(mesh);
-                }
-    });
+            }
+        );
     }
 
     function animate() {
