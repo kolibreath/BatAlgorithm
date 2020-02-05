@@ -1,10 +1,11 @@
 <template>
-  <v-app>
-    <v-app-bar
+  <v-app >
+    <!-- app bar -->
+    <div>
+      <v-app-bar
       app
       color="primary"
-      dark
-    >
+      dark>
       <div class="d-flex align-center">
         <v-img
           alt="Vuetify Logo"
@@ -12,8 +13,7 @@
           contain
           src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
           transition="scale-transition"
-          width="40"
-        />
+          width="40"/>
 
         <v-img
           alt="Vuetify Name"
@@ -30,31 +30,53 @@
       <v-btn
         href="https://github.com/vuetifyjs/vuetify/releases/latest"
         target="_blank"
-        text
-      >
+        text>
         <span class="mr-2">Latest Release</span>
         <v-icon>mdi-open-in-new</v-icon>
       </v-btn>
     </v-app-bar>
-
-    <v-content>
-      <HelloWorld/>
+    </div>
+    
+    <!-- content -->
+    <v-content class="wrapper">
+      <LeftDrawer></LeftDrawer>
+      <Main></Main>
+      <CanvasControls></CanvasControls>
+      <Canvas></Canvas>
+      <BottomTweaks class="footer"></BottomTweaks>
     </v-content>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
+// import HelloWorld from './components/HelloWorld';
+import LeftDrawer from "./components/LeftDrawer"
+import Main from "./components/Main"
+import BottomTweaks from "./components/BottomTweaks"
+import CanvasControls from "./components/CanvasControl"
+import Canvas from "./components/Canvas"
 
 export default {
   name: 'App',
-
   components: {
-    HelloWorld,
+    // HelloWorld,
+    LeftDrawer,Main,BottomTweaks, CanvasControls,Canvas
   },
-
   data: () => ({
     //
   }),
 };
 </script>
+<style>
+.wrapper {
+    position: relative;
+    min-height: 100%;
+    padding-bottom: 50px;
+    box-sizing: border-box;
+}
+.footer {
+    position: absolute;
+    bottom: 0;
+    height: 100px;
+}
+</style>

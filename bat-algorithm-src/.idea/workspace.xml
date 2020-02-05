@@ -2,24 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7d3fa006-0c51-4877-af57-2ae5506695ca" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../viewer/src/main/java/cn/edu/ccnu/kolibreath/al_viewer/algorithm/AbsBatAlgorithm.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../viewer/src/main/java/cn/edu/ccnu/kolibreath/al_viewer/algorithm/FileUtils.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../viewer/src/main/java/cn/edu/ccnu/kolibreath/al_viewer/algorithm/ImprovedBatAlgorithm.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../viewer/src/main/java/cn/edu/ccnu/kolibreath/al_viewer/algorithm/OriginalBatAlgorithm.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../viewer/src/main/java/cn/edu/ccnu/kolibreath/al_viewer/algorithm/TestAlgorithm.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../viewer/src/main/java/cn/edu/ccnu/kolibreath/al_viewer/algorithm/Window.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../viewer/src/main/java/cn/edu/ccnu/kolibreath/al_viewer/algorithm/functions/Functions.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../viewer/src/main/java/cn/edu/ccnu/kolibreath/al_viewer/algorithm/functions/IFunctions.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../viewer/src/main/java/cn/edu/ccnu/kolibreath/al_viewer/algorithm/functions/ImplementedFunctions.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../viewer/src/main/java/cn/edu/ccnu/kolibreath/al_viewer/model/Particle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../viewer/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../viewer/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../viewer/src/main/java/cn/edu/ccnu/kolibreath/al_viewer/controller/TestController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../viewer/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../viewer/src/main/resources/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../viewer-frontend/.eslintrc.js" beforeDir="false" afterPath="$PROJECT_DIR$/../viewer-frontend/.eslintrc.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../viewer-frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../viewer-frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../viewer-frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../viewer-frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../viewer-frontend/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../viewer-frontend/src/App.vue" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,30 +15,16 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Window.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="6" selection-start-column="6" selection-end-column="6" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/AbsBatAlgorithm.java">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="ProjectFrameBounds" fullScreen="true">
-    <option name="x" value="947" />
-    <option name="width" value="493" />
-    <option name="height" value="900" />
+    <option name="x" value="42" />
+    <option name="y" value="23" />
+    <option name="width" value="1398" />
+    <option name="height" value="877" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -59,7 +32,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -76,7 +49,7 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -110,16 +83,20 @@
       <updated>1579575786899</updated>
       <workItem from="1579575788287" duration="332000" />
       <workItem from="1579590111762" duration="582000" />
+      <workItem from="1580888341823" duration="126000" />
+      <workItem from="1580890344152" duration="361000" />
+      <workItem from="1580899382305" duration="57000" />
+      <workItem from="1580899502964" duration="223000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="914000" />
+    <option name="totallyTimeSpent" value="1681000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <frame x="0" y="0" width="762" height="900" extended-state="0" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2532189" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.30277777" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -154,6 +131,18 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/functions/Functions.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-462" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AbsBatAlgorithm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Window.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -161,8 +150,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/AbsBatAlgorithm.java">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$PROJECT_DIR$/src/TestAlgorithm.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="33" column="13" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#103#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
     </entry>
   </component>
 </project>
