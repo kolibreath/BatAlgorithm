@@ -58,6 +58,13 @@ import CanvasControls from "./components/CanvasControl"
 import Canvas from "./components/Canvas"
 import ParamsDialog from "./components/ParamsDialog"
 
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
+
+import Vue from 'vue'
+
+Vue.use(ElementUI)
+
 export default {
   name: 'App',
   components: {

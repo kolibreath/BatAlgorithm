@@ -1,59 +1,107 @@
 <template>
   <v-row justify="center">
-    <v-dialog v-model="dialog" persistent max-width="600px">
+    <v-dialog v-model="dialog" persistent max-width="900px">
+
       <template v-slot:activator="{ on }">
           <!-- 模拟发送事件 -->
         <v-btn color="primary" dark v-on="on" id="mockBtn" style="visibility:hidden">Open Dialog</v-btn>
       </template>
-      <v-card>
+
+      <v-card >
         <v-card-title>
-          <span class="headline">User Profile</span>
+          <span class="headline">{{defaultTitle}}</span>
         </v-card-title>
+        <v-card-subtitle>
+          <span > 当前的测试函数{{functionNames[functionIndex]}}</span>
+        </v-card-subtitle>
+
         <v-card-text>
           <v-container>
-            <v-row>
-              <v-col cols="12" sm="6" md="4">
-                <v-text-field label="Legal first name*" required></v-text-field>
+
+            <!-- progress bar 种群数量 -->
+            <v-row>              
+              <v-col cols="12" sm="2" class="my-auto">
+                <span>种群数量</span>
               </v-col>
-              <v-col cols="12" sm="6" md="4">
-                <v-text-field label="Legal middle name" hint="example of helper text only on focus"></v-text-field>
-              </v-col>
-              <v-col cols="12" sm="6" md="4">
-                <v-text-field
-                  label="Legal last name*"
-                  hint="example of persistent helper text"
-                  persistent-hint
-                  required
-                ></v-text-field>
-              </v-col>
-              <v-col cols="12">
-                <v-text-field label="Email*" required></v-text-field>
-              </v-col>
-              <v-col cols="12">
-                <v-text-field label="Password*" type="password" required></v-text-field>
-              </v-col>
-              <v-col cols="12" sm="6">
-                <v-select
-                  :items="['0-17', '18-29', '30-54', '54+']"
-                  label="Age*"
-                  required
-                ></v-select>
-              </v-col>
-              <v-col cols="12" sm="6">
-                <v-autocomplete
-                  :items="['Skiing', 'Ice hockey', 'Soccer', 'Basketball', 'Hockey', 'Reading', 'Writing', 'Coding', 'Basejump']"
-                  label="Interests"
-                  multiple
-                ></v-autocomplete>
+
+              <v-col cols="12" sm="10" >
+                  <v-slider
+                    v-model="population"
+                    :tick-labels="popLabels"
+                    :max="popLabels.length - 1"
+                    step="1"
+                    ticks="always"
+                    tick-size="4"
+                    ></v-slider>
               </v-col>
             </v-row>
+
+            <!-- 迭代次数 -->
+            <v-row>              
+              <v-col cols="12" sm="2" class="my-auto">
+                <span>迭代次数</span>
+              </v-col>
+
+              <v-col cols="12" sm="10" >
+                  <v-slider
+                     v-model="generation"
+                    :tick-labels="genLabels"
+                    :max="genLabels.length  - 1"
+                    step="1"
+                    ticks="always"
+                    tick-size="4"
+                    ></v-slider>
+              </v-col>
+            </v-row>
+
+            <!-- 脉冲频率 -->
+            <v-row>              
+              <v-col cols="12" sm="2" class="my-auto">
+                <span>脉冲频率</span>
+              </v-col>
+
+              <v-col cols="12" sm="10" >
+                  <v-slider
+                    v-model="pulseRate"
+                     :tick-labels="pulseLabels"
+                    :max="pulseLabels.length  - 1"
+                    step="1"
+                    ticks="always"
+                    tick-size="4"
+                    ></v-slider>
+              </v-col>
+            </v-row>
+
+            <!-- 频率最高值 -->
+            <v-row>              
+              <v-col cols="12" sm="2" class="my-auto">
+                <span>最大频率</span>
+              </v-col>
+
+              <v-col cols="12" sm="10" >
+                  <v-slider
+                    v-model="frequency"
+                    :tick-labels="freLabels"
+                    :max="freLabels.length  - 1"
+                    step="1"
+                    ticks="always"
+                    tick-size="4"
+                      ></v-slider>
+              </v-col>
+              
+            </v-row>
+
+          
+            <el-transfer v-model="value" :data="data" class="transfer-margin"></el-transfer>
+             
+
+            
           </v-container>
-          <small>*indicates required field</small>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" text @click="dialog = false">Close</v-btn>
-          <v-btn color="blue darken-1" text @click="dialog = false">Save</v-btn>
+          <v-btn color="blue darken-1" text @click="cancelConfig">Close</v-btn>
+          <v-btn color="blue darken-1" text @click="confirmConfig">Save</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -62,10 +110,38 @@
 <script>
 import bus from "../bus/bus.js"
 import $ from 'jquery'
+import global from "../store/Common"
 export default {
-    data: () => ({
-      dialog: false,
-    }),
+    data(){
+      const generateData = _ => {
+        const data = [];
+        for (let i = 0; i <= global.functionNames.length; i++) {
+          data.push({
+            key: i,
+            label:  global.functionNames[i],
+            disabled: false
+          });
+        }
+        return data;
+      };
+      return{
+        dialog: false,
+        population : global.population,
+        generation : global.generation,
+        pulseRate : global.pulseRate,
+        frequency : global.frequency,
+        defaultTitle: global.defaultTitle,
+        functionQueue: global.funtionQueue,
+        functionIndex: global.functionIndex,
+        functionNames: global.functionNames,
+        popLabels:['10','20','30','40','50'],
+        genLabels:['100','300','500','700','900','1000'],
+        pulseLabels:['0.25','0.50','0.75','1.0'],
+        freLabels:['0.75','1.25','1.75','2.0','2.5'],
+        value:[],
+        data:generateData()
+      }
+    },
     mounted(){
        this.paramsDialog();
     },
@@ -77,11 +153,20 @@ export default {
             bus.$on("paramsDialog",res =>{
                 $("#mockBtn").trigger("click");
             });
+        },
+        confirmConfig(){
+          this.dialog = false;
+        },
+        cancelConfig(){
+          this.dialog = false;
         }
     }
   }
 </script>
 
-<style>
-
+<style scoped>
+.transfer-margin{
+  margin-left: 120px
+}
 </style>
+

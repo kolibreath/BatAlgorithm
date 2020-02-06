@@ -159,8 +159,8 @@ export default {
         }
     },
     mounted(){
-        this.init(80,10);
-        this.animate();
+        // this.init(80,10);
+        // this.animate();
     }
 }
 </script>
