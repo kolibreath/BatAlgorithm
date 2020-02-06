@@ -29,9 +29,7 @@ export default {
             this.camera.position.z = length;
 
             this.renderer = new THREE.WebGLRenderer();
-            this.renderer.setSize(window.innerWidth, window.innerHeight);
-            //renderer.setClearColor(0xcccccc);
-            // document.body.appendChild(renderer.domElement);
+            this.renderer.setSize(1300, 600);
             document.getElementById("container").appendChild(this.renderer.domElement);
 
             this.controls = new OrbitControls(this.camera, this.renderer.domElement);
@@ -177,7 +175,7 @@ export default {
 /* 对应生成的canvas标签 */
 canvas {
     width: 100%;
-    height: 100%;
+    height: 100%;   
 }
 
 </style>

@@ -15,45 +15,117 @@
       </template>
 
       <!-- main content -->
-      <v-card tile>
-        <v-progress-linear
-          :value="50"
-          class="my-0"
-          height="3"
-        ></v-progress-linear>
+      <v-card
+      class="mx-auto"
+      max-width="600"
+      tile
+    >
+      <v-toolbar
+        flat
+        dense
+      >
+      <!-- 迭代速度控制 -->
+        <v-toolbar-title>
+          <span class="subheading">迭代速度</span>
+        </v-toolbar-title>
+        <v-spacer></v-spacer>
+      </v-toolbar>
 
-        <v-list>
-          <v-list-item>
-            <v-list-item-content>
-              <v-list-item-title>The Walker</v-list-item-title>
-              <v-list-item-subtitle>Fitz & The Trantrums</v-list-item-subtitle>
-            </v-list-item-content>
-
-            <v-spacer></v-spacer>
-
-            <v-list-item-icon>
-              <v-btn icon>
-                <v-icon>mdi-rewind</v-icon>
-              </v-btn>
-            </v-list-item-icon>
-
-            <v-list-item-icon :class="{ 'mx-5': $vuetify.breakpoint.mdAndUp }">
-              <v-btn icon>
-                <v-icon>mdi-pause</v-icon>
-              </v-btn>
-            </v-list-item-icon>
-
-            <v-list-item-icon
-              class="ml-0"
-              :class="{ 'mr-3': $vuetify.breakpoint.mdAndUp }"
+      <v-card-text>
+        <v-row
+          class="mb-4"
+          justify="space-between"
+        >
+          <v-col class="text-left">
+            <span
+              class="display-3 font-weight-light"
+              v-text="ticksLabels[bpm]"
+            ></span>
+            <span class="subheading font-weight-light mr-1">秒/轮</span>
+            <v-fade-transition>
+              <v-avatar
+                v-if="isPlaying"
+                :color="color"
+                :style="{
+                  animationDuration: animationDuration
+                }"
+                class="mb-1 v-avatar--metronome"
+                size="12"
+              ></v-avatar>
+            </v-fade-transition>
+          </v-col>
+          <v-col class="text-right">
+            <v-btn
+              :color="color"
+              dark
+              depressed
+              fab
+              @click="toggle"
             >
-              <v-btn icon>
-                <v-icon>mdi-fast-forward</v-icon>
-              </v-btn>
-            </v-list-item-icon>
-          </v-list-item>
-        </v-list>
-      </v-card>
+              <v-icon large>
+                {{ isPlaying ? 'mdi-pause' : 'mdi-play' }}
+              </v-icon>
+            </v-btn>
+          </v-col>
+        </v-row>
+
+        <!-- <v-slider
+          v-model="bpm"
+          :color="color"
+          track-color="grey"
+          always-dirty
+          min="40"
+          max="218"
+        >
+          <template v-slot:prepend>
+            <v-icon
+              :color="color"
+              @click="decrement"
+            >
+              mdi-minus
+            </v-icon>
+          </template>
+
+          <template v-slot:append>
+            <v-icon
+              :color="color"
+              @click="increment"
+            >
+              mdi-plus
+            </v-icon>
+          </template>
+        </v-slider> -->
+
+        <!-- 进度条调整的下标 -->
+         <v-slider
+          v-model="bpm"
+          :tick-labels="ticksLabels"
+          :max="3"
+          step="1"
+          ticks="always"
+          tick-size="4"
+        >
+        <template v-slot:prepend>
+            <v-icon
+              :color="color"
+              @click="decrement"
+            >
+              mdi-minus
+            </v-icon>
+          </template>
+
+          <template v-slot:append>
+            <v-icon
+              :color="color"
+              @click="increment"
+            >
+              mdi-plus
+            </v-icon>
+          </template>
+        </v-slider>
+
+      </v-card-text>
+    </v-card>
     </v-bottom-sheet>
   </div>
 </template>
@@ -62,9 +134,13 @@
 import bus from "../bus/bus.js"
 import $ from 'jquery'
 export default{
+  // bpm index
     data(){
         return {
-
+            bpm: 0,
+            interval: null,
+            isPlaying: false,
+            ticksLabels:['0.25','0.50','0.75','1.0']
         }
     },
     mounted(){
@@ -72,14 +148,36 @@ export default{
        
     },
     methods:{
-        activateCanvasControl(){
+          activateCanvasControl(){
             bus.$on('activateCanvasControl', res =>{
               $("#mock_click").trigger("click")
             })
-        }
+          },
+          decrement () {
+            this.bpm--
+          },
+          increment () {
+            this.bpm++
+          },
+          toggle () {
+            this.isPlaying = !this.isPlaying
+          }
     },
     beforeDestroy(){
         bus.$off('activateCanvasControl');
+    },
+    computed: {
+      color () {
+        if (this.bpm < 100) return 'indigo'
+        if (this.bpm < 125) return 'teal'
+        if (this.bpm < 140) return 'green'
+        if (this.bpm < 175) return 'orange'
+        return 'red'
+      },
+      //表示迭代时间
+      animationDuration () {
+        return `${0.5 / this.bpm}s`
+      },
     }
 }
 </script>
@@ -88,4 +186,20 @@ export default{
 .mock{
   visibility: hidden;
 }
+
+@keyframes metronome-example {
+    from {
+      transform: scale(.5);
+    }
+
+    to {
+      transform: scale(1);
+    }
+  }
+
+  .v-avatar--metronome {
+    animation-name: metronome-example;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+  }
 </style>
