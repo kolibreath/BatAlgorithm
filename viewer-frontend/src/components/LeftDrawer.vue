@@ -71,6 +71,7 @@
             v-for="item in items"
             :key="item.title"
             link
+            @click="toggle(item.id)"
           >
             <v-list-item-icon>
               <v-icon>{{ item.icon }}</v-icon>
@@ -86,13 +87,17 @@
 </template>
 
 <script>
+
+import bus from '../bus/bus.js'
+
 export default {
     data () {
       return {
         drawer: true,
         items: [
-          { title: '仪表盘', icon: 'mdi-view-dashboard' },
-          { title: '参数设置', icon: 'mdi-image' }
+          { title: '三维图像', icon: 'mdi-airplay' ,id:1},
+          { title: '仪表盘', icon: 'mdi-view-dashboard' ,id:2},
+          { title: '参数设置', icon: 'mdi-image' ,id:3}
         ],
         color: 'primary',
         // colors: [
@@ -113,6 +118,13 @@ export default {
         return this.background ? 'https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg' : undefined
       },
     },
+    methods:{
+      toggle(id){
+        if(id === 3){
+          bus.$emit("paramsDialog","test")
+        }
+      }
+    }
   }
 </script>
 

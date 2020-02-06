@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7d3fa006-0c51-4877-af57-2ae5506695ca" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../viewer-frontend/.eslintrc.js" beforeDir="false" afterPath="$PROJECT_DIR$/../viewer-frontend/.eslintrc.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../viewer-frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../viewer-frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../viewer-frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../viewer-frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../viewer-frontend/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../viewer-frontend/src/App.vue" afterDir="false" />
-    </list>
+    <list default="true" id="7d3fa006-0c51-4877-af57-2ae5506695ca" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,7 +9,20 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/TestAlgorithm.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="495">
+              <caret line="36" column="15" selection-start-line="36" selection-start-column="15" selection-end-line="36" selection-end-column="15" />
+              <folding>
+                <element signature="e#0#103#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -33,6 +40,7 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -49,7 +57,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -87,16 +94,17 @@
       <workItem from="1580890344152" duration="361000" />
       <workItem from="1580899382305" duration="57000" />
       <workItem from="1580899502964" duration="223000" />
+      <workItem from="1580961647724" duration="628000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1681000" />
+    <option name="totallyTimeSpent" value="2309000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="762" height="900" extended-state="0" />
+    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.30277777" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.30686694" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -152,8 +160,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/TestAlgorithm.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="33" column="13" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
+        <state relative-caret-position="495">
+          <caret line="36" column="15" selection-start-line="36" selection-start-column="15" selection-end-line="36" selection-end-column="15" />
           <folding>
             <element signature="e#0#103#0" expanded="true" />
           </folding>

@@ -43,6 +43,7 @@
       <Main></Main>
       <CanvasControls></CanvasControls>
       <Canvas></Canvas>
+      <ParamsDialog></ParamsDialog>
       <BottomTweaks class="footer"></BottomTweaks>
     </v-content>
   </v-app>
@@ -55,12 +56,13 @@ import Main from "./components/Main"
 import BottomTweaks from "./components/BottomTweaks"
 import CanvasControls from "./components/CanvasControl"
 import Canvas from "./components/Canvas"
+import ParamsDialog from "./components/ParamsDialog"
 
 export default {
   name: 'App',
   components: {
     // HelloWorld,
-    LeftDrawer,Main,BottomTweaks, CanvasControls,Canvas
+    LeftDrawer,Main,BottomTweaks, CanvasControls,Canvas,ParamsDialog
   },
   data: () => ({
     //

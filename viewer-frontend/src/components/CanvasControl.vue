@@ -1,6 +1,6 @@
 <template>
   <div class="text-center">
-    <v-bottom-sheet inset>
+    <v-bottom-sheet inset v-model="isPlaying">
       <!-- 模拟触发事件 -->
       <template v-slot:activator="{ on }">
         <!-- open player 点击的时候设置这个on是一个事件 点击的时候会传递-->
@@ -69,32 +69,6 @@
           </v-col>
         </v-row>
 
-        <!-- <v-slider
-          v-model="bpm"
-          :color="color"
-          track-color="grey"
-          always-dirty
-          min="40"
-          max="218"
-        >
-          <template v-slot:prepend>
-            <v-icon
-              :color="color"
-              @click="decrement"
-            >
-              mdi-minus
-            </v-icon>
-          </template>
-
-          <template v-slot:append>
-            <v-icon
-              :color="color"
-              @click="increment"
-            >
-              mdi-plus
-            </v-icon>
-          </template>
-        </v-slider> -->
 
         <!-- 进度条调整的下标 -->
          <v-slider
@@ -148,9 +122,11 @@ export default{
        
     },
     methods:{
+      //监听事件
           activateCanvasControl(){
             bus.$on('activateCanvasControl', res =>{
-              $("#mock_click").trigger("click")
+              $("#mock_click").trigger("click");
+              this.isPlaying = false;
             })
           },
           decrement () {
@@ -168,10 +144,10 @@ export default{
     },
     computed: {
       color () {
-        if (this.bpm < 100) return 'indigo'
-        if (this.bpm < 125) return 'teal'
-        if (this.bpm < 140) return 'green'
-        if (this.bpm < 175) return 'orange'
+        if (this.bpm == 0) return 'indigo'
+        if (this.bpm == 1) return 'teal'
+        if (this.bpm == 2) return 'green'
+        if (this.bpm == 3) return 'orange'
         return 'red'
       },
       //表示迭代时间

@@ -6,6 +6,7 @@
 
 <script>
 
+import bus from '../bus/bus.js'
 import $ from 'jquery';
 import * as THREE from 'three';
 const OrbitControls = require('three-orbit-controls')(THREE);
@@ -33,7 +34,6 @@ export default {
             document.getElementById("container").appendChild(this.renderer.domElement);
 
             this.controls = new OrbitControls(this.camera, this.renderer.domElement);
-            console.log(this.controls);
 
             let gridXz = new THREE.GridHelper(length,division,0xEED5B7, 0xEED5B7);
             gridXz.position.x = length / 2;
@@ -116,7 +116,6 @@ export default {
                 geom.colors.push(color1,color2);
 
                 let line = new THREE.Line(geom, lineMaterial);
-                console.log(line);
                 this.scene.add(line);
             }
         },
