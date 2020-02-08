@@ -265,7 +265,7 @@ public class ImprovedBatAlgorithm extends AbsBatAlgorithm{
 	private double[][] solutionWrapper(){
         initialize();
 
-        recordWindows = new LinkedList<Window>();
+        recordWindows = new LinkedList<Window>(windows);
 
 
         double alfa = 0.5264;
