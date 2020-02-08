@@ -1,12 +1,13 @@
 package cn.edu.ccnu.kolibreath.al_viewer.algorithm;
 
 import cn.edu.ccnu.kolibreath.al_viewer.algorithm.functions.IFunctions;
+import com.sun.java.swing.plaf.windows.resources.windows;
 
 import java.io.File;
 import java.util.*;
 
 
-@SuppressWarnings("SingleStatementInBlock")
+@SuppressWarnings({"SingleStatementInBlock", "Duplicates"})
 public class ImprovedBatAlgorithm extends AbsBatAlgorithm{
     //t表示当前迭代次数
     int population,t = 1;
@@ -261,87 +262,30 @@ public class ImprovedBatAlgorithm extends AbsBatAlgorithm{
 			   return s;
 		 }
 
-    private double[][] solution() {
-
+	private double[][] solutionWrapper(){
         initialize();
 
-        recordWindows = new LinkedList<Window>(windows);
+        recordWindows = new LinkedList<Window>();
 
-//        file = new File(getFilename());
 
         double alfa = 0.5264;
         double gamma = 4.411;
-        double A0;
-        double r0;
-        double fnew;
 
         double pulseRate[] = new double[population];
         for (int i = 0; i < population; i++) {
             pulseRate[i] = Math.random();
         }
 
-        while (t < generation) {
-
-            if (imporvedCounter % 1000 == 0)
-//                     FileUtils.Companion.write(file,fmin +"\n");
-
-                changePossibility();
-            watchWindows();
+        changePossibility();
+        watchWindows();
 
 
-            Collections.sort(windows);
-            String builder = t + "      " + windows.get(0).getObjectives() + "\n";
-//                 FileUtils.Companion.write(file, builder);
+        Collections.sort(windows);
 
-
-            for (int i = 0; i < population; i++) {
-                for (int k = 0; k < windowSize; k++) {
-                    windows.get(k).setObjectives(ff.func(windows.get(k).getLocation()));
-                }
-
-
-                r0 = pulseRate[i];
-                A0 = loundnesses[i];
-                //todo fitness 暂时没有改动
-//                    这里将best[]
-                best = windows.get(randomTarget()).getLocation();
-                Q[i] = Qmin + (Qmin - Qmax) * Math.random();
-                for (int j = 0; j < d; j++) {
-                    v[i][j] = v[i][j] + ((batPopulationLocation[i][j] - best[j]) * Q[i]);
-                    S[i][j] = batPopulationLocation[i][j] + v[i][j];
-                }
-                batPopulationLocation[i] = simplebounds(batPopulationLocation[i]);
-                if (Math.random() > r0) {
-                    for (int j = 0; j < d; j++) {
-                        double eth = Math.random() * 2 - 1;
-//                        S[i][j] = best[j] + (0.001 * random.nextGaussian());
-                        S[i][j] = best[j] + eth * aveLoundness();
-                    }
-                }
-
-                fnew = ff.func(simplebounds(S[i]));
-                imporvedCounter++;
-
-                //修改
-                if ((fnew <= fitness[i])) {
-                    System.arraycopy(S[i], 0, batPopulationLocation[i], 0, d);
-                    fitness[i] = fnew;
-                    pulseRate[i] = r0 * (1.0 - Math.exp(-gamma * t));
-                    loundnesses[i] = A0 * alfa;
-                }
-
-                if (fnew <= fmin) {
-                    System.arraycopy(S[i], 0, best, 0, d);
-                    fmin = fnew;
-                    useWindows(best);
-                }
-            }
-
-            BEST[t] = windows.get(0).getObjectives();
-            t++;
+        int tWrapper[] = {0};
+        while(tWrapper[0] < generation){
+            solutionEachGeneration(tWrapper, pulseRate, gamma, alfa);
         }
-
-
         double[] plott = new double[generation];
         for (int i = 0; i < generation; i++) {
             plott[i] = i;
@@ -354,7 +298,59 @@ public class ImprovedBatAlgorithm extends AbsBatAlgorithm{
             dep[1][i] = best[i];
         }
         return dep;
+    }
 
+
+    public double[][] solutionEachGeneration(int []tWrapper, double[] pulseRate, double gamma,
+                                             double alfa) {
+
+
+
+        for (int i = 0; i < population; i++) {
+            for (int k = 0; k < windowSize; k++) {
+                windows.get(k).setObjectives(ff.func(windows.get(k).getLocation()));
+            }
+
+            double r0, A0, fnew;
+            r0 = pulseRate[i];
+            A0 = loundnesses[i];
+
+            best = windows.get(randomTarget()).getLocation();
+            Q[i] = Qmin + (Qmin - Qmax) * Math.random();
+            for (int j = 0; j < d; j++) {
+                v[i][j] = v[i][j] + ((batPopulationLocation[i][j] - best[j]) * Q[i]);
+                S[i][j] = batPopulationLocation[i][j] + v[i][j];
+            }
+            batPopulationLocation[i] = simplebounds(batPopulationLocation[i]);
+            if (Math.random() > r0) {
+                for (int j = 0; j < d; j++) {
+                    double eth = Math.random() * 2 - 1;
+//                        S[i][j] = best[j] + (0.001 * random.nextGaussian());
+                    S[i][j] = best[j] + eth * aveLoundness();
+                }
+            }
+
+            fnew = ff.func(simplebounds(S[i]));
+            imporvedCounter++;
+
+            //修改
+            if ((fnew <= fitness[i])) {
+                System.arraycopy(S[i], 0, batPopulationLocation[i], 0, d);
+                fitness[i] = fnew;
+                pulseRate[i] = r0 * (1.0 - Math.exp(-gamma * t));
+                loundnesses[i] = A0 * alfa;
+            }
+
+            if (fnew <= fmin) {
+                System.arraycopy(S[i], 0, best, 0, d);
+                fmin = fnew;
+                useWindows(best);
+            }
+        }
+
+        BEST[tWrapper[0]] = windows.get(0).getObjectives();
+        tWrapper[0]++;
+        return batPopulationLocation;
     }
 
     private double aveLoundness(){
@@ -378,16 +374,9 @@ public class ImprovedBatAlgorithm extends AbsBatAlgorithm{
         }
         Collections.sort(windows);
     }
-	public 	void toStringnew() {
-        double[][] out = solution();
-        System.out.println("Optimized value = " + out[0][0]);
-        for (int i = 0; i < d; i++) {
-            System.out.println("x[" + i + "] = " + out[1][i]);
-        }
-    }
 
     @Override
     public double bestValue() {
-        return solution()[0][0];
+        return solutionWrapper()[0][0];
     }
 }

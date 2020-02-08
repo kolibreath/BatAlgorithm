@@ -109,9 +109,19 @@ public class OriginalBatAlgorithm extends AbsBatAlgorithm{
     }
 
     private double [][] solutionWrapper(){
+
+        initialize();
+        double alfa=0.5264;
+        double gamma=4.411;
+
+        double[] pulseRate = new double[population];
+        for (int i = 0; i < population; i++) {
+            pulseRate[i] = Math.random();
+        }
+
         int tWrapper[] = {0};
         while(tWrapper[0]< Ngen) {
-            solutionEachGeneration(tWrapper);
+            solutionEachGeneration(tWrapper, pulseRate, gamma, alfa);
         }
         double[] plott=new double[Ngen];
         for(int i=0;i<Ngen;i++) {
@@ -127,21 +137,18 @@ public class OriginalBatAlgorithm extends AbsBatAlgorithm{
         return dep;
     }
 
+    //并且会增加twrapper 数组中的值
     //输出每一次迭代的结果 返回sol
-    public double[][] solutionEachGeneration(int []tWrapper) {
+    public double[][] solutionEachGeneration(int []tWrapper, double[] pulseRate, double gamma, double alfa) {
 
-//        file = new File(getFilename());
-
-        initialize();
-        double alfa=0.5264;
-        double gamma=4.411;
-        double A0=0.5026;
-        double r0=0.4205;
-        double fnew=0.0;
 
         for(int i = 0; i< population; i++) {
+            double A0, r0, fnew;
             //改变这只蝙蝠的平均响度
+
             A0 = loundnesses[i];
+            r0 = pulseRate[i];
+
             Q[i] = Qmin + (Qmin - Qmax) * Math.random();
             for (int j = 0; j < d; j++) {
                 v[i][j] = v[i][j] + ((Sol[i][j] - best[j]) * Q[i]);
