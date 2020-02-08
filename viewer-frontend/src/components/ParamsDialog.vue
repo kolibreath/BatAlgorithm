@@ -124,6 +124,7 @@ export default {
         }
         return data;
       };
+      // 当前进行的函数不能够在放入
       return{
         dialog: false,
         population : global.population,

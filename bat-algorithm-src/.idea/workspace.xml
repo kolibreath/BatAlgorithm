@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7d3fa006-0c51-4877-af57-2ae5506695ca" name="Default Changelist" comment="" />
+    <list default="true" id="7d3fa006-0c51-4877-af57-2ae5506695ca" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../viewer-backend/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../viewer-backend/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../viewer-frontend/src/components/ParamsDialog.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../viewer-frontend/src/components/ParamsDialog.vue" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -9,7 +12,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/TestAlgorithm.kt">
           <provider selected="true" editor-type-id="text-editor">
@@ -40,7 +43,6 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -57,6 +59,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -95,16 +98,18 @@
       <workItem from="1580899382305" duration="57000" />
       <workItem from="1580899502964" duration="223000" />
       <workItem from="1580961647724" duration="628000" />
+      <workItem from="1581128129113" duration="52000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2309000" />
+    <option name="totallyTimeSpent" value="2361000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.30686694" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.3111588" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />

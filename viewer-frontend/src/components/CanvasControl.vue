@@ -114,6 +114,7 @@ export default{
             bpm: 0,
             interval: null,
             isPlaying: false,
+            // 修改计算 修改数据 修改显示秒/轮文字
             ticksLabels:['0.25','0.50','0.75','1.0']
         }
     },
