@@ -1,6 +1,5 @@
 package cn.edu.ccnu.kolibreath.al_viewer.controller;
 
-import cn.edu.ccnu.kolibreath.al_viewer.Constants;
 import cn.edu.ccnu.kolibreath.al_viewer.algorithm.ImprovedBatAlgorithm;
 import cn.edu.ccnu.kolibreath.al_viewer.algorithm.OriginalBatAlgorithm;
 import cn.edu.ccnu.kolibreath.al_viewer.algorithm.functions.ImplementedFunctions;
@@ -10,15 +9,13 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpSession;
 import java.util.LinkedList;
 
 //生成和返回图片的情况粒子分布等等
 @RestController
-@RequestMapping("graph")
 public class GraphController {
 
-    private double lower[] = {-10.0, -10.0, -10.0};
+    private double lower[] = {-10, -10, -10};
     private double upper[] = {10.0,10.0,10.0};
     private int n = 20;//population size
     private int Ngen = 1000; // number of generation
@@ -28,6 +25,10 @@ public class GraphController {
     private double Qmax = 2.0;
     //默认情况下是0.01秒一次迭代 1秒钟进行100次迭代
     private double speed = 0.01;
+
+    private double alfa = 0.5264;
+    private double gamma = 4.411;
+
 
     private ImplementedFunctions functions = new ImplementedFunctions();
 
@@ -52,36 +53,34 @@ public class GraphController {
 
     /**
      * 每次请求都返回原始蝙蝠算法和改进蝙蝠算法的粒子的位置
-     * @return
+     * @return 当前的原始蝙蝠算法和改进蝙蝠算法的粒子的位置
      */
-    @PostMapping("/api/start/{id}")
+    @RequestMapping(value = "/api/start/{id}", method = RequestMethod.POST)
     public ResultBean postStart(@PathVariable("id") int id){
         functions.setIndex(id);
         OriginalBatAlgorithm origin = new OriginalBatAlgorithm(functions, n , Ngen , A, r ,Qmin, Qmax, lower, upper);
         ImprovedBatAlgorithm improved = new ImprovedBatAlgorithm(functions, n , Ngen , A, r ,Qmin, Qmax, lower, upper );
+        
+        origin.initialize();
+        improved.initialize();
 
-//        double [][] originResult = origin.solutionEachGeneration(tWrapper);
-//        double [][] improvedResult = improved.solutionEachGeneration(tWrapper);
+        double pulseRate[] = new double[n];
+        for (int i = 0; i < n; i++) {
+            pulseRate[i] = Math.random();
+        }
+        double [][] originResult = origin.solutionEachGeneration(tWrapper, pulseRate, gamma, alfa);
+        double [][] improvedResult = improved.solutionEachGeneration(tWrapper, pulseRate, gamma, alfa);
 
-        return ResultBean.success(null);
+        List<Particle> originParticles = array2Particles(originResult);
+        List<Particle> improvedParticles = array2Particles(improvedResult);
+
+        ParticlesWrapper particlesWrapper = new ParticlesWrapper();
+        particlesWrapper.setOriginal(originParticles);
+        particlesWrapper.setImproved(improvedParticles);
+
+        return ResultBean.success(particlesWrapper);
     }
 
-    /**
-     * 每次调用返回当前的粒子状态
-     * id = 当前调用的测试函数类型
-     * @return 当前的粒子参数
-     */
-    @RequestMapping("/original/{id}")//todo function
-    public ResultBean getOriginalParticles(HttpSession httpSession , @PathVariable("id") int id){
-        functions.setIndex(id);
-        OriginalBatAlgorithm algorithm = new OriginalBatAlgorithm(functions, n ,Ngen , A , r, Qmin,Qmax, lower, upper);
-        int tWrapper[] = new int[1];
-        tWrapper[0] = ((UserSession) httpSession.getAttribute(Constants.USER_SESSION)).getGeneration();
-//        double solutionResult[][] = algorithm.solutionEachGeneration(tWrapper);
-//        List<Particle> particleList = array2Particles(solutionResult);
-//        return ResultBean.success(particleList);
-        return null;
-    }
 
 
     /**
@@ -125,7 +124,6 @@ public class GraphController {
         //停止算法运行
         return ResultBean.success(null);
     }
-
 
 
 

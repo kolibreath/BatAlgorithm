@@ -161,7 +161,7 @@ public class ImprovedBatAlgorithm extends AbsBatAlgorithm{
        return Math.abs(random.nextInt()) %   size;
     }
 
-    private	void initialize() {
+    public	void initialize() {
         for (int i = 0; i < population; i++) {
             for (int j = 0; j < d; j++) {
                 batPopulationLocation[i][j] = lb[j] + (ub[j] - lb[j]) * Math.random();
@@ -198,7 +198,7 @@ public class ImprovedBatAlgorithm extends AbsBatAlgorithm{
         windows.add(window);
         Collections.sort(windows);
 
-        //赋值操作！ 将lastWindows初始化 开始观察
+        recordWindows = new LinkedList<Window>(windows);
     }
     private  int[] getSortedFitnessIndices(double fitness[]){
         int indices[]= new int[fitness.length];
@@ -262,48 +262,31 @@ public class ImprovedBatAlgorithm extends AbsBatAlgorithm{
 			   return s;
 		 }
 
-	private double[][] solutionWrapper(){
+	private void solutionWrapper(){
         initialize();
-
-        recordWindows = new LinkedList<Window>(windows);
-
 
         double alfa = 0.5264;
         double gamma = 4.411;
 
+        //todo 玻璃！
         double pulseRate[] = new double[population];
         for (int i = 0; i < population; i++) {
             pulseRate[i] = Math.random();
         }
 
-        changePossibility();
-        watchWindows();
-
-
-        Collections.sort(windows);
-
         int tWrapper[] = {0};
         while(tWrapper[0] < generation){
             solutionEachGeneration(tWrapper, pulseRate, gamma, alfa);
         }
-        double[] plott = new double[generation];
-        for (int i = 0; i < generation; i++) {
-            plott[i] = i;
-        }
-
-
-        double[][] dep = new double[2][d];
-        dep[0][0] = fmin;
-        for (int i = 0; i < d; i++) {
-            dep[1][i] = best[i];
-        }
-        return dep;
     }
-
 
     public double[][] solutionEachGeneration(int []tWrapper, double[] pulseRate, double gamma,
                                              double alfa) {
 
+        changePossibility();
+        watchWindows();
+
+        Collections.sort(windows);
 
 
         for (int i = 0; i < population; i++) {
@@ -377,6 +360,7 @@ public class ImprovedBatAlgorithm extends AbsBatAlgorithm{
 
     @Override
     public double bestValue() {
-        return solutionWrapper()[0][0];
+        solutionWrapper();
+        return fmin;
     }
 }

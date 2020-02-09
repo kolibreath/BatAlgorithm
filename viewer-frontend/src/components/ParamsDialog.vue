@@ -91,6 +91,25 @@
               
             </v-row>
 
+            <!-- 响度调整 -->
+            <v-row>              
+              <v-col cols="12" sm="2" class="my-auto">
+                <span>响度调整</span>
+              </v-col>
+
+              <v-col cols="12" sm="10" >
+                  <v-slider
+                    v-model="loudness"
+                    :tick-labels="loudnessLabels"
+                    :max="loudnessLabels.length  - 1"
+                    step="1"
+                    ticks="always"
+                    tick-size="4"
+                      ></v-slider>
+              </v-col>
+              
+            </v-row>
+
           
             <el-transfer v-model="value" :data="data" class="transfer-margin"></el-transfer>
              
@@ -135,10 +154,12 @@ export default {
         functionQueue: global.funtionQueue,
         functionIndex: global.functionIndex,
         functionNames: global.functionNames,
-        popLabels:['10','20','30','40','50'],
+        loudness:global.loudness,
+        popLabels:['5','10','15','20'],
         genLabels:['100','300','500','700','900','1000'],
         pulseLabels:['0.25','0.50','0.75','1.0'],
         freLabels:['0.75','1.25','1.75','2.0','2.5'],
+        loudnessLabels:['0.35','0.40','0.45','0.50'],
         value:[],
         data:generateData()
       }

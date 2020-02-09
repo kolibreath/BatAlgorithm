@@ -63,7 +63,7 @@ public class OriginalBatAlgorithm extends AbsBatAlgorithm{
         v=new double[population][d];
     }
 
-    void initialize() {
+    public void initialize() {
         for(int i = 0; i< population; i++) {
             for(int j=0;j<d;j++) {
                 Sol[i][j]=Lbvec[j]+(Ubvec[j]-Lbvec[j])*Math.random();
@@ -108,7 +108,7 @@ public class OriginalBatAlgorithm extends AbsBatAlgorithm{
         return Math.abs(random.nextInt()) %   population;
     }
 
-    private double [][] solutionWrapper(){
+    private void solutionWrapper(){
 
         initialize();
         double alfa=0.5264;
@@ -128,14 +128,8 @@ public class OriginalBatAlgorithm extends AbsBatAlgorithm{
             plott[i]=i;
         }
 
-
-        double[][] dep=new double[2][d];
-        dep[0][0]=fmin;
-        for(int i=0;i<d;i++) {
-            dep[1][i]=best[i];
-        }
-        return dep;
     }
+
 
     //并且会增加twrapper 数组中的值
     //输出每一次迭代的结果 返回sol
@@ -199,6 +193,7 @@ public class OriginalBatAlgorithm extends AbsBatAlgorithm{
 
     @Override
     public double bestValue() {
-        return solutionWrapper()[0][0];
+        solutionWrapper();
+        return fmin;
     }
 }

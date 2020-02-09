@@ -107,6 +107,9 @@
 <script>
 import bus from "../bus/bus.js"
 import $ from 'jquery'
+import axios from "axios"
+import global from '../store/Common'
+
 export default{
   // bpm index
     data(){
@@ -136,8 +139,32 @@ export default{
           increment () {
             this.bpm++
           },
+          //给后端发送开始的消息
           toggle () {
             this.isPlaying = !this.isPlaying
+            //如果是第一次请求，就开始执行函数并且获取第一次粒子的数据！
+            // axios 默认使用表单请求！
+            //https://github.com/Wscats/vue-tutorial/issues/16
+            let message 
+            if(global.firstTime){
+              global.firstTime = false;
+              message = "开始执行测试函数"
+            }else{
+              message = "测试函数重新开始执行"
+            }
+          
+            axios.post( 'http://localhost:8081/api/start/' + global.functionIndex)
+                .then(function(response){
+                  bus.$emit("alertContent",{message: message ,type:'success'});
+                  bus.$emit("particleData", response)
+                })
+                .catch(function(error){
+                    bus.$emit("alertContent",{message:"函数执行失败", type:'error'})
+              });
+
+              global.firstTime = false;
+          
+            
           }
     },
     beforeDestroy(){

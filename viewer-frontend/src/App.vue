@@ -39,6 +39,7 @@
     
     <!-- content -->
     <v-content class="wrapper">
+      
       <LeftDrawer></LeftDrawer>
       <Main></Main>
       <CanvasControls></CanvasControls>
@@ -62,7 +63,7 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 
 import Vue from 'vue'
-
+import bus from './bus/bus.js'
 Vue.use(ElementUI)
 
 export default {
@@ -74,6 +75,24 @@ export default {
   data: () => ({
     //
   }),
+  //todo 如果进行路由切换的时候vue的状态？
+  //当加载完成主页的时候就弹出canvasControl.vue
+  mounted(){
+    bus.$emit("activateCanvasControl","test");
+    //监听alert消息
+    bus.$on("alertContent", res =>{
+      this.createAlert(res);
+    })
+  },
+  methods:{
+    createAlert(res){
+      this.$message({
+          showClose: true,
+          message: res.message,
+          type:    res.type
+        });
+    }
+  }
 };
 </script>
 <style>

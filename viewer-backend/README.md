@@ -70,19 +70,7 @@
 ## 启动算法
 |  methods   | api  | description | parameter |
 |  ---- | ----  | ---- | ---- |
-|POST| /api/start|启动蝙蝠算法的参数配置|no-params|
-```
-{
-    "code":int,
-    "message":string,
-    data:object
-}
-```
-
-## 返回每一次原始蝙蝠算法迭代粒子位置以及相关信息
-|  methods   | api  | description | parameter |
-|  ---- | ----  | ---- | ---- |
-|GET| /api/original?index=1修改蝙蝠算法的参数配置|no-params|
+|POST| /api/start/id|前端按照默认的数据启动算法|id= 测试函数的index|
 ```
 {
     "code":int,
