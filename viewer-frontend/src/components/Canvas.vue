@@ -173,7 +173,12 @@ export default {
         this.scene.add(sphere);
 
         sphere.on("click", function(m) {
-          console.log(m);
+          bus.$emit("particlePosition", {
+            x: improved[i].x,
+            y: improved[i].y,
+            z: improved[i].z,
+            type: "success"
+          });
         });
       }
 
@@ -189,7 +194,12 @@ export default {
         this.scene.add(sphere);
 
         sphere.on("click", function(m) {
-          console.log(m);
+          bus.$emit("particlePosition", {
+            x: improved[i].x,
+            y: improved[i].y,
+            z: improved[i].z,
+            type: "success"
+          });
         });
       }
     },
