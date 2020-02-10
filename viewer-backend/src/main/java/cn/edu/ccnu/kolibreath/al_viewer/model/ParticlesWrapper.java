@@ -6,6 +6,15 @@ import java.util.List;
 public class ParticlesWrapper {
     private List<Particle> original;
     private List<Particle> improved;
+    private int iteration;
+
+    public int getIteration() {
+        return iteration;
+    }
+
+    public void setIteration(int interation) {
+        this.iteration = interation;
+    }
 
     public List<Particle> getOriginal() {
         return original;

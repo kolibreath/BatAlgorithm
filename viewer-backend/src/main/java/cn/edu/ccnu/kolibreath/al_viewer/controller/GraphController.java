@@ -37,6 +37,15 @@ public class GraphController {
             lower,upper, n, Ngen, A , r, Qmin, Qmax, functions, speed
     );
 
+
+    private OriginalBatAlgorithm original;
+    private ImprovedBatAlgorithm improved;
+
+    //当前迭代的轮数记录
+    public int[] tWrapper = {0};
+
+    private double[] pulseRate;
+
     private List<Particle> array2Particles(double solutionResult[][]) {
         List<Particle> particleList = new LinkedList<>();
         for (int i = 0; i <  solutionResult.length; i++) {
@@ -48,27 +57,37 @@ public class GraphController {
         return particleList;
     }
 
-    //当前迭代的轮数记录
-    public int[] tWrapper = {0};
+
+    /**
+     * 初始化算法的一些值 并将这些值作为 公共领域内的引用
+     * @return
+     */
+    @RequestMapping(value ="/api/init/{id}", method = RequestMethod.POST)
+    public ResultBean postInit(@PathVariable("id") int id){
+        functions.setIndex((id));
+        original = new OriginalBatAlgorithm(functions, n ,Ngen, A, r, Qmin, Qmax, lower, upper);
+        improved = new ImprovedBatAlgorithm(functions, n ,Ngen, A, r, Qmin, Qmax, lower, upper);
+
+        original.initialize();
+        improved.initialize();
+
+        pulseRate = new double[n];
+        for (int i = 0; i < n; i++) {
+            pulseRate[i] = Math.random();
+        }
+
+        return ResultBean.success(null);
+    }
+
 
     /**
      * 每次请求都返回原始蝙蝠算法和改进蝙蝠算法的粒子的位置
      * @return 当前的原始蝙蝠算法和改进蝙蝠算法的粒子的位置
      */
-    @RequestMapping(value = "/api/start/{id}", method = RequestMethod.POST)
-    public ResultBean postStart(@PathVariable("id") int id){
-        functions.setIndex(id);
-        OriginalBatAlgorithm origin = new OriginalBatAlgorithm(functions, n , Ngen , A, r ,Qmin, Qmax, lower, upper);
-        ImprovedBatAlgorithm improved = new ImprovedBatAlgorithm(functions, n , Ngen , A, r ,Qmin, Qmax, lower, upper );
-        
-        origin.initialize();
-        improved.initialize();
+    @RequestMapping(value = "/api/start/", method = RequestMethod.POST)
+    public ResultBean postStart(){
 
-        double pulseRate[] = new double[n];
-        for (int i = 0; i < n; i++) {
-            pulseRate[i] = Math.random();
-        }
-        double [][] originResult = origin.solutionEachGeneration(tWrapper, pulseRate, gamma, alfa);
+        double [][] originResult = original.solutionEachGeneration(tWrapper, pulseRate, gamma, alfa);
         double [][] improvedResult = improved.solutionEachGeneration(tWrapper, pulseRate, gamma, alfa);
 
         List<Particle> originParticles = array2Particles(originResult);
@@ -77,6 +96,7 @@ public class GraphController {
         ParticlesWrapper particlesWrapper = new ParticlesWrapper();
         particlesWrapper.setOriginal(originParticles);
         particlesWrapper.setImproved(improvedParticles);
+        particlesWrapper.setIteration(tWrapper[0]);
 
         return ResultBean.success(particlesWrapper);
     }
@@ -97,7 +117,7 @@ public class GraphController {
      * @param defaultConfigWrapper 修改算法的结果 这样的情况下不修改算法的速度 默认不变
      * @return
      */
-    @PostMapping("/api/alterConfig")
+    @RequestMapping(value = "/api/alterConfig" , method = RequestMethod.POST)
     public ResultBean postAlteredConfig(@RequestBody DefaultConfigWrapper defaultConfigWrapper){
         this.configWrapper = defaultConfigWrapper;
         return ResultBean.success(null);
@@ -116,11 +136,12 @@ public class GraphController {
 
 
 
-    @PostMapping("/api/reset")
-    public ResultBean postResultAlgorithm(){
+    @RequestMapping(value = "/api/reset", method = RequestMethod.POST)
+    public ResultBean postResetAlgorithm(){
         configWrapper = new DefaultConfigWrapper(
                 lower,upper, n, Ngen, A , r, Qmin, Qmax, functions,speed
         );
+        tWrapper[0] = 0;
         //停止算法运行
         return ResultBean.success(null);
     }

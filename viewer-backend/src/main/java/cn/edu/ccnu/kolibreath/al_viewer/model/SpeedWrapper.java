@@ -14,4 +14,7 @@ public class SpeedWrapper {
     public SpeedWrapper(double speed){
         this.speed = speed;
     }
+
+
+    public SpeedWrapper(){}
 }

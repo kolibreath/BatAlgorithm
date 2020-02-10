@@ -180,7 +180,7 @@ public class OriginalBatAlgorithm extends AbsBatAlgorithm{
 
         }
 
-        BEST[tWrapper[0]]=fmin;
+            BEST[tWrapper[0]]=fmin;
         tWrapper[0]++;
         return Sol;
     }

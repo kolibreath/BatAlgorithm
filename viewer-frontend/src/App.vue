@@ -60,6 +60,8 @@ import Vue from "vue";
 import bus from "./bus/bus.js";
 Vue.use(ElementUI);
 
+import global from "./store/Common.vue";
+
 export default {
   name: "App",
   components: {

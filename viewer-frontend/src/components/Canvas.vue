@@ -11,6 +11,7 @@ import * as THREE from "three";
 const OrbitControls = require("three-orbit-controls")(THREE);
 
 import { Interaction } from "three.interaction";
+import { clearInterval } from "timers";
 
 export default {
   data() {
@@ -19,7 +20,11 @@ export default {
       scene: "",
       renderer: "",
       controls: "",
-      interaction: ""
+      interaction: "",
+      timer: null,
+      //初始化两个新的数组 如果数组为空 说明是第一次进行循环 如果不为空直接改变粒子的位置即可
+      originalParticles: [],
+      improvedParticles: []
     };
   },
   methods: {
@@ -158,49 +163,87 @@ export default {
         this.scene.add(line);
       }
     },
+    //移除scene中的
+    removePreviousParticles() {
+      let length = 0;
+      for (let i = 0; i < length; i++) {
+        this.improvedParticles[i].geometry.dispose();
+        this.improvedParticles[i].material.dispose();
 
-    //从后端获取的数据放入场景中
-    injectParticles(improved, original) {
-      for (let i = 0; i < improved.length; i++) {
-        let gemometry = new THREE.SphereGeometry(0.1, 16, 16);
-        let material = new THREE.MeshBasicMaterial({ color: 0x3f51b5 });
-        let sphere = new THREE.Mesh(gemometry, material);
-
-        sphere.position.y = improved[i].y;
-        sphere.position.z = improved[i].z;
-        sphere.position.x = improved[i].x;
-
-        this.scene.add(sphere);
-
-        sphere.on("click", function(m) {
-          bus.$emit("particlePosition", {
-            x: improved[i].x,
-            y: improved[i].y,
-            z: improved[i].z,
-            type: "success"
-          });
-        });
+        this.originalParticles[i].geometry.dispose();
+        this.originalParticles[i].material.dispose();
       }
+    },
+    //从后端获取的数据放入场景中
 
-      for (let i = 0; i < original.length; i++) {
-        let gemometry = new THREE.SphereGeometry(0.1, 16, 16);
-        let material = new THREE.MeshBasicMaterial({ color: 0xe91e63 });
-        let sphere = new THREE.Mesh(gemometry, material);
+    injectParticles(improved, original) {
+      this.removePreviousParticles();
 
-        sphere.position.y = original[i].y;
-        sphere.position.z = original[i].z;
-        sphere.position.x = original[i].x;
+      let improvedParticles = [];
+      let originalParticles = [];
 
-        this.scene.add(sphere);
+      let gemometry = new THREE.SphereGeometry(0.1, 16, 16);
+      let material1 = new THREE.MeshBasicMaterial({ color: 0x3f51b5 });
+      let material2 = new THREE.MeshBasicMaterial({ color: 0x9374bf });
 
-        sphere.on("click", function(m) {
-          bus.$emit("particlePosition", {
-            x: improved[i].x,
-            y: improved[i].y,
-            z: improved[i].z,
-            type: "success"
+      //如果是第一次遍历 需要初始化例子
+      if (
+        this.originalParticles.length === 0 ||
+        this.improvedParticles.length === 0
+      ) {
+        for (let i = 0; i < improved.length; i++) {
+          let sphere = new THREE.Mesh(gemometry, material1);
+
+          sphere.position.y = improved[i].y;
+          sphere.position.z = improved[i].z;
+          sphere.position.x = improved[i].x;
+
+          this.scene.add(sphere);
+          improvedParticles.push(sphere);
+
+          sphere.on("click", function(m) {
+            bus.$emit("particlePosition", {
+              x: improved[i].x,
+              y: improved[i].y,
+              z: improved[i].z,
+              type: "success"
+            });
           });
-        });
+        }
+
+        for (let i = 0; i < original.length; i++) {
+          let sphere = new THREE.Mesh(gemometry, material2);
+
+          sphere.position.y = original[i].y;
+          sphere.position.z = original[i].z;
+          sphere.position.x = original[i].x;
+
+          this.scene.add(sphere);
+          originalParticles.push(sphere);
+
+          sphere.on("click", function(m) {
+            bus.$emit("particlePosition", {
+              x: improved[i].x,
+              y: improved[i].y,
+              z: improved[i].z,
+              type: "success"
+            });
+          });
+        }
+
+        this.improvedParticles = improvedParticles;
+        this.originalParticles = originalParticles;
+      } else {
+        for (let i = 0; i < improved.length; i++) {
+          this.improvedParticles[i].position.x = improved[i].x;
+          this.improvedParticles[i].position.y = improved[i].y;
+          this.improvedParticles[i].position.z = improved[i].z;
+        }
+        for (let i = 0; i < original.length; i++) {
+          this.originalParticles[i].position.x = original[i].x;
+          this.originalParticles[i].position.y = original[i].y;
+          this.originalParticles[i].position.z = original[i].z;
+        }
       }
     },
 
@@ -210,20 +253,34 @@ export default {
     },
     render() {
       this.renderer.render(this.scene, this.camera);
+    },
+    listenParticleData() {
+      //监听是否有数据
+      bus.$on("particleData", res => {
+        let improved = res.data.data.improved;
+        let original = res.data.data.original;
+        //坐标系太大了 需要换算大小
+        if (res.iteration != global.generation) {
+          console.log(res.iteration);
+          this.injectParticles(improved, original);
+        } else {
+          bus.$emit("stop", "test");
+        }
+      });
+    },
+    stopRetriveParticleData() {
+      let _timer = this.timer;
+      bus.$on("stop", res => {
+        clearInterval(_timer);
+      });
     }
   },
   mounted() {
     this.init(10, 10);
     this.animate();
 
-    //监听是否有数据
-    bus.$on("particleData", res => {
-      console.log(res);
-      let improved = res.data.data.improved;
-      let original = res.data.data.original;
-      //坐标系太大了 需要换算大小
-      this.injectParticles(improved, original);
-    });
+    this.listenParticleData();
+    this.stopRetriveParticleData();
   }
 };
 </script>
