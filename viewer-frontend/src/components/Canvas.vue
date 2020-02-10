@@ -15,6 +15,8 @@ const OrbitControls = require("three-orbit-controls")(THREE);
 import { Interaction } from "three.interaction";
 import { clearInterval } from "timers";
 
+import helvetikerRegular from "../assets/helvetiker_regular.typeface.json";
+
 export default {
   data() {
     return {
@@ -59,41 +61,6 @@ export default {
         .appendChild(this.renderer.domElement);
       this.controls = new OrbitControls(this.camera, this.renderer.domElement);
 
-      let gridXz = new THREE.GridHelper(
-        length * 2,
-        division,
-        0xeed5b7,
-        0xeed5b7
-      );
-      //   gridXz.position.x = length / 2;
-      //   gridXz.position.y = 0;
-      //   gridXz.position.z = length / 2;
-      this.scene.add(gridXz);
-
-      let gridXy = new THREE.GridHelper(
-        length * 2,
-        division,
-        0xeed5b7,
-        0xeed5b7
-      );
-      gridXy.rotation.x = Math.PI / 2;
-      //   gridXy.position.x = length / 2;
-      //   gridXy.position.y = length / 2;
-      //   gridXy.position.z = 0;
-      this.scene.add(gridXy);
-
-      let gridYz = new THREE.GridHelper(
-        length * 2,
-        division,
-        0xeed5b7,
-        0xeed5b7
-      );
-      gridYz.rotation.z = Math.PI / 2;
-      //   gridYz.position.x = 0;
-      //   gridYz.position.y = length / 2;
-      //   gridYz.position.z = length / 2;
-      this.scene.add(gridYz);
-
       let axes = new THREE.AxesHelper(3);
       this.scene.add(axes);
 
@@ -105,34 +72,69 @@ export default {
 
     initAxisNumber(length, division) {
       let loader = new THREE.FontLoader();
-      loader.load("fonts/helvetiker_regular.typeface.json", function(font) {
-        //渲染x y z轴
-        for (let i = 0; i <= division; i++) {
-          let x = (length / division) * i;
-          let content = i + "";
-          let geometry = new THREE.TextGeometry(content, {
-            font: font,
-            size: 3,
-            height: 0.1
-          });
-          //创建法向量材质
-          let meshMaterial = new THREE.MeshNormalMaterial({
-            flatShading: THREE.FlatShading,
-            transparent: true,
-            opacity: 0.9
-          });
-          let meshX = new THREE.Mesh(geometry, meshMaterial);
-          let meshY = new THREE.Mesh(geometry, meshMaterial);
-          let meshZ = new THREE.Mesh(geometry, meshMaterial);
-          meshX.position.set(x, 0, 0);
-          meshY.position.set(0, x, 0);
-          meshZ.position.set(0, 0, x);
-
-          this.scene.add(meshX);
-          this.scene.add(meshY);
-          this.scene.add(meshZ);
-        }
+      let font = loader.parse(helvetikerRegular);
+      console.log("加载字体", font);
+      //渲染x y z正半轴
+      //使用相同的material材料可以节省内存开销
+      let meshMaterial = new THREE.MeshBasicMaterial({
+        flatShading: THREE.FlatShading,
+        transparent: true,
+        opacity: 0.9
       });
+
+      let g = new THREE.TextGeometry("0", {
+        font: font,
+        size: 0.3,
+        height: 0.1
+      });
+
+      let m = new THREE.Mesh(g, meshMaterial);
+      m.position.set(0, 0, 0);
+      this.scene.add(m);
+      //xyz 轴半轴
+      for (let i = 1; i <= division; i++) {
+        let x = (length / division) * i;
+        let content = i + "";
+
+        let geometry = new THREE.TextGeometry(content, {
+          font: font,
+          size: 0.3,
+          height: 0.1
+        });
+
+        //正半轴上面的数字
+        let meshX = new THREE.Mesh(geometry, meshMaterial);
+        let meshY = new THREE.Mesh(geometry, meshMaterial);
+        let meshZ = new THREE.Mesh(geometry, meshMaterial);
+
+        meshX.position.set(x, 0, 0);
+        meshY.position.set(0, x, 0);
+        meshZ.position.set(0, 0, x);
+
+        let _content = "-" + i;
+        let _geometry = new THREE.TextGeometry(_content, {
+          font: font,
+          size: 0.3,
+          height: 0.1
+        });
+
+        //负半轴
+        let _meshX = new THREE.Mesh(_geometry, meshMaterial);
+        let _meshY = new THREE.Mesh(_geometry, meshMaterial);
+        let _meshZ = new THREE.Mesh(_geometry, meshMaterial);
+
+        _meshX.position.set(-x, 0, 0);
+        _meshY.position.set(0, -x, 0);
+        _meshZ.position.set(0, 0, -x);
+
+        this.scene.add(meshX);
+        this.scene.add(meshY);
+        this.scene.add(meshZ);
+
+        this.scene.add(_meshX);
+        this.scene.add(_meshY);
+        this.scene.add(_meshZ);
+      }
     },
     //修改xyz轴
     initLineOfRealm(length) {
@@ -145,9 +147,9 @@ export default {
 
       //Y轴
       let starts = [
-        new THREE.Vector3(0, 0, 0),
-        new THREE.Vector3(0, 0, 0),
-        new THREE.Vector3(0, 0, 0)
+        new THREE.Vector3(0, 0, -length),
+        new THREE.Vector3(0, -length, 0),
+        new THREE.Vector3(-length, 0, 0)
       ];
       let ends = [
         new THREE.Vector3(0, 0, length),

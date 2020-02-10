@@ -88,6 +88,7 @@ export default {
   mounted() {
     this.activateCanvasControl();
     this.stopInterval();
+    this.listenPause();
 
     //监听requireData
     let _context = this;
@@ -175,6 +176,7 @@ export default {
           .post("http://localhost:8081/api/start/")
           .then(function(response) {
             bus.$emit("particleData", response);
+            bus.$emit("requireData", "test");
           })
           .catch(function(error) {
             bus.$emit("alertContent", {
@@ -211,6 +213,14 @@ export default {
         });
 
       global.firstTime = false;
+    },
+    //监听是否有暂停的消息 直接取消
+    listenPause() {
+      bus.$on("pause", res => {
+        bus.$emit("alertContent", { message: "函数执行被暂停", type: "warn" });
+        clearInterval(global.timer);
+      });
+      this.firstTime = false;
     }
   },
   beforeDestroy() {

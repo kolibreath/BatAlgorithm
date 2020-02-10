@@ -5,14 +5,13 @@
       <v-icon>mdi-history</v-icon>
     </v-btn>
 
-    <v-btn>
-      <span>过滤器</span>
-      <v-icon>mdi-alien</v-icon>
-    </v-btn>
-
     <v-btn @click="reset">
       <span>重置</span>
       <v-icon>mdi-autorenew</v-icon>
+    </v-btn>
+    <v-btn @click="pause">
+      <span>暂停</span>
+      <v-icon>mdi-pause</v-icon>
     </v-btn>
   </v-bottom-navigation>
 </template>
@@ -44,6 +43,10 @@ export default {
             type: "error"
           });
         });
+    },
+    //暂停算法进行
+    pause() {
+      bus.$emit("pause", "test");
     }
   }
 };
