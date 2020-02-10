@@ -69,7 +69,7 @@ import bus from "../bus/bus.js";
 import $ from "jquery";
 import axios from "axios";
 import global from "../store/Common";
-import { setInterval } from "timers";
+import { setInterval, clearInterval } from "timers";
 
 export default {
   // bpm index
@@ -87,12 +87,13 @@ export default {
   },
   mounted() {
     this.activateCanvasControl();
+    this.stopInterval();
 
     //监听requireData
     let _context = this;
     this.requireData(function() {
       axios
-        .post("http://localhost:8081/api/start/" + global.functionIndex)
+        .post("http://localhost:8081/api/start/")
         .then(function(response) {
           bus.$emit("particleData", response);
         })
@@ -121,7 +122,13 @@ export default {
     //开始按照固定的周期获取当前粒子的收敛状态
     requireData(request, context) {
       bus.$on("requireData", res => {
-        context.timer = setInterval(request, parseFloat(context.speed) * 1000);
+        global.timer = setInterval(request, parseFloat(context.speed) * 1000);
+      });
+    },
+    stopInterval() {
+      bus.$on("stop", res => {
+        console.log("收到停止算法执行" + global.timer);
+        clearInterval(global.timer);
       });
     },
     //给后端发送开始的消息
@@ -136,8 +143,19 @@ export default {
         global.firstTime = false;
         message = "开始执行测试函数";
 
-        const request1 = await axios
-          .post("http://localhost:8081/api/start/" + global.functionIndex)
+        //如果是firstTime 需要初始化
+        const init = await axios
+          .post("http://localhost:8081/api/init/" + global.functionIndex)
+          .then(function(response) {
+            console.log("完成初始化");
+          })
+          .catch(function(error) {
+            console.log(error);
+          });
+
+        //总是拉取当前的设置 从Common.vue 中拿取设置
+        const start = await axios
+          .post("http://localhost:8081/api/start/")
           .then(function(response) {
             bus.$emit("alertContent", { message: message, type: "success" });
             bus.$emit("particleData", response);
@@ -154,7 +172,7 @@ export default {
         message = "测试函数重新开始执行";
 
         const request1 = await axios
-          .post("http://localhost:8081/api/start/" + global.functionIndex)
+          .post("http://localhost:8081/api/start/")
           .then(function(response) {
             bus.$emit("particleData", response);
           })
@@ -165,9 +183,11 @@ export default {
             });
           });
       }
+
+      //总是把当前的速度提交
       let _speed = this.speed;
 
-      const request2 = await axios({
+      const speedRequest = await axios({
         url: "http://localhost:8081/api/alterSpeed",
         method: "post",
         headers: {
@@ -212,6 +232,7 @@ export default {
   watch: {
     bpm: function(val) {
       this.speed = this.ticksLabels[val];
+      global.speed = this.speed;
     }
   }
 };

@@ -8,6 +8,8 @@
 import bus from "../bus/bus.js";
 import $ from "jquery";
 import * as THREE from "three";
+
+import global from "../store/Common";
 const OrbitControls = require("three-orbit-controls")(THREE);
 
 import { Interaction } from "three.interaction";
@@ -183,8 +185,10 @@ export default {
       let originalParticles = [];
 
       let gemometry = new THREE.SphereGeometry(0.1, 16, 16);
-      let material1 = new THREE.MeshBasicMaterial({ color: 0x3f51b5 });
-      let material2 = new THREE.MeshBasicMaterial({ color: 0x9374bf });
+      //red
+      let material1 = new THREE.MeshBasicMaterial({ color: 0xc2185b });
+      //blue
+      let material2 = new THREE.MeshBasicMaterial({ color: 0x303f9f });
 
       //如果是第一次遍历 需要初始化例子
       if (
@@ -257,21 +261,19 @@ export default {
     listenParticleData() {
       //监听是否有数据
       bus.$on("particleData", res => {
+        let code = res.data.data.iteration;
+        console.log("代数" + global.generation + "当前index" + code);
         let improved = res.data.data.improved;
         let original = res.data.data.original;
         //坐标系太大了 需要换算大小
-        if (res.iteration != global.generation) {
+        if (code != global.generation - 1) {
+          console.log("收到数据");
           console.log(res.iteration);
           this.injectParticles(improved, original);
         } else {
+          console.log("停止算法执行");
           bus.$emit("stop", "test");
         }
-      });
-    },
-    stopRetriveParticleData() {
-      let _timer = this.timer;
-      bus.$on("stop", res => {
-        clearInterval(_timer);
       });
     }
   },
@@ -280,7 +282,6 @@ export default {
     this.animate();
 
     this.listenParticleData();
-    this.stopRetriveParticleData();
   }
 };
 </script>

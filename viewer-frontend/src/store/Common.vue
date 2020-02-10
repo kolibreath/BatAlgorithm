@@ -14,6 +14,7 @@ let population = 20,
 //当前正在执行的函数的下标
 let functionIndex = 0,
   functionQueue;
+let timer;
 let defaultTitle = "改进蝙蝠算法 Vs 原始蝙蝠算法";
 let functionNames = [
   "sphere",
@@ -42,7 +43,8 @@ export default {
   functionIndex,
   loudness,
   firstTime,
-  speed
+  speed,
+  timer
 };
 </script>
 

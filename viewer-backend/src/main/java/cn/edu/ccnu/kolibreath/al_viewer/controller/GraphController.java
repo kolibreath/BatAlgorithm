@@ -23,6 +23,7 @@ public class GraphController {
     private double r =0.5;
     private double Qmin = 0.0;
     private double Qmax = 2.0;
+
     //默认情况下是0.01秒一次迭代 1秒钟进行100次迭代
     private double speed = 0.01;
 
@@ -87,8 +88,12 @@ public class GraphController {
     @RequestMapping(value = "/api/start/", method = RequestMethod.POST)
     public ResultBean postStart(){
 
-        double [][] originResult = original.solutionEachGeneration(tWrapper, pulseRate, gamma, alfa);
-        double [][] improvedResult = improved.solutionEachGeneration(tWrapper, pulseRate, gamma, alfa);
+         int tem[] = {tWrapper[0]};
+        //两次执行并做一步 不能够将tWrapper变化两次
+        double [][] originResult = original.solutionEachGeneration(tem, pulseRate, gamma, alfa);
+        double [][] improvedResult = improved.solutionEachGeneration(tem, pulseRate, gamma, alfa);
+
+        tWrapper[0]++;
 
         List<Particle> originParticles = array2Particles(originResult);
         List<Particle> improvedParticles = array2Particles(improvedResult);
