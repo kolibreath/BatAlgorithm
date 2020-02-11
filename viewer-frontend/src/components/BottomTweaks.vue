@@ -35,7 +35,10 @@ export default {
       axios
         .post("http://localhost:8081/api/reset/")
         .then(function(response) {
+          //重置后端的数据
           bus.$emit("alertContent", { message: "重置算法", type: "success" });
+          //重置前端的数据
+          bus.$emit("reset", "test");
         })
         .catch(function(error) {
           bus.$emit("alertContent", {
@@ -48,7 +51,8 @@ export default {
     pause() {
       bus.$emit("pause", "test");
     }
-  }
+  },
+  mounted() {}
 };
 </script>
 

@@ -264,18 +264,33 @@ export default {
       //监听是否有数据
       bus.$on("particleData", res => {
         let code = res.data.data.iteration;
-        console.log("代数" + global.generation + "当前index" + code);
+
         let improved = res.data.data.improved;
         let original = res.data.data.original;
         //坐标系太大了 需要换算大小
         if (code != global.generation - 1) {
-          console.log("收到数据");
-          console.log(res.iteration);
           this.injectParticles(improved, original);
         } else {
-          console.log("停止算法执行");
+          bus.$emit("alertContent", {
+            message: "函数迭代完成！",
+            type: "success"
+          });
           bus.$emit("stop", "test");
         }
+      });
+    },
+    //监听是否有重置数据
+    listenReset() {
+      bus.$on("reset", res => {
+        let length = this.improvedParticles.length;
+        for (let i = 0; i < length; i++) {
+          this.scene.remove(this.improvedParticles[i]);
+          this.scene.remove(this.originalParticles[i]);
+        }
+        this.removePreviousParticles();
+
+        this.improved = [];
+        this.original = [];
       });
     }
   },
@@ -284,6 +299,7 @@ export default {
     this.animate();
 
     this.listenParticleData();
+    this.listenReset();
   }
 };
 </script>

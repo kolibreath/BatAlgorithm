@@ -39,6 +39,7 @@
       <CanvasControls></CanvasControls>
       <Canvas></Canvas>
       <ParamsDialog></ParamsDialog>
+
       <BottomTweaks class="footer"></BottomTweaks>
     </v-content>
   </v-app>
