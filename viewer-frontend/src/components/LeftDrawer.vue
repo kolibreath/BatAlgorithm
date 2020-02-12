@@ -1,6 +1,5 @@
 <template>
-   <v-container >
-   
+  <v-container>
     <!-- <v-row justify="space-around">
       <v-col cols="12">
         <v-select
@@ -39,93 +38,86 @@
         class="ma-2"
         label="Right"
       ></v-switch>
-    </v-row> -->
-      <v-navigation-drawer
-        v-model="drawer"
-        :color="color"
-        :expand-on-hover="expandOnHover"
-        :mini-variant="miniVariant"
-        :src="bg"
-        absolute
-        dark
-      >
-        <v-list
-          dense
-          nav
-          class="py-0"
-        >
-          <v-list-item two-line :class="miniVariant && 'px-0'">
-            <v-list-item-avatar>
-              <img src="https://randomuser.me/api/portraits/men/81.jpg">
-            </v-list-item-avatar>
+    </v-row>-->
+    <v-navigation-drawer
+      v-model="drawer"
+      :color="color"
+      :expand-on-hover="expandOnHover"
+      :mini-variant="miniVariant"
+      :src="bg"
+      absolute
+      dark
+    >
+      <v-list dense nav class="py-0">
+        <v-list-item two-line :class="miniVariant && 'px-0'">
+          <v-list-item-avatar>
+            <img src="https://randomuser.me/api/portraits/men/81.jpg">
+          </v-list-item-avatar>
 
-            <v-list-item-content>
-              <v-list-item-title>Application</v-list-item-title>
-              <v-list-item-subtitle>Subtext</v-list-item-subtitle>
-            </v-list-item-content>
-          </v-list-item>
+          <v-list-item-content>
+            <v-list-item-title>Application</v-list-item-title>
+            <v-list-item-subtitle>Subtext</v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
 
-          <v-divider></v-divider>
+        <v-divider></v-divider>
 
-          <v-list-item
-            v-for="item in items"
-            :key="item.title"
-            link
-            @click="toggle(item.id)"
-          >
-            <v-list-item-icon>
-              <v-icon>{{ item.icon }}</v-icon>
-            </v-list-item-icon>
+        <v-list-item v-for="item in items" :key="item.title" link @click="toggle(item.id)">
+          <v-list-item-icon>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-item-icon>
 
-            <v-list-item-content>
-              <v-list-item-title>{{ item.title }}</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </v-list>
-      </v-navigation-drawer>
+          <v-list-item-content>
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
   </v-container>
 </template>
 
 <script>
-
-import bus from '../bus/bus.js'
+import bus from "../bus/bus.js";
 
 export default {
-    data () {
-      return {
-        drawer: true,
-        items: [
-          { title: '三维图像', icon: 'mdi-airplay' ,id:1},
-          { title: '仪表盘', icon: 'mdi-view-dashboard' ,id:2},
-          { title: '参数设置', icon: 'mdi-image' ,id:3}
-        ],
-        color: 'primary',
-        // colors: [
-        //   'primary',
-        //   'blue',
-        //   'success',
-        //   'red',
-        //   'teal',
-        // ],
-        right: false,
-        miniVariant: false,
-        expandOnHover: true,
-        background: false,
-      }
-    },
-    computed: {
-      bg () {
-        return this.background ? 'https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg' : undefined
-      },
-    },
-    methods:{
-      toggle(id){
-        if(id === 3){
-          bus.$emit("paramsDialog","test")
-        }
+  data() {
+    return {
+      drawer: true,
+      items: [
+        { title: "三维图像", icon: "mdi-airplay", id: 1 },
+        { title: "仪表盘", icon: "mdi-view-dashboard", id: 2 },
+        { title: "参数设置", icon: "mdi-image", id: 3 }
+      ],
+      color: "primary",
+      right: false,
+      miniVariant: false,
+      expandOnHover: true,
+      background: false
+    };
+  },
+  computed: {
+    bg() {
+      return this.background
+        ? "https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg"
+        : undefined;
+    }
+  },
+  methods: {
+    toggle(id) {
+      switch (id) {
+        case 1:
+          this.$router.replace("canvas").catch(err => console.log(err));
+          break;
+        case 2:
+          this.$router.replace("dashboard").catch(err => console.log(err));
+          break;
+        case 3:
+          bus.$emit("paramsDialog", "test");
+          break;
       }
     }
   }
+};
 </script>
 
 <style>

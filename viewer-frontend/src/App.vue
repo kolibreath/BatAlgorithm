@@ -37,7 +37,8 @@
       <LeftDrawer></LeftDrawer>
       <Main></Main>
       <CanvasControls></CanvasControls>
-      <Canvas></Canvas>
+      <!-- 渲染的组件显示在这里 -->
+      <router-view></router-view>
       <ParamsDialog></ParamsDialog>
 
       <BottomTweaks class="footer"></BottomTweaks>
@@ -71,7 +72,6 @@ export default {
     Main,
     BottomTweaks,
     CanvasControls,
-    Canvas,
     ParamsDialog
   },
   data: () => ({
@@ -88,6 +88,8 @@ export default {
     bus.$on("particlePosition", res => {
       this.showParticlePosition(res);
     });
+
+    this.$router.push("canvas");
   },
   methods: {
     createAlert(res) {
