@@ -91,7 +91,7 @@ export default {
       let m = new THREE.Mesh(g, meshMaterial);
       m.position.set(0, 0, 0);
       this.scene.add(m);
-      //xyz 轴半轴
+      //xyz 轴
       for (let i = 1; i <= division; i++) {
         let x = (length / division) * i;
         let content = i + "";
@@ -142,8 +142,10 @@ export default {
         vertexColors: THREE.VertexColors,
         linewidth: 3
       });
-      let color1 = new THREE.Color(0xee00dd),
-        color2 = new THREE.Color(0xeec0b0);
+      //x y z轴颜色
+      let color1 = new THREE.Color(0xff4081);
+      let color2 = new THREE.Color(0x536dfe);
+      let color3 = new THREE.Color(0xffeb3b);
 
       //Y轴
       let starts = [
@@ -161,7 +163,17 @@ export default {
         let geom = new THREE.Geometry();
         geom.vertices.push(starts[i]);
         geom.vertices.push(ends[i]);
-        geom.colors.push(color1, color2);
+        switch (i) {
+          case 0:
+            geom.colors.push(color1, color1);
+            break;
+          case 1:
+            geom.colors.push(color2, color2);
+            break;
+          case 2:
+            geom.colors.push(color3, color3);
+            break;
+        }
 
         let line = new THREE.Line(geom, lineMaterial);
         this.scene.add(line);
@@ -228,10 +240,11 @@ export default {
           originalParticles.push(sphere);
 
           sphere.on("click", function(m) {
+            console.log(improved[i]);
             bus.$emit("particlePosition", {
-              x: improved[i].x,
-              y: improved[i].y,
-              z: improved[i].z,
+              x: original[i].x,
+              y: original[i].y,
+              z: original[i].z,
               type: "success"
             });
           });
