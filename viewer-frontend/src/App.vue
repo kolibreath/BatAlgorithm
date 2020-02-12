@@ -98,9 +98,13 @@ export default {
       });
     },
     showParticlePosition(res) {
+      console.log(res);
       this.$message({
         showClose: true,
-        message: `粒子坐标 (${res.x}, ${res.y}, ${res.z})`,
+        message: `粒子坐标 (
+          ${parseFloat(res.x).toFixed(2)},
+          ${parseFloat(res.y).toFixed(2)}, 
+          ${parseFloat(res.z).toFixed(2)})`,
         type: res.type
       });
     }

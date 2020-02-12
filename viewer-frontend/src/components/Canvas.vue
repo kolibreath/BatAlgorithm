@@ -216,17 +216,18 @@ export default {
           sphere.position.z = improved[i].z;
           sphere.position.x = improved[i].x;
 
-          this.scene.add(sphere);
-          improvedParticles.push(sphere);
-
-          sphere.on("click", function(m) {
+          sphere.once("click", function(m) {
+            let position = m.data.target.position;
             bus.$emit("particlePosition", {
-              x: improved[i].x,
-              y: improved[i].y,
-              z: improved[i].z,
+              x: position.x,
+              y: position.y,
+              z: position.z,
               type: "success"
             });
           });
+
+          this.scene.add(sphere);
+          improvedParticles.push(sphere);
         }
 
         for (let i = 0; i < original.length; i++) {
@@ -236,22 +237,22 @@ export default {
           sphere.position.z = original[i].z;
           sphere.position.x = original[i].x;
 
-          this.scene.add(sphere);
-          originalParticles.push(sphere);
-
-          sphere.on("click", function(m) {
-            console.log(improved[i]);
+          sphere.once("click", function(m) {
+            let position = m.data.target.position;
             bus.$emit("particlePosition", {
-              x: original[i].x,
-              y: original[i].y,
-              z: original[i].z,
+              x: position.x,
+              y: position.y,
+              z: position.z,
               type: "success"
             });
           });
+          this.scene.add(sphere);
+          originalParticles.push(sphere);
         }
 
         this.improvedParticles = improvedParticles;
         this.originalParticles = originalParticles;
+        //后面遍历的时候直接修改粒子的位置
       } else {
         for (let i = 0; i < improved.length; i++) {
           this.improvedParticles[i].position.x = improved[i].x;
@@ -259,13 +260,13 @@ export default {
           this.improvedParticles[i].position.z = improved[i].z;
         }
         for (let i = 0; i < original.length; i++) {
+          let sphere = this.originalParticles[i];
           this.originalParticles[i].position.x = original[i].x;
           this.originalParticles[i].position.y = original[i].y;
           this.originalParticles[i].position.z = original[i].z;
         }
       }
     },
-
     animate() {
       requestAnimationFrame(this.animate);
       this.render();
