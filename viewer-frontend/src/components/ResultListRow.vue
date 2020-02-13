@@ -8,7 +8,7 @@
 export default {
   name: "tableRow",
   //从父组件传递过来的数据
-  props: ["row", " headings"]
+  props: ["row", "headings"]
 };
 </script>
 

@@ -19,22 +19,22 @@
 
 <script>
 import TableRow from "./ResultListRow";
+import axios from "axios";
 export default {
+  components: { TableRow },
+  methods: {
+    initRowData() {
+      axios.get("http://localhost:8081/api/dashboard").then(res => {});
+    }
+  },
   data() {
     return {
       tableHeadings: [
-        { name: "Weekly Rank", value: "rank" },
-        { name: "Name", value: "name" },
-        { name: "Team", value: "team" },
-        { name: "Rec. Targets", value: "recTarget" },
-        { name: "Receptions", value: "receptions" },
-        { name: "Rec. Yards", value: "recYards" },
-        { name: "Rec. TD", value: "recTD" },
-        { name: "Rush Attempts", value: "rushAtt" },
-        { name: "Rush Yards", value: "rushYards" },
-        { name: "Rush TD", value: "rushTD" },
-        { name: "Week's Points", value: "fantasyPts" },
-        { name: "Total Points", value: "fantasyPtsPerGame" }
+        { name: "迭代次数", value: "iteration" },
+        { name: "最大值", value: "max" },
+        { name: "最小值", value: "min" },
+        { name: "平均值", value: "ave" },
+        { name: "标准差", value: "std" }
       ],
       rowData: [
         {
