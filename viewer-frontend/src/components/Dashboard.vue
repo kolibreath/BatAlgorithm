@@ -55,11 +55,11 @@ export default {
         for (let i = 0; i < length; i++) {
           improvedPoints.push({
             x: result[i].iteration,
-            y: result[i].improvedMin
+            y: result[i].improvedStd
           });
           originalPoints.push({
             x: result[i].iteration,
-            y: result[i].originMin
+            y: result[i].originalStd
           });
         }
 

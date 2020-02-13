@@ -42,6 +42,8 @@ public class GraphController {
     private OriginalBatAlgorithm original;
     private ImprovedBatAlgorithm improved;
 
+
+    private List<IterationWrapper> iterationWrapperList = new LinkedList<>();
     //当前迭代的轮数记录
     public int[] tWrapper = {0};
 
@@ -56,6 +58,55 @@ public class GraphController {
             particleList.add(particle);
         }
         return particleList;
+    }
+
+
+    @RequestMapping(value = "/api/dashboard", method = RequestMethod.GET)
+    public ResultBean getParticleDashboardData(){
+        return ResultBean.success(iterationWrapperList);
+    }
+
+    private double findMax(List<Particle> particles){
+        double max = 0;
+        for(Particle particle: particles){
+            double d[] = {particle.getX(), particle.getY(), particle.getZ()};
+            double score = functions.func(d);
+            if( score >= max){
+                max = score;
+            }
+        }
+        return max;
+    }
+
+    private double findMin(List<Particle> particles){
+        double min = 0;
+        for(Particle particle: particles){
+            double d[] = {particle.getX(), particle.getY(), particle.getZ()};
+            double score = functions.func(d);
+            if( score < min){
+                min = score;
+            }
+        }
+        return min;
+    }
+
+    private double findAve(List<Particle> particles){
+        double sum = 0;
+        for(Particle particle: particles){
+            double d[] = {particle.getX(), particle.getY(), particle.getZ()};
+            sum += functions.func(d);
+        }
+        return  sum / particles.size();
+    }
+
+    private double findStd(List<Particle> particles){
+        double ave = findAve(particles);
+        double sum = 0;
+        for(Particle particle: particles){
+            double d[] = {particle.getX(), particle.getY(), particle.getZ()};
+            sum += (functions.func(d) - ave) * (functions.func(d) - ave);
+        }
+        return Math.sqrt(sum / particles.size());
     }
 
 
@@ -77,6 +128,7 @@ public class GraphController {
             pulseRate[i] = Math.random();
         }
 
+
         return ResultBean.success(null);
     }
 
@@ -95,13 +147,37 @@ public class GraphController {
 
         tWrapper[0]++;
 
-        List<Particle> originParticles = array2Particles(originResult);
+        List<Particle> originalParticles = array2Particles(originResult);
         List<Particle> improvedParticles = array2Particles(improvedResult);
 
         ParticlesWrapper particlesWrapper = new ParticlesWrapper();
-        particlesWrapper.setOriginal(originParticles);
+        particlesWrapper.setOriginal(originalParticles);
         particlesWrapper.setImproved(improvedParticles);
         particlesWrapper.setIteration(tWrapper[0]);
+
+
+        if(tWrapper[0] % 100 == 0 || tWrapper[0] ==999) {
+            IterationWrapper wrapper = new IterationWrapper();
+            if(tWrapper[0] == 999)
+                wrapper.setIteration(1000);
+            else
+                wrapper.setIteration(tWrapper[0]);
+
+            wrapper.setImprovedMin(findMin(improvedParticles));
+            wrapper.setOriginalMin(findMin(originalParticles));
+
+            wrapper.setImprovedAve(findAve(improvedParticles));
+            wrapper.setOriginalAve(findAve(originalParticles));
+
+            wrapper.setOriginalMax(findMax(originalParticles));
+            wrapper.setImprovedMax(findMax(improvedParticles));
+
+            wrapper.setOriginalStd(findStd(originalParticles));
+            wrapper.setImprovedStd(findStd(improvedParticles));
+
+            iterationWrapperList.add(wrapper);
+        }
+
 
         return ResultBean.success(particlesWrapper);
     }
