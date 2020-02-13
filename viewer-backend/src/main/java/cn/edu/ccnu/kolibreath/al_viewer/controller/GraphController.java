@@ -223,6 +223,7 @@ public class GraphController {
                 lower,upper, n, Ngen, A , r, Qmin, Qmax, functions,speed
         );
         tWrapper[0] = 0;
+        iterationWrapperList = new LinkedList<>();
         //停止算法运行
         return ResultBean.success(null);
     }

@@ -44,8 +44,6 @@ export default {
         let result = res.data.data;
         let length = result.length;
 
-        console.log(result);
-
         let improvedDataSeries = { type: "line" };
         let originalDataSeries = { type: "line" };
 
