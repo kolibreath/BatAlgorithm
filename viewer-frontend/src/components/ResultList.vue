@@ -1,8 +1,8 @@
 <template>
-  <table class="table table-striped">
+  <table class="table table-striped table-margin">
     <thead>
       <tr>
-        <th v-for="(heading, index) in tableHeadings" :key="index">{{heading}}</th>
+        <th v-for="(heading, index) in tableHeadings" :key="index">{{heading.name}}</th>
       </tr>
     </thead>
 
@@ -20,6 +20,10 @@
 <script>
 import TableRow from "./ResultListRow";
 import axios from "axios";
+
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+
 export default {
   components: { TableRow },
   methods: {
@@ -52,41 +56,20 @@ export default {
         { name: "标准差", value: "std" }
       ],
       rowData: [
-        {
-          iteration:1,
-          max:1,
-          min:1,
-          ave:1,
-          std:1,
-        },
-        {
-          iteration:1,
-          max:1,
-          min:1,
-          ave:1,
-          std:1,
-        },{
-          iteration:1,
-          max:1,
-          min:1,
-          ave:1,
-          std:1,
-        },{
-          iteration:1,
-          max:1,
-          min:1,
-          ave:1,
-          std:1,
-        }
+        
       ]
     };
   },
   mounted() {
     //测试 是否是网络问题
-    // this.initRowData();
+    this.initRowData();
   }
 };
 </script>
 
-<style>
+<style scoped>
+.table-margin{
+  margin-top:30px;
+  margin-left:80px
+}
 </style>
