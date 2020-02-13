@@ -1,60 +1,88 @@
 <template>
-  <div class="small">
-    <canvas id="myChart2" width="400px" height="400px"></canvas>
+  <div>
+    <div id="chartContainer" class="container"></div>
+    <result-list></result-list>
   </div>
 </template>
 <script>
-import Chart from "chart.js";
+import * as CanvasJS from "../canvas/canvasjs.min.js";
+import axios from "axios";
+
+import ResultList from "./ResultList.vue";
 
 export default {
-  components: {},
+  components: {
+    ResultList
+  },
   data() {
-    return {};
+    //放入图像中的data的数据结构
+    //dataPoints: 数据的坐标
+    //dataSeries 数据的形状
+    //整合到一起的data结果
+    return {
+      data: []
+    };
+  },
+  methods: {
+    initChart() {
+      let chart = new CanvasJS.Chart("chartContainer", {
+        animationEnabled: true,
+        zoomEnabled: true,
+        title: {
+          text: "运算结果"
+        },
+        axisY: {
+          includeZero: false
+        },
+        data: this.data
+      });
+
+      chart.render();
+    },
+    initData() {
+      axios.get("http://localhost:8081/api/dashboard").then(res => {
+        let result = res.data.data;
+        let length = result.length;
+
+        console.log(result);
+
+        let improvedDataSeries = { type: "line" };
+        let originalDataSeries = { type: "line" };
+
+        let improvedPoints = [];
+        let originalPoints = [];
+
+        for (let i = 0; i < length; i++) {
+          improvedPoints.push({
+            x: result[i].iteration,
+            y: result[i].improvedMin
+          });
+          originalPoints.push({
+            x: result[i].iteration,
+            y: result[i].originMin
+          });
+        }
+
+        improvedDataSeries.dataPoints = improvedPoints;
+        originalDataSeries.dataPoints = originalPoints;
+
+        this.data.push(improvedDataSeries);
+        this.data.push(originalDataSeries);
+
+        this.initChart();
+      });
+    }
   },
   mounted() {
-    var ctx2 = document.getElementById("myChart2");
-
-    var myChart2 = new Chart(ctx2, {
-      type: "line",
-      data: {
-        labels: [
-          "January",
-          "February",
-          "March",
-          "April",
-          "May",
-          "June",
-          "July",
-          "August",
-          "September",
-          "October",
-          "November",
-          "December"
-        ],
-        datasets: [
-          {
-            label: "test1",
-            backgroundColor: "rgba(225,10,10,0.3)",
-            borderColor: "rgba(225,103,110,1)",
-            borderWidth: 1,
-            pointStrokeColor: "#fff",
-            pointStyle: "crossRot",
-            data: [65, 59, 0, 81, 56, 10, 40, 22, 32, 54, 10, 30],
-            cubicInterpolationMode: "monotone",
-            spanGaps: "false",
-            fill: "false"
-          }
-        ]
-      },
-      options: {}
-    });
-  },
-  methods: {}
+    //获取数据 并且初始化chart
+    this.initData();
+  }
 };
 </script>
-<style>
-.small {
-  width: 500px;
-  height: 500px;
+<style scoped>
+.container {
+  height: 300px;
+  width: 100%;
+  margin-left: 200px;
 }
 </style>
