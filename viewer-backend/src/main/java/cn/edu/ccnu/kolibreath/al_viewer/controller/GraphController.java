@@ -20,33 +20,46 @@ public class GraphController {
     private int n = 20;//population size
     private int Ngen = 1000; // number of generation
     private double  A = 0.45; // loudness
-    private double r =0.5;
+    private double r =0.5;    //pulseRate default Value
     private double Qmin = 0.0;
-    private double Qmax = 2.0;
+    private double Qmax = 2.0;  //maximum of frequency
 
-    //默认情况下是0.01秒一次迭代 1秒钟进行100次迭代
-    private double speed = 0.01;
 
     private double alfa = 0.5264;
     private double gamma = 4.411;
 
+    private double speed;
+
 
     private ImplementedFunctions functions = new ImplementedFunctions();
 
-    //default configuration
-    private DefaultConfigWrapper configWrapper = new DefaultConfigWrapper(
-            lower,upper, n, Ngen, A , r, Qmin, Qmax, functions, speed
-    );
+    private ConfigWrapper configWrapper = new ConfigWrapper();
 
 
     private OriginalBatAlgorithm original;
     private ImprovedBatAlgorithm improved;
 
 
+    private String[] functionNames = {
+            "sphere",
+            "schwefel",
+            "schwefel2",
+            "schwefel3",
+            "Rosen Brock",
+            "step",
+            "quartic with Noise",
+            "schwefel4",
+            "Rastrign",
+            "Ackley",
+            "griewank",
+            "penalized",
+            "penalized2"};
+
     private List<IterationWrapper> iterationWrapperList = new LinkedList<>();
     //当前迭代的轮数记录
     public int[] tWrapper = {0};
 
+    //pulseRate 不同的蝙蝠的pulseRate不同
     private double[] pulseRate;
 
     private List<Particle> array2Particles(double solutionResult[][]) {
@@ -109,6 +122,17 @@ public class GraphController {
         return Math.sqrt(sum / particles.size());
     }
 
+    private void initConfig(int id){
+        // 初始化配置
+        configWrapper.setPopulation(n);
+        configWrapper.setGeneration(Ngen);
+        configWrapper.setPulseRate(r);
+        configWrapper.setFunctionQueue(new LinkedList<>());
+        configWrapper.setFunctionIndex(id);
+        configWrapper.setLoudness(A);
+        configWrapper.setFrequency(Qmax);
+        configWrapper.setSpeed(speed);
+    }
 
     /**
      * 初始化算法的一些值 并将这些值作为 公共领域内的引用
@@ -116,6 +140,8 @@ public class GraphController {
      */
     @RequestMapping(value ="/api/init/{id}", method = RequestMethod.POST)
     public ResultBean postInit(@PathVariable("id") int id){
+        if(id > functionNames.length) return ResultBean.error(400,"没有这个测试函数");
+
         functions.setIndex((id));
         original = new OriginalBatAlgorithm(functions, n ,Ngen, A, r, Qmin, Qmax, lower, upper);
         improved = new ImprovedBatAlgorithm(functions, n ,Ngen, A, r, Qmin, Qmax, lower, upper);
@@ -128,6 +154,7 @@ public class GraphController {
             pulseRate[i] = Math.random();
         }
 
+         initConfig(id);
 
         return ResultBean.success(null);
     }
@@ -199,7 +226,7 @@ public class GraphController {
      * @return
      */
     @RequestMapping(value = "/api/alterConfig" , method = RequestMethod.POST)
-    public ResultBean postAlteredConfig(@RequestBody DefaultConfigWrapper defaultConfigWrapper){
+    public ResultBean postAlteredConfig(@RequestBody ConfigWrapper defaultConfigWrapper){
         this.configWrapper = defaultConfigWrapper;
         return ResultBean.success(null);
     }
@@ -219,9 +246,7 @@ public class GraphController {
 
     @RequestMapping(value = "/api/reset", method = RequestMethod.POST)
     public ResultBean postResetAlgorithm(){
-        configWrapper = new DefaultConfigWrapper(
-                lower,upper, n, Ngen, A , r, Qmin, Qmax, functions,speed
-        );
+        initConfig(0);
         tWrapper[0] = 0;
         iterationWrapperList = new LinkedList<>();
         //停止算法运行

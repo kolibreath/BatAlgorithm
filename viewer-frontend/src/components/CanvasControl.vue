@@ -91,7 +91,6 @@ export default {
     this.listenPause();
 
     //监听requireData
-    let _context = this;
     this.requireData(function() {
       axios
         .post("http://localhost:8081/api/start/")
@@ -104,7 +103,7 @@ export default {
             type: "error"
           });
         });
-    }, _context);
+    });
   },
   methods: {
     //监听事件
@@ -121,9 +120,10 @@ export default {
       this.bpm++;
     },
     //开始按照固定的周期获取当前粒子的收敛状态
-    requireData(request, context) {
+    requireData(request) {
       bus.$on("requireData", res => {
-        global.timer = setInterval(request, parseFloat(context.speed) * 1000);
+        console.log("收到require timer");
+        global.timer = setInterval(request, parseFloat(this.speed) * 1000);
       });
     },
     stopInterval() {
@@ -175,6 +175,7 @@ export default {
         const request1 = await axios
           .post("http://localhost:8081/api/start/")
           .then(function(response) {
+            bus.$emit("alertContent", { message: message, type: "success" });
             bus.$emit("particleData", response);
             bus.$emit("requireData", "test");
           })
@@ -218,6 +219,7 @@ export default {
     listenPause() {
       bus.$on("pause", res => {
         bus.$emit("alertContent", { message: "函数执行被暂停", type: "warn" });
+        global.firstTime = false;
         clearInterval(global.timer);
       });
       this.firstTime = false;

@@ -37,11 +37,12 @@ public class  ResultBean<T> {
         return resultBean;
     }
 
-    public static  void error(int code){
+    public static  ResultBean error(int code, String message){
         ResultBean resultBean= new ResultBean();
         resultBean.setCode(code);
-        resultBean.setMessage("error");
+        resultBean.setMessage(message);
         resultBean.setData(null);
+        return resultBean;
     }
 }
 

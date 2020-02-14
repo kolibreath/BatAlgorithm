@@ -281,7 +281,6 @@ export default {
 
         let improved = res.data.data.improved;
         let original = res.data.data.original;
-        //坐标系太大了 需要换算大小
         if (code != global.generation - 1) {
           this.injectParticles(improved, original);
         } else {
@@ -296,6 +295,7 @@ export default {
     //监听是否有重置数据
     listenReset() {
       bus.$on("reset", res => {
+        global.firstTime = true;
         let length = this.improvedParticles.length;
         for (let i = 0; i < length; i++) {
           this.scene.remove(this.improvedParticles[i]);
@@ -303,8 +303,8 @@ export default {
         }
         this.removePreviousParticles();
 
-        this.improved = [];
-        this.original = [];
+        this.improvedParticles = [];
+        this.originalParticles = [];
       });
     }
   },

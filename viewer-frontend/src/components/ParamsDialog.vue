@@ -105,7 +105,7 @@
                 ></v-slider>
               </v-col>
             </v-row>
-
+            <!-- transfer -->
             <el-transfer v-model="value" :data="data" class="transfer-margin"></el-transfer>
           </v-container>
         </v-card-text>
@@ -122,6 +122,8 @@
 import bus from "../bus/bus.js";
 import $ from "jquery";
 import global from "../store/Common";
+import axios from "axios";
+
 export default {
   data() {
     const generateData = _ => {
@@ -167,7 +169,26 @@ export default {
       });
     },
     confirmConfig() {
-      this.dialog = false;
+      axios({
+        url: "http://localhost:8081/api/alterConfig",
+        method: "post",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        data: JSON.stringify({
+          population: this.population,
+          generation: this.generation,
+          pulseRate: this.pulseRate,
+          frequency: this.frequency,
+          //function queue 从列表中获取
+          functionQueue: this.value,
+          functionIndex: this.functionIndex,
+          functionNames: this.functionNames,
+          loudness: this.loudness
+        })
+      }).then(res => {
+        this.dialog = false;
+      });
     },
     cancelConfig() {
       this.dialog = false;
