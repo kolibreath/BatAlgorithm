@@ -1,5 +1,23 @@
 <template>
   <v-card class="center">
+    <span style="position:absolute; z-index:10;margin-top:20px; margin-left:1000px">
+      <span style="color:white">x轴:</span>
+      <span style="color:yellow">红色</span>
+      <br>
+      <span style="color:white">y轴:</span>
+      <span style="color:red">红色</span>
+      <br>
+      <span style="color:white">z轴:</span>
+      <span style="color:blue">蓝色</span>
+      <br>
+      <br>
+      <span style="color:white">改进蝙蝠算法粒子颜色:</span>
+      <span style="color:rgb(194, 24, 91)">平红色</span>
+      <br>
+      <span style="color:white">原始蝙蝠算法粒子颜色:</span>
+      <span style="color:rgb(48, 63, 159)">深蓝色</span>
+      <br>
+    </span>
     <div id="container"></div>
   </v-card>
 </template>
@@ -66,14 +84,11 @@ export default {
 
       this.initAxisNumber(length, division);
       this.initLineOfRealm(length);
-      //测试的用的随机生成粒子
-      // this.initParticles(length);
     },
 
     initAxisNumber(length, division) {
       let loader = new THREE.FontLoader();
       let font = loader.parse(helvetikerRegular);
-      console.log("加载字体", font);
       //渲染x y z正半轴
       //使用相同的material材料可以节省内存开销
       let meshMaterial = new THREE.MeshBasicMaterial({
@@ -147,7 +162,6 @@ export default {
       let color2 = new THREE.Color(0x536dfe);
       let color3 = new THREE.Color(0xffeb3b);
 
-      //Y轴
       let starts = [
         new THREE.Vector3(0, 0, -length),
         new THREE.Vector3(0, -length, 0),
@@ -193,8 +207,6 @@ export default {
     //从后端获取的数据放入场景中
 
     injectParticles(improved, original) {
-      this.removePreviousParticles();
-
       let improvedParticles = [];
       let originalParticles = [];
 

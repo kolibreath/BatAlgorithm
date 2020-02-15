@@ -21,8 +21,8 @@
 import TableRow from "./ResultListRow";
 import axios from "axios";
 
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
+import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap-vue/dist/bootstrap-vue.css";
 
 export default {
   components: { TableRow },
@@ -35,10 +35,15 @@ export default {
           //先完成improved list
           let obj = {
             iteration: data[i].iteration,
-            max: data[i].improvedMax,
-            min: data[i].improvedMin,
-            ave: data[i].improvedAve,
-            std: data[i].improvedStd
+            improvedMax: data[i].improvedMax,
+            improvedMin: data[i].improvedMin,
+            improvedAve: data[i].improvedAve,
+            improvedStd: data[i].improvedStd,
+
+            originalMax: data[i].originalMax,
+            originalMin: data[i].originalMin,
+            originalAve: data[i].originalAve,
+            originalStd: data[i].originalStd
           };
 
           this.rowData.push(obj);
@@ -50,14 +55,17 @@ export default {
     return {
       tableHeadings: [
         { name: "迭代次数", value: "iteration" },
-        { name: "最大值", value: "max" },
-        { name: "最小值", value: "min" },
-        { name: "平均值", value: "ave" },
-        { name: "标准差", value: "std" }
+        { name: "改进最大值", value: "improvedMax" },
+        { name: "改进最小值", value: "improvedMin" },
+        { name: "改进平均值", value: "improvedAve" },
+        { name: "改进标准差", value: "improvedStd" },
+
+        { name: "原始最大值", value: "originalMax" },
+        { name: "原始最小值", value: "originalMin" },
+        { name: "原始平均值", value: "originalAve" },
+        { name: "原始标准差", value: "originalStd" }
       ],
-      rowData: [
-        
-      ]
+      rowData: []
     };
   },
   mounted() {
@@ -68,8 +76,8 @@ export default {
 </script>
 
 <style scoped>
-.table-margin{
-  margin-top:30px;
-  margin-left:80px
+.table-margin {
+  margin-top: 30px;
+  margin-left: 55px;
 }
 </style>

@@ -3,17 +3,17 @@ package cn.edu.ccnu.kolibreath.al_viewer.model;
 public class IterationWrapper {
     private int iteration;
 
-    private double improvedMin;
-    private double originalMin;
+    private String improvedMin;
+    private String originalMin;
 
-    private double improvedAve;
-    private double originalAve;
+    private String improvedAve;
+    private String originalAve;
 
-    private double improvedStd;
-    private double originalStd;
+    private String improvedStd;
+    private String originalStd;
 
-    private double improvedMax;
-    private double originalMax;
+    private String improvedMax;
+    private String originalMax;
 
     public int getIteration() {
         return iteration;
@@ -23,67 +23,67 @@ public class IterationWrapper {
         this.iteration = iteration;
     }
 
-    public double getImprovedMin() {
+    public String getImprovedMin() {
         return improvedMin;
     }
 
-    public void setImprovedMin(double improvedMin) {
+    public void setImprovedMin(String improvedMin) {
         this.improvedMin = improvedMin;
     }
 
-    public double getOriginalMin() {
+    public String getOriginalMin() {
         return originalMin;
     }
 
-    public void setOriginalMin(double originalMin) {
+    public void setOriginalMin(String originalMin) {
         this.originalMin = originalMin;
     }
 
-    public double getImprovedAve() {
+    public String getImprovedAve() {
         return improvedAve;
     }
 
-    public void setImprovedAve(double improvedAve) {
+    public void setImprovedAve(String improvedAve) {
         this.improvedAve = improvedAve;
     }
 
-    public double getOriginalAve() {
+    public String getOriginalAve() {
         return originalAve;
     }
 
-    public void setOriginalAve(double originalAve) {
+    public void setOriginalAve(String originalAve) {
         this.originalAve = originalAve;
     }
 
-    public double getImprovedStd() {
+    public String getImprovedStd() {
         return improvedStd;
     }
 
-    public void setImprovedStd(double improvedStd) {
+    public void setImprovedStd(String improvedStd) {
         this.improvedStd = improvedStd;
     }
 
-    public double getOriginalStd() {
+    public String getOriginalStd() {
         return originalStd;
     }
 
-    public void setOriginalStd(double originalStd) {
+    public void setOriginalStd(String originalStd) {
         this.originalStd = originalStd;
     }
 
-    public double getImprovedMax() {
+    public String getImprovedMax() {
         return improvedMax;
     }
 
-    public void setImprovedMax(double improvedMax) {
+    public void setImprovedMax(String improvedMax) {
         this.improvedMax = improvedMax;
     }
 
-    public double getOriginalMax() {
+    public String getOriginalMax() {
         return originalMax;
     }
 
-    public void setOriginalMax(double originalMax) {
+    public void setOriginalMax(String originalMax) {
         this.originalMax = originalMax;
     }
 }

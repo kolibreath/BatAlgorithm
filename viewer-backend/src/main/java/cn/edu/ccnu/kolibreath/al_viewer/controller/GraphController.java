@@ -5,6 +5,8 @@ import cn.edu.ccnu.kolibreath.al_viewer.algorithm.OriginalBatAlgorithm;
 import cn.edu.ccnu.kolibreath.al_viewer.algorithm.functions.ImplementedFunctions;
 import cn.edu.ccnu.kolibreath.al_viewer.model.*;
 
+import java.text.DecimalFormat;
+import java.util.Formatter;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.*;
@@ -79,6 +81,11 @@ public class GraphController {
         return ResultBean.success(iterationWrapperList);
     }
 
+    private String format(double num){
+        Formatter fmt = new Formatter();
+        fmt.format("%8.2e", num);
+        return fmt.toString();
+    }
     private double findMax(List<Particle> particles){
         double max = 0;
         for(Particle particle: particles){
@@ -92,7 +99,7 @@ public class GraphController {
     }
 
     private double findMin(List<Particle> particles){
-        double min = 0;
+        double min = 9999;
         for(Particle particle: particles){
             double d[] = {particle.getX(), particle.getY(), particle.getZ()};
             double score = functions.func(d);
@@ -190,17 +197,17 @@ public class GraphController {
             else
                 wrapper.setIteration(tWrapper[0]);
 
-            wrapper.setImprovedMin(findMin(improvedParticles));
-            wrapper.setOriginalMin(findMin(originalParticles));
+            wrapper.setImprovedMin(format(findMin(improvedParticles)));
+            wrapper.setOriginalMin(format(findMin(originalParticles)));
 
-            wrapper.setImprovedAve(findAve(improvedParticles));
-            wrapper.setOriginalAve(findAve(originalParticles));
+            wrapper.setImprovedAve(format(findAve(improvedParticles)));
+            wrapper.setOriginalAve(format(findAve(originalParticles)));
 
-            wrapper.setOriginalMax(findMax(originalParticles));
-            wrapper.setImprovedMax(findMax(improvedParticles));
-
-            wrapper.setOriginalStd(findStd(originalParticles));
-            wrapper.setImprovedStd(findStd(improvedParticles));
+            wrapper.setOriginalMax(format(findMax(originalParticles)));
+            wrapper.setImprovedMax(format(findMax(improvedParticles)));
+                                  
+            wrapper.setOriginalStd(format(findStd(originalParticles)));
+            wrapper.setImprovedStd(format(findStd(improvedParticles)));
 
             iterationWrapperList.add(wrapper);
         }

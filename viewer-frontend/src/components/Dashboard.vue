@@ -1,6 +1,17 @@
 <template>
   <div>
+    <span style=" margin-left:1000px">
+      <span>
+        改进蝙蝠算法:
+        <span style="color:rgb(58, 85, 117);">浅蓝色</span>
+      </span>
+      <span>
+        原始蝙蝠算法:
+        <span style="color:rgb(119, 58, 57)">深红色</span>
+      </span>
+    </span>
     <div id="chartContainer" class="container"></div>
+
     <result-list></result-list>
   </div>
 </template>
@@ -29,7 +40,7 @@ export default {
         animationEnabled: true,
         zoomEnabled: true,
         title: {
-          text: "运算结果"
+          text: "函数标准差随迭代次数变化"
         },
         axisY: {
           includeZero: false
@@ -53,11 +64,11 @@ export default {
         for (let i = 0; i < length; i++) {
           improvedPoints.push({
             x: result[i].iteration,
-            y: result[i].improvedStd
+            y: parseFloat(result[i].improvedStd)
           });
           originalPoints.push({
             x: result[i].iteration,
-            y: result[i].originalStd
+            y: parseFloat(result[i].originalStd)
           });
         }
 
