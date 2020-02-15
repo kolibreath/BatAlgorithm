@@ -30,5 +30,5 @@ npm run serve
 ```
 
 ### some details
-1. [notes must be taken about frontend]()
-2. [words gotta to say  about backend and algoritm]()
+1. [notes must be taken about frontend](https://github.com/kolibreath/BatAlgorithm/blob/master/viewer-frontend/README.md)
+2. [words gotta to say  about backend and algoritm](https://github.com/kolibreath/BatAlgorithm/blob/master/viewer-backend/README.md)
