@@ -2,11 +2,11 @@
   <div>
     <span style=" margin-left:1000px">
       <span>
-        改进蝙蝠算法:
+        原始蝙蝠算法:
         <span style="color:rgb(58, 85, 117);">浅蓝色</span>
       </span>
       <span>
-        原始蝙蝠算法:
+        改进蝙蝠算法:
         <span style="color:rgb(119, 58, 57)">深红色</span>
       </span>
     </span>
