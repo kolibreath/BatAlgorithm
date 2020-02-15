@@ -24,10 +24,11 @@ cd viewer-frontend
 ```
 npm install
 ```
-- start the project
+- start the project 
 ```
 npm run serve
 ```
+And start the backend application with IntelliJ
 
 ### some details
 1. [notes must be taken about frontend](https://github.com/kolibreath/BatAlgorithm/blob/master/viewer-frontend/README.md)
