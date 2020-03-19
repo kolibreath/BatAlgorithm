@@ -67,7 +67,6 @@ import global from "./store/Common.vue";
 export default {
   name: "App",
   components: {
-    // HelloWorld,
     LeftDrawer,
     Main,
     BottomTweaks,
