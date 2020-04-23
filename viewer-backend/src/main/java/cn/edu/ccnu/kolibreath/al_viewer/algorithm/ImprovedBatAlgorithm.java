@@ -288,7 +288,8 @@ public class ImprovedBatAlgorithm extends AbsBatAlgorithm{
 
         Collections.sort(windows);
 
-
+        if(tWrapper[0] % 5 == 0)
+            System.out.println(fmin);
         for (int i = 0; i < population; i++) {
             for (int k = 0; k < windowSize; k++) {
                 windows.get(k).setObjectives(ff.func(windows.get(k).getLocation()));

@@ -28,7 +28,7 @@ fun main(args:Array<String>) {
 //        counter += 1000
 //    }
 
-    val indexControl = 11
+    val indexControl = 10
 
     println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ORIGIN~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`")
     repeat(1) {
@@ -36,24 +36,20 @@ fun main(args:Array<String>) {
         functions.index = indexControl
 
         val container = LinkedList<Double>()
-        repeat(30) {index ->
-//            val fileName = "/Users/kolibreath/githubProjects/pig/src/result/origin_${functions.index}_$index.txt"
-//            val file = File(fileName)
-//            file.delete()
-            batAlgorithm = OriginalBatAlgorithm(functions, n, Ngen, A, r, Qmin, Qmax, Lower, Upper)
-//            batAlgorithm.initFile(filename)
+        repeat(1) {index ->
 
+            batAlgorithm = OriginalBatAlgorithm(functions, n, Ngen, A, r, Qmin, Qmax, Lower, Upper)
             val bestValue = batAlgorithm.bestValue()
             println("$bestValue")
             container.add(bestValue)
         }
-
-        println()
-
-        println("the worst   value is ${container.max()}")
-        println("the best    value is ${container.min()}")
-        println("the average value is ${container.average()}")
-        println("the std     value is ${container.std()}")
+//
+//        println()
+//
+//        println("the worst   value is ${container.max()}")
+//        println("the best    value is ${container.min()}")
+//        println("the average value is ${container.average()}")
+//        println("the std     value is ${container.std()}")
 
     }
 
@@ -90,24 +86,21 @@ fun main(args:Array<String>) {
         val container = LinkedList<Double>()
         println("-----------------------------------${functions.index}----------------------------------------------")
 
-        repeat(10) {index ->
-//            val fileName = "/Users/kolibreath/githubProjects/pig/src/result/improved${functions.index}_$index.txt"
-//            val file = File(fileName)
-//            file.delete()
+        repeat(1) {index ->
+
             batAlgorithm = ImprovedBatAlgorithm(functions, n, Ngen, A, r, Qmin, Qmax, Lower, Upper)
-//            batAlgorithm.setFileName(fileName)
 
             val bestValue = batAlgorithm.bestValue()
             println("$bestValue")
             container.add(bestValue)
 
         }
-
-        println()
-        println("the std     value is ${container.std()}")
-        println("the worst   value is ${container.max()}")
-        println("the best    value is ${container.min()}")
-        println("the average value is ${container.average()}")
+//
+//        println()
+//        println("the std     value is ${container.std()}")
+//        println("the worst   value is ${container.max()}")
+//        println("the best    value is ${container.min()}")
+//        println("the average value is ${container.average()}")
     }
 
 //    Lower = doubleArrayOf(-500.0, -500.0, -500.0)

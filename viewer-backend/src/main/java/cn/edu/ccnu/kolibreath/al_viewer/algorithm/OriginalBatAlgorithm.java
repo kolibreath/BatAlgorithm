@@ -135,7 +135,9 @@ public class OriginalBatAlgorithm extends AbsBatAlgorithm{
     //输出每一次迭代的结果 返回sol
     public double[][] solutionEachGeneration(int []tWrapper, double[] pulseRate, double gamma, double alfa) {
 
-
+        //输出100次迭代中最好的结果
+        if(tWrapper[0] % 5 == 0)
+            System.out.println(fmin);
         for(int i = 0; i< population; i++) {
             double A0, r0, fnew;
             //改变这只蝙蝠的平均响度
