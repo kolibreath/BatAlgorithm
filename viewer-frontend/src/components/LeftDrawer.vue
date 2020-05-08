@@ -80,10 +80,10 @@ export default {
     return {
       drawer: true,
       items: [
-        { title: "三维图像", icon: "mdi-airplay", id: 1 },
+        { title: "三维图像", icon: "mdi-filmstrip-box-multiple", id: 1 },
         { title: "仪表盘", icon: "mdi-view-dashboard", id: 2 },
-        { title: "参数设置", icon: "mdi-image", id: 3 },
-        { title: "内容介绍", icon: "mdi-image", id: 4 }
+        { title: "参数设置", icon: "mdi-flask-empty-outline", id: 3 },
+        { title: "内容介绍", icon: "mdi-shape-plus", id: 4 }
       ],
       color: "primary",
       right: false,
