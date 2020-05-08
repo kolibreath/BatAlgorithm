@@ -41,10 +41,10 @@ export default {
           bus.$emit("reset", "test");
         })
         .catch(function(error) {
-          bus.$emit("alertContent", {
-            message: "函数执行失败",
-            type: "error"
-          });
+          // bus.$emit("alertContent", {
+          //   message: "函数执行失败",
+          //   type: "error"
+          // });
         });
     },
     //暂停算法进行

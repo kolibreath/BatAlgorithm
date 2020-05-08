@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 
 import Canvas from '../components/Canvas.vue';
 import Dashboard from '../components/Dashboard.vue';
+import Step from '../components/Step.vue';
 
 Vue.use(VueRouter);
 
@@ -14,6 +15,10 @@ const routes = [
 	{
 		path: '/dashboard',
 		component: Dashboard
+	},
+	{
+		path: '/step',
+		component: Step
 	}
 ];
 

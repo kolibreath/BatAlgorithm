@@ -3,20 +3,20 @@
     <span style="position:absolute; z-index:10;margin-top:20px; margin-left:1000px">
       <span style="color:white">x轴:</span>
       <span style="color:yellow">红色</span>
-      <br>
+      <br />
       <span style="color:white">y轴:</span>
       <span style="color:red">红色</span>
-      <br>
+      <br />
       <span style="color:white">z轴:</span>
       <span style="color:blue">蓝色</span>
-      <br>
-      <br>
+      <br />
+      <br />
       <span style="color:white">改进蝙蝠算法粒子颜色:</span>
       <span style="color:rgb(194, 24, 91)">平红色</span>
-      <br>
+      <br />
       <span style="color:white">原始蝙蝠算法粒子颜色:</span>
       <span style="color:rgb(48, 63, 159)">深蓝色</span>
-      <br>
+      <br />
     </span>
     <div id="container"></div>
   </v-card>
@@ -155,7 +155,7 @@ export default {
     initLineOfRealm(length) {
       let lineMaterial = new THREE.LineBasicMaterial({
         vertexColors: THREE.VertexColors,
-        linewidth: 3
+        linewidth: 10
       });
       //x y z轴颜色
       let color1 = new THREE.Color(0xff4081);

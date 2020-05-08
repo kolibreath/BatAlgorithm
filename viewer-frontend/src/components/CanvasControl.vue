@@ -98,10 +98,10 @@ export default {
           bus.$emit("particleData", response);
         })
         .catch(function(error) {
-          bus.$emit("alertContent", {
-            message: "函数执行失败",
-            type: "error"
-          });
+          // bus.$emit("alertContent", {
+          //   message: "函数执行失败",
+          //   type: "error"
+          // });
         });
     });
   },
@@ -164,10 +164,10 @@ export default {
             console.log("函数执行完成");
           })
           .catch(function(error) {
-            bus.$emit("alertContent", {
-              message: "函数执行失败",
-              type: "error"
-            });
+            // bus.$emit("alertContent", {
+            //   message: "函数执行失败",
+            //   type: "error"
+            // });
           });
       } else {
         message = "测试函数重新开始执行";
@@ -180,10 +180,10 @@ export default {
             bus.$emit("requireData", "test");
           })
           .catch(function(error) {
-            bus.$emit("alertContent", {
-              message: "函数执行失败",
-              type: "error"
-            });
+            // bus.$emit("alertContent", {
+            //   message: "函数执行失败",
+            //   type: "error"
+            // });
           });
       }
 

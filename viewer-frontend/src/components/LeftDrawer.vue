@@ -82,7 +82,8 @@ export default {
       items: [
         { title: "三维图像", icon: "mdi-airplay", id: 1 },
         { title: "仪表盘", icon: "mdi-view-dashboard", id: 2 },
-        { title: "参数设置", icon: "mdi-image", id: 3 }
+        { title: "参数设置", icon: "mdi-image", id: 3 },
+        { title: "内容介绍", icon: "mdi-image", id: 4 }
       ],
       color: "primary",
       right: false,
@@ -110,6 +111,8 @@ export default {
         case 3:
           bus.$emit("paramsDialog", "test");
           break;
+        case 4:
+          this.$router.replace("step").catch(err => console.log(err));
       }
     }
   }
